@@ -8,12 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		78792272252FE11D00D02FDB /* MusubiPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 78792270252FE11D00D02FDB /* MusubiPlayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		78CFE81F252FE73A00650951 /* MusubiPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CFE81D252FE73A00650951 /* MusubiPlayerViewController.swift */; };
+		78CFE820252FE73A00650951 /* MusubiPlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78CFE81E252FE73A00650951 /* MusubiPlayerViewController.xib */; };
+		78CFE823252FF25700650951 /* MusubiPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CFE822252FF25700650951 /* MusubiPlayer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		7879226D252FE11D00D02FDB /* MusubiPlayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MusubiPlayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		78792270252FE11D00D02FDB /* MusubiPlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MusubiPlayer.h; sourceTree = "<group>"; };
 		78792271252FE11D00D02FDB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		78CFE81D252FE73A00650951 /* MusubiPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusubiPlayerViewController.swift; sourceTree = "<group>"; };
+		78CFE81E252FE73A00650951 /* MusubiPlayerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MusubiPlayerViewController.xib; sourceTree = "<group>"; };
+		78CFE822252FF25700650951 /* MusubiPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusubiPlayer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,8 +52,27 @@
 		7879226F252FE11D00D02FDB /* MusubiPlayer */ = {
 			isa = PBXGroup;
 			children = (
+				78CFE821252FEF2800650951 /* MusubiPlayer */,
+				7879229D252FE3EB00D02FDB /* ViewController */,
 				78792270252FE11D00D02FDB /* MusubiPlayer.h */,
 				78792271252FE11D00D02FDB /* Info.plist */,
+			);
+			path = MusubiPlayer;
+			sourceTree = "<group>";
+		};
+		7879229D252FE3EB00D02FDB /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				78CFE81D252FE73A00650951 /* MusubiPlayerViewController.swift */,
+				78CFE81E252FE73A00650951 /* MusubiPlayerViewController.xib */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		78CFE821252FEF2800650951 /* MusubiPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				78CFE822252FF25700650951 /* MusubiPlayer.swift */,
 			);
 			path = MusubiPlayer;
 			sourceTree = "<group>";
@@ -95,6 +120,7 @@
 				TargetAttributes = {
 					7879226C252FE11D00D02FDB = {
 						CreatedOnToolsVersion = 11.5;
+						LastSwiftMigration = 1150;
 					};
 				};
 			};
@@ -121,6 +147,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				78CFE820252FE73A00650951 /* MusubiPlayerViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -131,6 +158,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				78CFE81F252FE73A00650951 /* MusubiPlayerViewController.swift in Sources */,
+				78CFE823252FF25700650951 /* MusubiPlayer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,6 +289,7 @@
 		78792276252FE11D00D02FDB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = KYV3CSY2F3;
@@ -276,6 +306,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = kr.hangyojeong.MusubiPlayer;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -284,6 +315,7 @@
 		78792277252FE11D00D02FDB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = KYV3CSY2F3;
