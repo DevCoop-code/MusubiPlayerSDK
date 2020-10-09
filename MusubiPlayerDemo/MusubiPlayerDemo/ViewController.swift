@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import MusubiPlayer
 
-class ViewController: UIViewController {
+class ViewController: MusubiPlayerViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
