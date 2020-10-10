@@ -12,7 +12,6 @@
                 <outlet property="elapsedTimeLabel" destination="w5M-C1-diM" id="dcm-s9-8pU"/>
                 <outlet property="musubiControllerGroup" destination="UM5-yP-Ljp" id="MET-RL-QTv"/>
                 <outlet property="musubiPlayPauseBtn" destination="QJj-wQ-7HS" id="L8q-qq-TXo"/>
-                <outlet property="musubiPlayerView" destination="G0c-UG-QPm" id="Ire-lb-Utm"/>
                 <outlet property="musubiSeekbar" destination="94U-XM-ZRB" id="Euw-UN-wk0"/>
                 <outlet property="remainTimeLabel" destination="KzA-EH-dgn" id="VL0-5T-ELj"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>

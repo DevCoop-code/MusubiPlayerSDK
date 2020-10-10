@@ -20,7 +20,6 @@ open class MusubiPlayerViewController: UIViewController {
     }
     
     // Property
-    @IBOutlet weak var musubiPlayerView: UIView!
     @IBOutlet weak var musubiControllerGroup: UIView!
     @IBOutlet weak var musubiPlayPauseBtn: UIButton!
     @IBOutlet weak var musubiSeekbar: UISlider!
