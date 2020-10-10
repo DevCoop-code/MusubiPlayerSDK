@@ -8,14 +8,15 @@
 
 import UIKit
 
-public class MusubiPlayerViewController: UIViewController {
+open class MusubiPlayerViewController: UIViewController {
 
     // ViewController를 인스턴스화 하기 위해 init() 함수를 호출
     public init() {
         super.init(nibName: "MusubiPlayerViewController", bundle: Bundle(for: MusubiPlayerViewController.self))
     }
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    
+    public required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
     }
     
     // Property
@@ -26,8 +27,10 @@ public class MusubiPlayerViewController: UIViewController {
     @IBOutlet weak var elapsedTimeLabel: UILabel!
     @IBOutlet weak var remainTimeLabel: UILabel!
     
-    public override func viewDidLoad() {
+    open override func viewDidLoad() {
         super.viewDidLoad()
+        
+//        var musubiPlayer = MusubiPlayer()
 
     }
 }

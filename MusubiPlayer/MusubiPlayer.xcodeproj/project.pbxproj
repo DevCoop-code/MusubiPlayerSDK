@@ -11,6 +11,8 @@
 		78CFE81F252FE73A00650951 /* MusubiPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CFE81D252FE73A00650951 /* MusubiPlayerViewController.swift */; };
 		78CFE820252FE73A00650951 /* MusubiPlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78CFE81E252FE73A00650951 /* MusubiPlayerViewController.xib */; };
 		78CFE823252FF25700650951 /* MusubiPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CFE822252FF25700650951 /* MusubiPlayer.swift */; };
+		78CFE826252FF58500650951 /* Shader.metal in Sources */ = {isa = PBXBuildFile; fileRef = 78CFE825252FF58500650951 /* Shader.metal */; };
+		78CFE829253039D600650951 /* MusubiProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CFE828253039D600650951 /* MusubiProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +22,8 @@
 		78CFE81D252FE73A00650951 /* MusubiPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusubiPlayerViewController.swift; sourceTree = "<group>"; };
 		78CFE81E252FE73A00650951 /* MusubiPlayerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MusubiPlayerViewController.xib; sourceTree = "<group>"; };
 		78CFE822252FF25700650951 /* MusubiPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusubiPlayer.swift; sourceTree = "<group>"; };
+		78CFE825252FF58500650951 /* Shader.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Shader.metal; sourceTree = "<group>"; };
+		78CFE828253039D600650951 /* MusubiProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusubiProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +37,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7859072C253190A8006D4AA3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		78792263252FE11D00D02FDB = {
 			isa = PBXGroup;
 			children = (
@@ -52,6 +63,9 @@
 		7879226F252FE11D00D02FDB /* MusubiPlayer */ = {
 			isa = PBXGroup;
 			children = (
+				7859072C253190A8006D4AA3 /* View */,
+				78CFE827253039A200650951 /* Protocols */,
+				78CFE824252FF57400650951 /* Shaders */,
 				78CFE821252FEF2800650951 /* MusubiPlayer */,
 				7879229D252FE3EB00D02FDB /* ViewController */,
 				78792270252FE11D00D02FDB /* MusubiPlayer.h */,
@@ -75,6 +89,22 @@
 				78CFE822252FF25700650951 /* MusubiPlayer.swift */,
 			);
 			path = MusubiPlayer;
+			sourceTree = "<group>";
+		};
+		78CFE824252FF57400650951 /* Shaders */ = {
+			isa = PBXGroup;
+			children = (
+				78CFE825252FF58500650951 /* Shader.metal */,
+			);
+			path = Shaders;
+			sourceTree = "<group>";
+		};
+		78CFE827253039A200650951 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				78CFE828253039D600650951 /* MusubiProtocol.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -158,7 +188,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				78CFE826252FF58500650951 /* Shader.metal in Sources */,
 				78CFE81F252FE73A00650951 /* MusubiPlayerViewController.swift in Sources */,
+				78CFE829253039D600650951 /* MusubiProtocol.swift in Sources */,
 				78CFE823252FF25700650951 /* MusubiPlayer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
