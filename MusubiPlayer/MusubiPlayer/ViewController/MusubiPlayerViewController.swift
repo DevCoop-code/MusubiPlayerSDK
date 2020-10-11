@@ -50,5 +50,7 @@ open class MusubiPlayerViewController: UIViewController {
         } else {
             
         }
+        
+        musubiPlayer?.start()
     }
 }

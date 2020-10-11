@@ -86,6 +86,7 @@ class MusubiPlayer:NSObject, AVPlayerItemOutputPullDelegate {
         // Setup AVPlayerItemVideoOutput with the required pixelbuffer attributes
         var pixelBufferAttributes: NSDictionary = [kCVPixelBufferMetalCompatibilityKey:true, kCVPixelBufferPixelFormatTypeKey:kCVPixelFormatType_420YpCbCr8BiPlanarFullRange]
         videoOutput_ = AVPlayerItemVideoOutput.init(pixelBufferAttributes: pixelBufferAttributes as! [String: Any])
+        videoOutputQueue_ = DispatchQueue(label: "VideoOutputQueue")
         videoOutput_?.setDelegate(self, queue: videoOutputQueue_)
         
         if let device = device_, let commandQueue = commandQueue_ {
@@ -173,7 +174,7 @@ class MusubiPlayer:NSObject, AVPlayerItemOutputPullDelegate {
                             item.add(videoOutput)
                             player.replaceCurrentItem(with: item)
                             videoOutput.requestNotificationOfMediaDataChange(withAdvanceInterval: ONE_FRAME_DURATION)
-                            player.pause()
+//                            player.pause()
                             
                             self.totalPlayTime_ = player.currentItem?.duration
                         }
@@ -184,6 +185,12 @@ class MusubiPlayer:NSObject, AVPlayerItemOutputPullDelegate {
                     }
                 }
             }
+        }
+    }
+    
+    func start() {
+        if let avPlayer = avPlayer_ {
+            avPlayer.play()
         }
     }
 }
