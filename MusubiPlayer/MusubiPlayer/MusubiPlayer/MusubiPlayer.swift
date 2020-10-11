@@ -48,6 +48,8 @@ class MusubiPlayer:NSObject, AVPlayerItemOutputPullDelegate {
     
     var musubiDelegate: MusubiDelegate?
     
+    var objectToDraw_: SquarePlain?
+    
     init(_ videoPlayerView: UIView) {
         super.init()
         
@@ -84,6 +86,11 @@ class MusubiPlayer:NSObject, AVPlayerItemOutputPullDelegate {
         var pixelBufferAttributes: NSDictionary = [kCVPixelBufferMetalCompatibilityKey:true, kCVPixelBufferPixelFormatTypeKey:kCVPixelFormatType_420YpCbCr8BiPlanarFullRange]
         videoOutput_ = AVPlayerItemVideoOutput.init(pixelBufferAttributes: pixelBufferAttributes as! [String: Any])
         videoOutput_?.setDelegate(self, queue: videoOutputQueue_)
+        
+        if let device = device_, let commandQueue = commandQueue_ {
+            objectToDraw_ = SquarePlain.init(device, commandQ: commandQueue)
+        }
+        self.musubiDelegate = self
         
         avPlayer_ = AVPlayer()
     }
@@ -176,6 +183,17 @@ class MusubiPlayer:NSObject, AVPlayerItemOutputPullDelegate {
                     }
                 }
             }
+        }
+    }
+}
+
+extension MusubiPlayer: MusubiDelegate {
+    func renderObject(drawable: CAMetalDrawable, pixelBuffer: CVPixelBuffer) {
+        if let commandQueue = commandQueue_, let pipelineState = pipelineState_ {
+            objectToDraw_?.render(commandQueue,
+                                  renderPipelineState: pipelineState,
+                                  drawable: drawable,
+                                  pixelBuffer: pixelBuffer)
         }
     }
 }

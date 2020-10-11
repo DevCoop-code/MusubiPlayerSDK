@@ -12,6 +12,7 @@
                 <outlet property="elapsedTimeLabel" destination="w5M-C1-diM" id="dcm-s9-8pU"/>
                 <outlet property="musubiControllerGroup" destination="UM5-yP-Ljp" id="MET-RL-QTv"/>
                 <outlet property="musubiPlayPauseBtn" destination="QJj-wQ-7HS" id="L8q-qq-TXo"/>
+                <outlet property="musubiPlayerview" destination="G0c-UG-QPm" id="cQG-yM-KUC"/>
                 <outlet property="musubiSeekbar" destination="94U-XM-ZRB" id="Euw-UN-wk0"/>
                 <outlet property="remainTimeLabel" destination="KzA-EH-dgn" id="VL0-5T-ELj"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -22,7 +23,7 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G0c-UG-QPm">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G0c-UG-QPm" customClass="MusubiPlayerView" customModule="MusubiPlayer" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UM5-yP-Ljp">

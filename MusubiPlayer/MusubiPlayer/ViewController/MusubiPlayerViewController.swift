@@ -28,13 +28,27 @@ open class MusubiPlayerViewController: UIViewController {
     @IBOutlet weak var musubiSeekbar: UISlider!
     @IBOutlet weak var elapsedTimeLabel: UILabel!
     @IBOutlet weak var remainTimeLabel: UILabel!
+    @IBOutlet weak var musubiPlayerview: MusubiPlayerView!
     
-    var objectToDraw_: SquarePlain?
+    var musubiPlayer: MusubiPlayer?
+    
+    open var mediaURL: String?
     
     open override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    open override func viewWillAppear(_ animated: Bool) {
         
-//        var musubiPlayer = MusubiPlayer()
-
+    }
+    
+    open override func viewDidAppear(_ animated: Bool) {
+        if let mediaPath = mediaURL {
+            NSLog("Media URL: %@", mediaPath)
+            musubiPlayer = MusubiPlayer(musubiPlayerview)
+            musubiPlayer?.open(mediaPath, mediaType: .hls)
+        } else {
+            
+        }
     }
 }

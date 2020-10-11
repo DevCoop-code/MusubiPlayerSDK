@@ -17,7 +17,9 @@ class ViewController: UIViewController {
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        self.present(MusubiPlayerViewController(), animated: true, completion: nil)
+        var musubiPlayerController:MusubiPlayerViewController = MusubiPlayerViewController()
+        musubiPlayerController.mediaURL = "https://bitdash-a.akamaihd.net/content/MI201109210084_1/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8"
+        self.present(musubiPlayerController, animated: true, completion: nil)
     }
 }
 
