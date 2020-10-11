@@ -65,9 +65,10 @@ class MusubiPlayer:NSObject, AVPlayerItemOutputPullDelegate {
             metalLayer.frame = videoPlayerView.layer.frame
             videoPlayerView.layer.addSublayer(metalLayer)
             
-            let defaultLibrary = metalDevice.makeDefaultLibrary()
-            let vertexProgram = defaultLibrary?.makeFunction(name: "basic_vertex")
-            let fragmentProgram = defaultLibrary?.makeFunction(name: "basic_fragment")
+            let frameworkBundle = Bundle(for: MusubiPlayer.self)
+            let defaultLibrary = try! metalDevice.makeDefaultLibrary(bundle: frameworkBundle)
+            let vertexProgram = defaultLibrary.makeFunction(name: "basic_vertex")
+            let fragmentProgram = defaultLibrary.makeFunction(name: "basic_fragment")
             
             let pipelineStateDescriptor = MTLRenderPipelineDescriptor()
             pipelineStateDescriptor.vertexFunction = vertexProgram
