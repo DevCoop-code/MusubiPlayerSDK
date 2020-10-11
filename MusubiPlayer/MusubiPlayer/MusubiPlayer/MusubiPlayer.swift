@@ -24,6 +24,9 @@ enum mediaType {
     case dash
 }
 
+// Key-Value observing context
+private var playerItemContext = 0
+
 class MusubiPlayer:NSObject, AVPlayerItemOutputPullDelegate {
     var device_: MTLDevice?
     var metalLayer_: CAMetalLayer?
@@ -81,6 +84,8 @@ class MusubiPlayer:NSObject, AVPlayerItemOutputPullDelegate {
         var pixelBufferAttributes: NSDictionary = [kCVPixelBufferMetalCompatibilityKey:true, kCVPixelBufferPixelFormatTypeKey:kCVPixelFormatType_420YpCbCr8BiPlanarFullRange]
         videoOutput_ = AVPlayerItemVideoOutput.init(pixelBufferAttributes: pixelBufferAttributes as! [String: Any])
         videoOutput_?.setDelegate(self, queue: videoOutputQueue_)
+        
+        avPlayer_ = AVPlayer()
     }
     
     @objc func newFrame(displayLink: CADisplayLink) {
@@ -114,6 +119,61 @@ class MusubiPlayer:NSObject, AVPlayerItemOutputPullDelegate {
                 let drawable: CAMetalDrawable? = metalLayer_?.nextDrawable()
                 if let pixelBufferData = pixelBuffer, let drawableData = drawable {
                     musubiDelegate?.renderObject(drawable: drawableData, pixelBuffer: pixelBufferData)
+                }
+            }
+        }
+    }
+    
+    func open(_ mediaPath: String, mediaType: mediaType) {
+        videoOutput_?.addObserver(self,
+                                  forKeyPath: #keyPath(AVPlayerItem.status),
+                                  options: [.old, .new],
+                                  context: &playerItemContext)
+        
+        var mediaURL_: NSURL?
+        if let player = avPlayer_, let videoOutput = videoOutput_ {
+            NSLog("Media Content URI: %@", mediaPath)
+            player.pause()
+            
+            switch mediaType {
+            case .local:
+                mediaURL_ = NSURL.fileURL(withPath: mediaPath) as NSURL
+                break
+            case .hls:
+                mediaURL_ = NSURL(string: mediaPath)
+                break
+            case .dash:
+                // TODO: playing dash content
+                break
+            default:
+                
+                break
+            }
+            
+            player.currentItem?.remove(videoOutput)
+            
+            if let mediaURL = mediaURL_ {
+                let item = AVPlayerItem.init(url: mediaURL as URL)
+                let asset = item.asset
+                
+                asset.loadValuesAsynchronously(forKeys: ["tracks"]) {
+                    var error: NSError? = nil
+                    let status = asset.statusOfValue(forKey: "tracks", error: &error)
+                    switch status {
+                    case .loaded:
+                        DispatchQueue.main.async {
+                            item.add(videoOutput)
+                            player.replaceCurrentItem(with: item)
+                            videoOutput.requestNotificationOfMediaDataChange(withAdvanceInterval: ONE_FRAME_DURATION)
+                            player.pause()
+                            
+                            self.totalPlayTime_ = player.currentItem?.duration
+                        }
+                        break
+                    default:
+                        NSLog("Player Status is not loaded")
+                        break
+                    }
                 }
             }
         }
