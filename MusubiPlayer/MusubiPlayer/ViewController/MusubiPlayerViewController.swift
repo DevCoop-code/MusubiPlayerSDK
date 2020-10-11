@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import MetalKit
+import Metal
+import Foundation
 
 open class MusubiPlayerViewController: UIViewController {
 
@@ -25,6 +28,8 @@ open class MusubiPlayerViewController: UIViewController {
     @IBOutlet weak var musubiSeekbar: UISlider!
     @IBOutlet weak var elapsedTimeLabel: UILabel!
     @IBOutlet weak var remainTimeLabel: UILabel!
+    
+    var objectToDraw_: SquarePlain?
     
     open override func viewDidLoad() {
         super.viewDidLoad()

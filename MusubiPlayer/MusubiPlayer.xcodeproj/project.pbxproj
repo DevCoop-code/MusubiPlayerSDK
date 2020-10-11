@@ -8,19 +8,21 @@
 
 /* Begin PBXBuildFile section */
 		7859073325328928006D4AA3 /* MusubiPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7859073225328928006D4AA3 /* MusubiPlayerView.swift */; };
-		7859073925329D13006D4AA3 /* Vertex.h in Headers */ = {isa = PBXBuildFile; fileRef = 7859073725329D13006D4AA3 /* Vertex.h */; };
+		7859073925329D13006D4AA3 /* Vertex.h in Headers */ = {isa = PBXBuildFile; fileRef = 7859073725329D13006D4AA3 /* Vertex.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7859073A25329D13006D4AA3 /* Vertex.m in Sources */ = {isa = PBXBuildFile; fileRef = 7859073825329D13006D4AA3 /* Vertex.m */; };
-		7859073D25329E25006D4AA3 /* Node.h in Headers */ = {isa = PBXBuildFile; fileRef = 7859073B25329E25006D4AA3 /* Node.h */; };
+		7859073D25329E25006D4AA3 /* Node.h in Headers */ = {isa = PBXBuildFile; fileRef = 7859073B25329E25006D4AA3 /* Node.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7859073E25329E25006D4AA3 /* Node.m in Sources */ = {isa = PBXBuildFile; fileRef = 7859073C25329E25006D4AA3 /* Node.m */; };
-		7859074125329E4B006D4AA3 /* BufferProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = 7859073F25329E4B006D4AA3 /* BufferProvider.h */; };
+		7859074125329E4B006D4AA3 /* BufferProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = 7859073F25329E4B006D4AA3 /* BufferProvider.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7859074225329E4B006D4AA3 /* BufferProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 7859074025329E4B006D4AA3 /* BufferProvider.m */; };
 		7859074725329E93006D4AA3 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7859074625329E93006D4AA3 /* Metal.framework */; };
 		785907492532A0B3006D4AA3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 785907482532A0B3006D4AA3 /* QuartzCore.framework */; };
 		7859074B2532A195006D4AA3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7859074A2532A195006D4AA3 /* UIKit.framework */; platformFilter = ios; };
-		7859074E2532A253006D4AA3 /* MetalTexture.h in Headers */ = {isa = PBXBuildFile; fileRef = 7859074C2532A253006D4AA3 /* MetalTexture.h */; };
+		7859074E2532A253006D4AA3 /* MetalTexture.h in Headers */ = {isa = PBXBuildFile; fileRef = 7859074C2532A253006D4AA3 /* MetalTexture.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7859074F2532A253006D4AA3 /* MetalTexture.m in Sources */ = {isa = PBXBuildFile; fileRef = 7859074D2532A253006D4AA3 /* MetalTexture.m */; };
 		785907512532A2AE006D4AA3 /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 785907502532A2AD006D4AA3 /* VideoToolbox.framework */; };
 		785907532532A2B2006D4AA3 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 785907522532A2B2006D4AA3 /* CoreVideo.framework */; };
+		785907562532A960006D4AA3 /* SquarePlain.h in Headers */ = {isa = PBXBuildFile; fileRef = 785907542532A960006D4AA3 /* SquarePlain.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		785907572532A960006D4AA3 /* SquarePlain.m in Sources */ = {isa = PBXBuildFile; fileRef = 785907552532A960006D4AA3 /* SquarePlain.m */; };
 		78792272252FE11D00D02FDB /* MusubiPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 78792270252FE11D00D02FDB /* MusubiPlayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		78CFE81F252FE73A00650951 /* MusubiPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CFE81D252FE73A00650951 /* MusubiPlayerViewController.swift */; };
 		78CFE820252FE73A00650951 /* MusubiPlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78CFE81E252FE73A00650951 /* MusubiPlayerViewController.xib */; };
@@ -45,6 +47,8 @@
 		7859074D2532A253006D4AA3 /* MetalTexture.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MetalTexture.m; sourceTree = "<group>"; };
 		785907502532A2AD006D4AA3 /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/VideoToolbox.framework; sourceTree = DEVELOPER_DIR; };
 		785907522532A2B2006D4AA3 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/CoreVideo.framework; sourceTree = DEVELOPER_DIR; };
+		785907542532A960006D4AA3 /* SquarePlain.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SquarePlain.h; sourceTree = "<group>"; };
+		785907552532A960006D4AA3 /* SquarePlain.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SquarePlain.m; sourceTree = "<group>"; };
 		7879226D252FE11D00D02FDB /* MusubiPlayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MusubiPlayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		78792270252FE11D00D02FDB /* MusubiPlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MusubiPlayer.h; sourceTree = "<group>"; };
 		78792271252FE11D00D02FDB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -90,6 +94,8 @@
 				7859074025329E4B006D4AA3 /* BufferProvider.m */,
 				7859074C2532A253006D4AA3 /* MetalTexture.h */,
 				7859074D2532A253006D4AA3 /* MetalTexture.m */,
+				785907542532A960006D4AA3 /* SquarePlain.h */,
+				785907552532A960006D4AA3 /* SquarePlain.m */,
 			);
 			path = GraphicRendering;
 			sourceTree = "<group>";
@@ -179,11 +185,12 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7859073925329D13006D4AA3 /* Vertex.h in Headers */,
-				7859074E2532A253006D4AA3 /* MetalTexture.h in Headers */,
-				7859073D25329E25006D4AA3 /* Node.h in Headers */,
 				78792272252FE11D00D02FDB /* MusubiPlayer.h in Headers */,
+				7859073925329D13006D4AA3 /* Vertex.h in Headers */,
+				7859073D25329E25006D4AA3 /* Node.h in Headers */,
 				7859074125329E4B006D4AA3 /* BufferProvider.h in Headers */,
+				7859074E2532A253006D4AA3 /* MetalTexture.h in Headers */,
+				785907562532A960006D4AA3 /* SquarePlain.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -262,6 +269,7 @@
 				7859073A25329D13006D4AA3 /* Vertex.m in Sources */,
 				7859073E25329E25006D4AA3 /* Node.m in Sources */,
 				78CFE826252FF58500650951 /* Shader.metal in Sources */,
+				785907572532A960006D4AA3 /* SquarePlain.m in Sources */,
 				78CFE81F252FE73A00650951 /* MusubiPlayerViewController.swift in Sources */,
 				78CFE829253039D600650951 /* MusubiProtocol.swift in Sources */,
 				7859074F2532A253006D4AA3 /* MetalTexture.m in Sources */,
@@ -412,6 +420,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = kr.hangyojeong.MusubiPlayer;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -438,6 +447,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = kr.hangyojeong.MusubiPlayer;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
