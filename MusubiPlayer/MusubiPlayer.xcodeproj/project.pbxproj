@@ -3,10 +3,24 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7859073325328928006D4AA3 /* MusubiPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7859073225328928006D4AA3 /* MusubiPlayerView.swift */; };
+		7859073925329D13006D4AA3 /* Vertex.h in Headers */ = {isa = PBXBuildFile; fileRef = 7859073725329D13006D4AA3 /* Vertex.h */; };
+		7859073A25329D13006D4AA3 /* Vertex.m in Sources */ = {isa = PBXBuildFile; fileRef = 7859073825329D13006D4AA3 /* Vertex.m */; };
+		7859073D25329E25006D4AA3 /* Node.h in Headers */ = {isa = PBXBuildFile; fileRef = 7859073B25329E25006D4AA3 /* Node.h */; };
+		7859073E25329E25006D4AA3 /* Node.m in Sources */ = {isa = PBXBuildFile; fileRef = 7859073C25329E25006D4AA3 /* Node.m */; };
+		7859074125329E4B006D4AA3 /* BufferProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = 7859073F25329E4B006D4AA3 /* BufferProvider.h */; };
+		7859074225329E4B006D4AA3 /* BufferProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 7859074025329E4B006D4AA3 /* BufferProvider.m */; };
+		7859074725329E93006D4AA3 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7859074625329E93006D4AA3 /* Metal.framework */; };
+		785907492532A0B3006D4AA3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 785907482532A0B3006D4AA3 /* QuartzCore.framework */; };
+		7859074B2532A195006D4AA3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7859074A2532A195006D4AA3 /* UIKit.framework */; platformFilter = ios; };
+		7859074E2532A253006D4AA3 /* MetalTexture.h in Headers */ = {isa = PBXBuildFile; fileRef = 7859074C2532A253006D4AA3 /* MetalTexture.h */; };
+		7859074F2532A253006D4AA3 /* MetalTexture.m in Sources */ = {isa = PBXBuildFile; fileRef = 7859074D2532A253006D4AA3 /* MetalTexture.m */; };
+		785907512532A2AE006D4AA3 /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 785907502532A2AD006D4AA3 /* VideoToolbox.framework */; };
+		785907532532A2B2006D4AA3 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 785907522532A2B2006D4AA3 /* CoreVideo.framework */; };
 		78792272252FE11D00D02FDB /* MusubiPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 78792270252FE11D00D02FDB /* MusubiPlayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		78CFE81F252FE73A00650951 /* MusubiPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CFE81D252FE73A00650951 /* MusubiPlayerViewController.swift */; };
 		78CFE820252FE73A00650951 /* MusubiPlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78CFE81E252FE73A00650951 /* MusubiPlayerViewController.xib */; };
@@ -16,6 +30,21 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7859073225328928006D4AA3 /* MusubiPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusubiPlayerView.swift; sourceTree = "<group>"; };
+		7859073725329D13006D4AA3 /* Vertex.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Vertex.h; sourceTree = "<group>"; };
+		7859073825329D13006D4AA3 /* Vertex.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Vertex.m; sourceTree = "<group>"; };
+		7859073B25329E25006D4AA3 /* Node.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Node.h; sourceTree = "<group>"; };
+		7859073C25329E25006D4AA3 /* Node.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Node.m; sourceTree = "<group>"; };
+		7859073F25329E4B006D4AA3 /* BufferProvider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BufferProvider.h; sourceTree = "<group>"; };
+		7859074025329E4B006D4AA3 /* BufferProvider.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BufferProvider.m; sourceTree = "<group>"; };
+		7859074425329E6F006D4AA3 /* MetalKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/MetalKit.framework; sourceTree = DEVELOPER_DIR; };
+		7859074625329E93006D4AA3 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/Metal.framework; sourceTree = DEVELOPER_DIR; };
+		785907482532A0B3006D4AA3 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
+		7859074A2532A195006D4AA3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		7859074C2532A253006D4AA3 /* MetalTexture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MetalTexture.h; sourceTree = "<group>"; };
+		7859074D2532A253006D4AA3 /* MetalTexture.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MetalTexture.m; sourceTree = "<group>"; };
+		785907502532A2AD006D4AA3 /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/VideoToolbox.framework; sourceTree = DEVELOPER_DIR; };
+		785907522532A2B2006D4AA3 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/CoreVideo.framework; sourceTree = DEVELOPER_DIR; };
 		7879226D252FE11D00D02FDB /* MusubiPlayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MusubiPlayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		78792270252FE11D00D02FDB /* MusubiPlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MusubiPlayer.h; sourceTree = "<group>"; };
 		78792271252FE11D00D02FDB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -31,6 +60,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				785907512532A2AE006D4AA3 /* VideoToolbox.framework in Frameworks */,
+				785907492532A0B3006D4AA3 /* QuartzCore.framework in Frameworks */,
+				7859074B2532A195006D4AA3 /* UIKit.framework in Frameworks */,
+				7859074725329E93006D4AA3 /* Metal.framework in Frameworks */,
+				785907532532A2B2006D4AA3 /* CoreVideo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,8 +74,37 @@
 		7859072C253190A8006D4AA3 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				7859073225328928006D4AA3 /* MusubiPlayerView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		7859073625329CAE006D4AA3 /* GraphicRendering */ = {
+			isa = PBXGroup;
+			children = (
+				7859073725329D13006D4AA3 /* Vertex.h */,
+				7859073825329D13006D4AA3 /* Vertex.m */,
+				7859073B25329E25006D4AA3 /* Node.h */,
+				7859073C25329E25006D4AA3 /* Node.m */,
+				7859073F25329E4B006D4AA3 /* BufferProvider.h */,
+				7859074025329E4B006D4AA3 /* BufferProvider.m */,
+				7859074C2532A253006D4AA3 /* MetalTexture.h */,
+				7859074D2532A253006D4AA3 /* MetalTexture.m */,
+			);
+			path = GraphicRendering;
+			sourceTree = "<group>";
+		};
+		7859074325329E6E006D4AA3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				785907522532A2B2006D4AA3 /* CoreVideo.framework */,
+				785907502532A2AD006D4AA3 /* VideoToolbox.framework */,
+				7859074A2532A195006D4AA3 /* UIKit.framework */,
+				785907482532A0B3006D4AA3 /* QuartzCore.framework */,
+				7859074625329E93006D4AA3 /* Metal.framework */,
+				7859074425329E6F006D4AA3 /* MetalKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		78792263252FE11D00D02FDB = {
@@ -49,6 +112,7 @@
 			children = (
 				7879226F252FE11D00D02FDB /* MusubiPlayer */,
 				7879226E252FE11D00D02FDB /* Products */,
+				7859074325329E6E006D4AA3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -63,6 +127,7 @@
 		7879226F252FE11D00D02FDB /* MusubiPlayer */ = {
 			isa = PBXGroup;
 			children = (
+				7859073625329CAE006D4AA3 /* GraphicRendering */,
 				7859072C253190A8006D4AA3 /* View */,
 				78CFE827253039A200650951 /* Protocols */,
 				78CFE824252FF57400650951 /* Shaders */,
@@ -114,7 +179,11 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7859073925329D13006D4AA3 /* Vertex.h in Headers */,
+				7859074E2532A253006D4AA3 /* MetalTexture.h in Headers */,
+				7859073D25329E25006D4AA3 /* Node.h in Headers */,
 				78792272252FE11D00D02FDB /* MusubiPlayer.h in Headers */,
+				7859074125329E4B006D4AA3 /* BufferProvider.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -188,9 +257,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7859074225329E4B006D4AA3 /* BufferProvider.m in Sources */,
+				7859073325328928006D4AA3 /* MusubiPlayerView.swift in Sources */,
+				7859073A25329D13006D4AA3 /* Vertex.m in Sources */,
+				7859073E25329E25006D4AA3 /* Node.m in Sources */,
 				78CFE826252FF58500650951 /* Shader.metal in Sources */,
 				78CFE81F252FE73A00650951 /* MusubiPlayerViewController.swift in Sources */,
 				78CFE829253039D600650951 /* MusubiProtocol.swift in Sources */,
+				7859074F2532A253006D4AA3 /* MetalTexture.m in Sources */,
 				78CFE823252FF25700650951 /* MusubiPlayer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
