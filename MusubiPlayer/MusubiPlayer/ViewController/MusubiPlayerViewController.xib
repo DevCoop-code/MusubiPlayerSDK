@@ -83,9 +83,13 @@
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
+                <constraint firstItem="G0c-UG-QPm" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="6jd-ea-9HQ"/>
+                <constraint firstItem="G0c-UG-QPm" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="CGg-Wx-84H"/>
                 <constraint firstItem="G0c-UG-QPm" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="LWy-y6-BnL"/>
+                <constraint firstItem="G0c-UG-QPm" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="Od8-eM-cbP"/>
                 <constraint firstItem="G0c-UG-QPm" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="WhI-lb-i28"/>
                 <constraint firstItem="G0c-UG-QPm" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="YQN-Th-Ygg"/>
+                <constraint firstItem="G0c-UG-QPm" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="bZi-TP-8b2"/>
                 <constraint firstItem="G0c-UG-QPm" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="nWA-4V-BH2"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>

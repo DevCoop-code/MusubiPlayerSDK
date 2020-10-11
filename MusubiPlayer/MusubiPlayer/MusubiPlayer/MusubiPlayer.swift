@@ -63,7 +63,8 @@ class MusubiPlayer:NSObject, AVPlayerItemOutputPullDelegate {
             metalLayer.pixelFormat = .bgra8Unorm
             metalLayer.framebufferOnly = true
             metalLayer.frame = videoPlayerView.layer.frame
-            videoPlayerView.layer.addSublayer(metalLayer)
+//            videoPlayerView.layer.addSublayer(metalLayer)
+            videoPlayerView.layer.insertSublayer(metalLayer, at: 0)
             
             let frameworkBundle = Bundle(for: MusubiPlayer.self)
             let defaultLibrary = try! metalDevice.makeDefaultLibrary(bundle: frameworkBundle)
