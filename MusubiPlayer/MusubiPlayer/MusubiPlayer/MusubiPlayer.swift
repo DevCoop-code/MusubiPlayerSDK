@@ -93,9 +93,10 @@ class MusubiPlayer:NSObject, AVPlayerItemOutputPullDelegate {
         if let device = device_, let commandQueue = commandQueue_ {
             objectToDraw_ = SquarePlain.init(device, commandQ: commandQueue)
         }
-        self.musubiDelegate = self
         
         avPlayer_ = AVPlayer()
+        
+        addPeriodicTimeObserver()
     }
     
     @objc func newFrame(displayLink: CADisplayLink) {
@@ -129,6 +130,8 @@ class MusubiPlayer:NSObject, AVPlayerItemOutputPullDelegate {
                 let drawable: CAMetalDrawable? = metalLayer_?.nextDrawable()
                 if let pixelBufferData = pixelBuffer, let drawableData = drawable {
                     musubiDelegate?.renderObject(drawable: drawableData, pixelBuffer: pixelBufferData)
+                    
+                    renderObject(drawable: drawableData, pixelBuffer: pixelBufferData)
                 }
             }
         }
@@ -189,20 +192,31 @@ class MusubiPlayer:NSObject, AVPlayerItemOutputPullDelegate {
         }
     }
     
-    func start() {
+    func addPeriodicTimeObserver() {
+        let interval = CMTime(seconds: 1.0, preferredTimescale: CMTimeScale(NSEC_PER_SEC))
+        
+        // Add time observer. Invoke closure on the main queue
         if let avPlayer = avPlayer_ {
-            avPlayer.play()
+            avPlayer.addPeriodicTimeObserver(forInterval: interval, queue: .main) { time in
+                
+//                NSLog("Player Time: %f", CMTimeGetSeconds(time))
+                self.musubiDelegate?.currentTime(time: CMTimeGetSeconds(time))
+            }
         }
     }
-}
-
-extension MusubiPlayer: MusubiDelegate {
+    
     func renderObject(drawable: CAMetalDrawable, pixelBuffer: CVPixelBuffer) {
         if let commandQueue = commandQueue_, let pipelineState = pipelineState_ {
             objectToDraw_?.render(commandQueue,
                                   renderPipelineState: pipelineState,
                                   drawable: drawable,
                                   pixelBuffer: pixelBuffer)
+        }
+    }
+    
+    func start() {
+        if let avPlayer = avPlayer_ {
+            avPlayer.play()
         }
     }
 }

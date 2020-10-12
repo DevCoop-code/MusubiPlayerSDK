@@ -10,4 +10,5 @@ import UIKit
 
 protocol MusubiDelegate {
     func renderObject(drawable: CAMetalDrawable, pixelBuffer: CVPixelBuffer)
+    func currentTime(time: Float64)
 }
