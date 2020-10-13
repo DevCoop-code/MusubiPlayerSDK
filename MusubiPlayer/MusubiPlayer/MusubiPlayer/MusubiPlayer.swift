@@ -138,11 +138,6 @@ class MusubiPlayer:NSObject, AVPlayerItemOutputPullDelegate {
     }
     
     func open(_ mediaPath: String, mediaType: mediaType) {
-        videoOutput_?.addObserver(self,
-                                  forKeyPath: #keyPath(AVPlayerItem.status),
-                                  options: [.old, .new],
-                                  context: &playerItemContext)
-        
         var mediaURL_: NSURL?
         if let player = avPlayer_, let videoOutput = videoOutput_ {
             NSLog("Media Content URI: %@", mediaPath)
@@ -179,12 +174,7 @@ class MusubiPlayer:NSObject, AVPlayerItemOutputPullDelegate {
                             player.replaceCurrentItem(with: item)
                             videoOutput.requestNotificationOfMediaDataChange(withAdvanceInterval: ONE_FRAME_DURATION)
 //                            player.pause()
-                            
-                            self.totalPlayTime_ = player.currentItem?.duration
-                            
-                            if let totalPlayTime = self.totalPlayTime_ {
-                                self.musubiDelegate?.totalTime(time: CMTimeGetSeconds(totalPlayTime))
-                            }
+                            player.addObserver(self, forKeyPath: "status", options: .new, context: &playerItemContext)
                         }
                         break
                     default:
@@ -221,6 +211,49 @@ class MusubiPlayer:NSObject, AVPlayerItemOutputPullDelegate {
     func start() {
         if let avPlayer = avPlayer_ {
             avPlayer.play()
+        }
+    }
+    
+    /*
+     KVO
+     */
+    override func observeValue(forKeyPath keyPath: String?,
+                                     of object: Any?,
+                                     change: [NSKeyValueChangeKey : Any]?,
+                                     context: UnsafeMutableRawPointer?) {
+        guard context == &playerItemContext else {
+            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
+            
+            return
+        }
+        
+        if keyPath == #keyPath(AVPlayerItem.status) {
+            let status_: AVPlayerItem.Status?
+            if let statusNumber = change?[.newKey] as? NSNumber {
+                status_ = AVPlayerItem.Status(rawValue: statusNumber.intValue)
+            } else {
+                status_ = .unknown
+            }
+            
+            if let status = status_ {
+                switch status {
+                case .readyToPlay:
+                    // Player item is ready to play.
+                    if let avPlayer = avPlayer_ {
+                        self.totalPlayTime_ = avPlayer.currentItem?.asset.duration
+                        if let totalPlayTime = self.totalPlayTime_ {
+                            self.musubiDelegate?.totalTime(time: CMTimeGetSeconds(totalPlayTime))
+                        }
+                    }
+                    break
+                case .failed:
+                    // Player ittem failed. See error.
+                    break
+                case .unknown:
+                    // Player item is not yet ready
+                    break
+                }
+            }
         }
     }
 }
