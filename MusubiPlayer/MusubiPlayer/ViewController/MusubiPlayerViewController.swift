@@ -47,10 +47,26 @@ open class MusubiPlayerViewController: UIViewController {
             NSLog("Media URL: %@", mediaPath)
             musubiPlayer = MusubiPlayer(musubiPlayerview)
             musubiPlayer?.open(mediaPath, mediaType: .hls)
+            
+            musubiPlayer?.musubiDelegate = self
         } else {
             
         }
         
         musubiPlayer?.start()
+    }
+}
+
+extension MusubiPlayerViewController: MusubiDelegate {
+    func renderObject(drawable: CAMetalDrawable, pixelBuffer: CVPixelBuffer) {
+        // Add the code for rendering video
+    }
+    
+    func currentTime(time: Float64) {
+        elapsedTimeLabel.text = String(describing: time)
+    }
+    
+    func totalTime(time: Float64) {
+        remainTimeLabel.text = String(describing: time)
     }
 }

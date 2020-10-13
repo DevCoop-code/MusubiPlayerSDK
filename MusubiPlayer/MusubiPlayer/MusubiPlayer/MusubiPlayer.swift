@@ -46,7 +46,7 @@ class MusubiPlayer:NSObject, AVPlayerItemOutputPullDelegate {
     var currentPlayTime_: CMTime?
     var totalPlayTime_: CMTime?
     
-    var musubiDelegate: MusubiDelegate?
+    weak var musubiDelegate: MusubiDelegate?
     
     var objectToDraw_: SquarePlain?
     
@@ -181,6 +181,10 @@ class MusubiPlayer:NSObject, AVPlayerItemOutputPullDelegate {
 //                            player.pause()
                             
                             self.totalPlayTime_ = player.currentItem?.duration
+                            
+                            if let totalPlayTime = self.totalPlayTime_ {
+                                self.musubiDelegate?.totalTime(time: CMTimeGetSeconds(totalPlayTime))
+                            }
                         }
                         break
                     default:

@@ -8,7 +8,9 @@
 
 import UIKit
 
-protocol MusubiDelegate {
+// STUDY: why inherit 'class' protocol
+protocol MusubiDelegate: class {
     func renderObject(drawable: CAMetalDrawable, pixelBuffer: CVPixelBuffer)
     func currentTime(time: Float64)
+    func totalTime(time: Float64)
 }
