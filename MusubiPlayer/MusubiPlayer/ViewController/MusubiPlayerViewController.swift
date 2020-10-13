@@ -63,10 +63,34 @@ extension MusubiPlayerViewController: MusubiDelegate {
     }
     
     func currentTime(time: Float64) {
-        elapsedTimeLabel.text = String(describing: time)
+        var curTime = Int(time)
+        elapsedTimeLabel.text = /*String(describing: curTime)*/ convertTimeFormat(time: curTime)
     }
     
     func totalTime(time: Float64) {
-        remainTimeLabel.text = String(describing: time)
+        var curTime = Int(time)
+        remainTimeLabel.text = /*String(describing: time)*/ convertTimeFormat(time: curTime)
+    }
+    
+    func convertTimeFormat(time: Int) -> String {
+        var result: String
+        var hour: Int = 0
+        var minute: Int = 0
+        var second: Int = 0
+        
+        hour = time / 3600
+        
+        var extraMinutes = time % 3600
+        
+        minute = extraMinutes / 60
+        second = extraMinutes % 60
+        
+        if hour != 0 {
+            result = "\(hour):\(minute):\(second)"
+        } else {
+            result = "\(minute):\(second)"
+        }
+        
+        return result
     }
 }
