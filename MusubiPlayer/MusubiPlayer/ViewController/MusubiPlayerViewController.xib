@@ -32,6 +32,9 @@
                                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="94U-XM-ZRB">
                                     <rect key="frame" x="8" y="90" width="382" height="31"/>
                                     <color key="tintColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <connections>
+                                        <action selector="seekbarValueChanged:" destination="-1" eventType="valueChanged" id="EH8-yM-CjJ"/>
+                                    </connections>
                                 </slider>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QJj-wQ-7HS">
                                     <rect key="frame" x="179" y="24.5" width="40" height="36.5"/>
