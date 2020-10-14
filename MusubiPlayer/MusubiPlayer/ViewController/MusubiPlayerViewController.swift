@@ -55,10 +55,12 @@ open class MusubiPlayerViewController: UIViewController {
             
         }
         
+        // When play automatically
         musubiPlayer?.start()
         self.musubiPlayPauseBtn.setBackgroundImage(UIImage(systemName: "pause.fill"), for: .normal)
     }
     
+    // MARK: - UI Event Action
     @IBAction func playPauseAction(_ sender: Any) {
         NSLog("playpause action")
         
