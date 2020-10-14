@@ -41,6 +41,9 @@
                                     </constraints>
                                     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <state key="normal" backgroundImage="play.fill" catalog="system"/>
+                                    <connections>
+                                        <action selector="playPauseAction:" destination="-1" eventType="touchDown" id="T1o-2X-8t3"/>
+                                    </connections>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="hh:mm:ss" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w5M-C1-diM">
                                     <rect key="frame" x="8" y="61" width="75" height="21"/>
