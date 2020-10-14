@@ -93,9 +93,25 @@ extension MusubiPlayerViewController: MusubiDelegate {
         second = extraMinutes % 60
         
         if hour != 0 {
-            result = "\(hour):\(minute):\(second)"
+            if second >= 0 && second < 10 && minute > 9{
+                result = "\(hour):\(minute):0\(second)"
+            } else if second >= 0 && second < 10 && minute >= 0 && minute < 10 {
+                result = "\(hour):0\(minute):0\(second)"
+            } else if minute >= 0 && minute < 10 && second > 9 {
+                result = "\(hour):0\(minute):\(second)"
+            } else {
+                 result = "\(hour):\(minute):\(second)"
+            }
         } else {
-            result = "\(minute):\(second)"
+            if second >= 0 && second < 10 && minute > 9{
+                result = "\(hour):\(minute):0\(second)"
+            } else if second >= 0 && second < 10 && minute >= 0 && minute < 10 {
+                result = "0\(minute):0\(second)"
+            } else if minute >= 0 && minute < 10 && second > 9 {
+                result = "0\(minute):\(second)"
+            } else {
+                 result = "\(minute):\(second)"
+            }
         }
         
         return result
