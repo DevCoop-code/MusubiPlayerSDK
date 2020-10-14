@@ -36,6 +36,8 @@ open class MusubiPlayerViewController: UIViewController {
     
     open override func viewDidLoad() {
         super.viewDidLoad()
+        
+        musubiSeekbar.minimumValue = 0.0
     }
     
     open override func viewWillAppear(_ animated: Bool) {
@@ -65,11 +67,16 @@ extension MusubiPlayerViewController: MusubiDelegate {
     func currentTime(time: Float64) {
         var curTime = Int(time)
         elapsedTimeLabel.text = /*String(describing: curTime)*/ convertTimeFormat(time: curTime)
+        
+        musubiSeekbar.value = Float(curTime.doubleValue)
     }
     
     func totalTime(time: Float64) {
         var curTime = Int(time)
         remainTimeLabel.text = /*String(describing: time)*/ convertTimeFormat(time: curTime)
+        
+        // Set the Seek bar maximum value
+        musubiSeekbar.maximumValue = Float(curTime.doubleValue)
     }
     
     func convertTimeFormat(time: Int) -> String {
@@ -92,5 +99,11 @@ extension MusubiPlayerViewController: MusubiDelegate {
         }
         
         return result
+    }
+}
+
+extension Int {
+    var doubleValue: Double {
+        return Double(self)
     }
 }
