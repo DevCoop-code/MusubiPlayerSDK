@@ -56,12 +56,27 @@ open class MusubiPlayerViewController: UIViewController {
         }
         
         musubiPlayer?.start()
+        self.musubiPlayPauseBtn.setBackgroundImage(UIImage(systemName: "pause.fill"), for: .normal)
     }
     
     @IBAction func playPauseAction(_ sender: Any) {
         NSLog("playpause action")
         
-        self.musubiPlayPauseBtn.setBackgroundImage(UIImage(systemName: "pause.fill"), for: .normal)
+        if let player = musubiPlayer {
+            switch player.getPlayerState() {
+            case .play:
+                player.pause()
+                self.musubiPlayPauseBtn.setBackgroundImage(UIImage(systemName: "play.fill"), for: .normal)
+                break
+            case .pause:
+                player.start()
+                self.musubiPlayPauseBtn.setBackgroundImage(UIImage(systemName: "pause.fill"), for: .normal)
+                break
+            default:
+                NSLog("Player State is not suitable")
+                break
+            }
+        }
     }
 }
 

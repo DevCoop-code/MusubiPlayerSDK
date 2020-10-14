@@ -24,6 +24,13 @@ enum mediaType {
     case dash
 }
 
+enum playerState {
+    case none
+    case open
+    case play
+    case pause
+}
+
 // Key-Value observing context
 private var playerItemContext = 0
 
@@ -49,6 +56,8 @@ class MusubiPlayer:NSObject, AVPlayerItemOutputPullDelegate {
     weak var musubiDelegate: MusubiDelegate?
     
     var objectToDraw_: SquarePlain?
+    
+    var musubiPlayerState: playerState = .none
     
     init(_ videoPlayerView: UIView) {
         super.init()
@@ -139,7 +148,7 @@ class MusubiPlayer:NSObject, AVPlayerItemOutputPullDelegate {
         var mediaURL_: NSURL?
         if let player = avPlayer_, let videoOutput = videoOutput_ {
             NSLog("Media Content URI: %@", mediaPath)
-            player.pause()
+            self.musubiPlayerState = .open
             
             switch mediaType {
             case .local:
@@ -208,8 +217,20 @@ class MusubiPlayer:NSObject, AVPlayerItemOutputPullDelegate {
     
     func start() {
         if let avPlayer = avPlayer_ {
+            musubiPlayerState = .play
             avPlayer.play()
         }
+    }
+    
+    func pause() {
+        if let avPlayer = avPlayer_ {
+            musubiPlayerState = .pause
+            avPlayer.pause()
+        }
+    }
+    
+    func getPlayerState() -> playerState {
+        return musubiPlayerState;
     }
     
     /*
