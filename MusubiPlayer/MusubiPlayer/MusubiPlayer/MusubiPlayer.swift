@@ -117,22 +117,20 @@ class MusubiPlayer:NSObject, AVPlayerItemOutputPullDelegate {
             if videoOutput.hasNewPixelBuffer(forItemTime: outputItemTime) {
                 pixelBuffer = videoOutput.copyPixelBuffer(forItemTime: outputItemTime, itemTimeForDisplay: nil)
             }
-            
+
             if 0.0 == lastFrameTimestamp_ {
                 lastFrameTimestamp_ = displayLink.timestamp
             }
-            
-            if let lastFrameTimestamp = lastFrameTimestamp_ {
-                var elapsed: TimeInterval = displayLink.timestamp - lastFrameTimestamp
-                lastFrameTimestamp_ = displayLink.timestamp
-                
-                // AutoRelease
-                let drawable: CAMetalDrawable? = metalLayer_?.nextDrawable()
-                if let pixelBufferData = pixelBuffer, let drawableData = drawable {
-                    musubiDelegate?.renderObject(drawable: drawableData, pixelBuffer: pixelBufferData)
-                    
-                    renderObject(drawable: drawableData, pixelBuffer: pixelBufferData)
-                }
+
+//            var elapsed: TimeInterval = displayLink.timestamp - lastFrameTimestamp
+            lastFrameTimestamp_ = displayLink.timestamp
+
+            // AutoRelease
+            let drawable: CAMetalDrawable? = metalLayer_?.nextDrawable()
+            if let pixelBufferData = pixelBuffer, let drawableData = drawable {
+                musubiDelegate?.renderObject(drawable: drawableData, pixelBuffer: pixelBufferData)
+
+                renderObject(drawable: drawableData, pixelBuffer: pixelBufferData)
             }
         }
     }
