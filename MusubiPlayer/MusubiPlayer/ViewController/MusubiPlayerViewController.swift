@@ -93,14 +93,14 @@ extension MusubiPlayerViewController: MusubiDelegate {
     }
     
     func currentTime(time: Float64) {
-        var curTime = Int(time)
+        let curTime = Int(time)
         elapsedTimeLabel.text = /*String(describing: curTime)*/ convertTimeFormat(time: curTime)
         
         musubiSeekbar.value = Float(curTime.doubleValue)
     }
     
     func totalTime(time: Float64) {
-        var curTime = Int(time)
+        let curTime = Int(time)
         remainTimeLabel.text = /*String(describing: time)*/ convertTimeFormat(time: curTime)
         
         // Set the Seek bar maximum value
@@ -115,7 +115,7 @@ extension MusubiPlayerViewController: MusubiDelegate {
         
         hour = time / 3600
         
-        var extraMinutes = time % 3600
+        let extraMinutes = time % 3600
         
         minute = extraMinutes / 60
         second = extraMinutes % 60
