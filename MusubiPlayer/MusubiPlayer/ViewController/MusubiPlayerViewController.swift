@@ -84,6 +84,12 @@ open class MusubiPlayerViewController: UIViewController {
     @IBAction func seekbarValueChanged(_ sender: Any) {
         let seekbar = sender as! UISlider
         NSLog("Seek value: %f", seekbar.value)
+        
+        if let player = musubiPlayer {
+            player.seek(seekbar.value)
+            
+            musubiSeekbar.value = seekbar.value
+        }
     }
 }
 

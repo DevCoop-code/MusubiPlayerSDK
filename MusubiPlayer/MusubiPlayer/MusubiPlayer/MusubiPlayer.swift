@@ -233,6 +233,13 @@ class MusubiPlayer:NSObject, AVPlayerItemOutputPullDelegate {
         return musubiPlayerState;
     }
     
+    func seek(_ time: Float) {
+        if let avPlayer = avPlayer_ {
+            let cmTime: CMTime = CMTimeMake(value: Int64(time), timescale: Int32(1.0))
+            avPlayer.seek(to: cmTime)
+        }
+    }
+    
     /*
      KVO
      */
