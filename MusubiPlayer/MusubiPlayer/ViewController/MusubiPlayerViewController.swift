@@ -11,6 +11,11 @@ import MetalKit
 import Metal
 import Foundation
 
+enum userBehaviour {
+    case none;
+    case seeking;
+}
+
 open class MusubiPlayerViewController: UIViewController {
 
     // ViewController를 인스턴스화 하기 위해 init() 함수를 호출
@@ -33,6 +38,8 @@ open class MusubiPlayerViewController: UIViewController {
     var musubiPlayer: MusubiPlayer?
     
     open var mediaURL: String?
+    
+    var userAction: userBehaviour = .none
     
     open override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,13 +89,28 @@ open class MusubiPlayerViewController: UIViewController {
     }
     
     @IBAction func seekbarValueChanged(_ sender: Any) {
+//        let seekbar = sender as! UISlider
+//        NSLog("Seek value: %f", seekbar.value)
+//
+//        if let player = musubiPlayer {
+//            player.seek(seekbar.value)
+//
+//            musubiSeekbar.value = seekbar.value
+//        }
+    }
+    
+    @IBAction func seekBarTouchDown(_ sender: Any) {
+        userAction = .seeking
+    }
+    
+    @IBAction func seekBarTouchUp(_ sender: Any) {
         let seekbar = sender as! UISlider
-        NSLog("Seek value: %f", seekbar.value)
-        
+        NSLog("Touch Up")
         if let player = musubiPlayer {
             player.seek(seekbar.value)
             
             musubiSeekbar.value = seekbar.value
+            userAction = .none
         }
     }
 }
@@ -102,7 +124,9 @@ extension MusubiPlayerViewController: MusubiDelegate {
         let curTime = Int(time)
         elapsedTimeLabel.text = /*String(describing: curTime)*/ convertTimeFormat(time: curTime)
         
-        musubiSeekbar.value = Float(curTime.doubleValue)
+        if userAction != userBehaviour.seeking {
+            musubiSeekbar.value = Float(curTime.doubleValue)
+        }
     }
     
     func totalTime(time: Float64) {
