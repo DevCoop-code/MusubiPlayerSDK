@@ -23,6 +23,8 @@
 		785907532532A2B2006D4AA3 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 785907522532A2B2006D4AA3 /* CoreVideo.framework */; };
 		785907562532A960006D4AA3 /* SquarePlain.h in Headers */ = {isa = PBXBuildFile; fileRef = 785907542532A960006D4AA3 /* SquarePlain.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		785907572532A960006D4AA3 /* SquarePlain.m in Sources */ = {isa = PBXBuildFile; fileRef = 785907552532A960006D4AA3 /* SquarePlain.m */; };
+		7873AFC2253ED2AC001D73EB /* musubiMediaProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 7873AFC0253ED2AC001D73EB /* musubiMediaProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7873AFC3253ED2AC001D73EB /* musubiMediaProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 7873AFC1253ED2AC001D73EB /* musubiMediaProtocol.m */; };
 		78792272252FE11D00D02FDB /* MusubiPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 78792270252FE11D00D02FDB /* MusubiPlayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		78CFE81F252FE73A00650951 /* MusubiPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CFE81D252FE73A00650951 /* MusubiPlayerViewController.swift */; };
 		78CFE820252FE73A00650951 /* MusubiPlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78CFE81E252FE73A00650951 /* MusubiPlayerViewController.xib */; };
@@ -49,6 +51,8 @@
 		785907522532A2B2006D4AA3 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/CoreVideo.framework; sourceTree = DEVELOPER_DIR; };
 		785907542532A960006D4AA3 /* SquarePlain.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SquarePlain.h; sourceTree = "<group>"; };
 		785907552532A960006D4AA3 /* SquarePlain.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SquarePlain.m; sourceTree = "<group>"; };
+		7873AFC0253ED2AC001D73EB /* musubiMediaProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = musubiMediaProtocol.h; sourceTree = "<group>"; };
+		7873AFC1253ED2AC001D73EB /* musubiMediaProtocol.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = musubiMediaProtocol.m; sourceTree = "<group>"; };
 		7879226D252FE11D00D02FDB /* MusubiPlayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MusubiPlayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		78792270252FE11D00D02FDB /* MusubiPlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MusubiPlayer.h; sourceTree = "<group>"; };
 		78792271252FE11D00D02FDB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -113,6 +117,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		7873AFBF253ED245001D73EB /* MediaProtocol */ = {
+			isa = PBXGroup;
+			children = (
+				7873AFC0253ED2AC001D73EB /* musubiMediaProtocol.h */,
+				7873AFC1253ED2AC001D73EB /* musubiMediaProtocol.m */,
+			);
+			path = MediaProtocol;
+			sourceTree = "<group>";
+		};
 		78792263252FE11D00D02FDB = {
 			isa = PBXGroup;
 			children = (
@@ -133,6 +146,7 @@
 		7879226F252FE11D00D02FDB /* MusubiPlayer */ = {
 			isa = PBXGroup;
 			children = (
+				7873AFBF253ED245001D73EB /* MediaProtocol */,
 				7859073625329CAE006D4AA3 /* GraphicRendering */,
 				7859072C253190A8006D4AA3 /* View */,
 				78CFE827253039A200650951 /* Protocols */,
@@ -191,6 +205,7 @@
 				7859074125329E4B006D4AA3 /* BufferProvider.h in Headers */,
 				7859074E2532A253006D4AA3 /* MetalTexture.h in Headers */,
 				785907562532A960006D4AA3 /* SquarePlain.h in Headers */,
+				7873AFC2253ED2AC001D73EB /* musubiMediaProtocol.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -268,6 +283,7 @@
 				7859073325328928006D4AA3 /* MusubiPlayerView.swift in Sources */,
 				7859073A25329D13006D4AA3 /* Vertex.m in Sources */,
 				7859073E25329E25006D4AA3 /* Node.m in Sources */,
+				7873AFC3253ED2AC001D73EB /* musubiMediaProtocol.m in Sources */,
 				78CFE826252FF58500650951 /* Shader.metal in Sources */,
 				785907572532A960006D4AA3 /* SquarePlain.m in Sources */,
 				78CFE81F252FE73A00650951 /* MusubiPlayerViewController.swift in Sources */,
