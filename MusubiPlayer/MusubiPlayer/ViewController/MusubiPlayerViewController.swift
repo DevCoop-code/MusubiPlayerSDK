@@ -14,6 +14,7 @@ import Foundation
 enum userBehaviour {
     case none;
     case seeking;
+    case seekEnd;
 }
 
 open class MusubiPlayerViewController: UIViewController {
@@ -115,7 +116,7 @@ open class MusubiPlayerViewController: UIViewController {
 //                NSLog("=====Seekvar value: %d", seekbar.value)
                 currentPlayerTime = seekbar.value
 //                musubiSeekbar.value = seekbar.value
-                userAction = .none
+                userAction = .seekEnd
             }
         }
     }
@@ -131,10 +132,13 @@ extension MusubiPlayerViewController: MusubiDelegate {
         elapsedTimeLabel.text = /*String(describing: curTime)*/ convertTimeFormat(time: curTime)
         
         if userAction != userBehaviour.seeking {
-            if userAction == .none {
+            if userAction == .seekEnd {
                 if !(Double(currentPlayerTime) - time > 1.0 || Double(currentPlayerTime) - time < -1.0) {
                     musubiSeekbar.value = Float(curTime.doubleValue)
+                    userAction = .none
                 }
+            }else {
+                musubiSeekbar.value = Float(curTime.doubleValue)
             }
         }
     }
