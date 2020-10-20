@@ -184,6 +184,11 @@ class MusubiPlayer:NSObject, AVPlayerItemOutputPullDelegate {
         }
     }
     
+    // MARK: Notification Center callback event
+    @objc func playerDidFinishPlaying(note: NSNotification) {
+        NSLog("Video Finished")
+    }
+    
     /*
      KVO
      */
@@ -268,6 +273,7 @@ extension MusubiPlayer: MusubiPlayerAction {
                             videoOutput.requestNotificationOfMediaDataChange(withAdvanceInterval: ONE_FRAME_DURATION)
 //                            player.pause()
                             player.addObserver(self, forKeyPath: "status", options: .new, context: &playerItemContext)
+                            NotificationCenter.default.addObserver(self, selector: #selector(self.playerDidFinishPlaying), name:.AVPlayerItemDidPlayToEndTime , object: player.currentItem)
                         }
                         break
                     default:
