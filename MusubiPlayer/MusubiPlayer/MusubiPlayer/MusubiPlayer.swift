@@ -58,11 +58,10 @@ class MusubiPlayer:NSObject, AVPlayerItemOutputPullDelegate {
     var objectToDraw_: SquarePlain?
     
     var musubiPlayerState: playerState = .none
+    var musubiDispatchQueue: DispatchQueue?
     
     init(_ videoPlayerView: UIView) {
         super.init()
-        
-        lastFrameTimestamp_ = 0.0
         
         device_ = MTLCreateSystemDefaultDevice()
         metalLayer_ = CAMetalLayer()
@@ -238,6 +237,13 @@ class MusubiPlayer:NSObject, AVPlayerItemOutputPullDelegate {
             let cmTime: CMTime = CMTimeMake(value: Int64(time), timescale: Int32(1.0))
             avPlayer.seek(to: cmTime)
         }
+    }
+    
+    // MARK: Initialize the Properties
+    func initProperties() {
+        musubiDispatchQueue = DispatchQueue(label: "musubiStatus")
+        
+        lastFrameTimestamp_ = 0.0
     }
     
     /*
