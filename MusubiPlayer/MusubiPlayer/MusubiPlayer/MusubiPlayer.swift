@@ -71,7 +71,7 @@ class MusubiPlayer:NSObject, AVPlayerItemOutputPullDelegate {
             metalLayer.pixelFormat = .bgra8Unorm
             metalLayer.framebufferOnly = true
             metalLayer.frame = videoPlayerView.layer.frame
-//            videoPlayerView.layer.addSublayer(metalLayer)
+            //            videoPlayerView.layer.addSublayer(metalLayer)
             videoPlayerView.layer.insertSublayer(metalLayer, at: 0)
             
             let frameworkBundle = Bundle(for: MusubiPlayer.self)
@@ -170,6 +170,18 @@ class MusubiPlayer:NSObject, AVPlayerItemOutputPullDelegate {
         musubiDispatchQueue = DispatchQueue(label: "musubiStatus")
         
         lastFrameTimestamp_ = 0.0
+    }
+    
+    func reSetVideoPlayerViewFrame(_ videoPlayerView: UIView) {
+        if let metalLayer = metalLayer_ {
+
+            let transformRect = CGRect(x: videoPlayerView.layer.frame.origin.y,
+                                       y: videoPlayerView.layer.frame.origin.x,
+                                       width: videoPlayerView.layer.frame.height,
+                                       height: videoPlayerView.layer.frame.width)
+            metalLayer.frame = transformRect
+            videoPlayerView.layer.insertSublayer(metalLayer, at: 0)
+        }
     }
     
     /*

@@ -120,6 +120,12 @@ open class MusubiPlayerViewController: UIViewController {
             }
         }
     }
+    
+    open override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        
+        musubiPlayer?.reSetVideoPlayerViewFrame(musubiPlayerview)
+    }
 }
 
 extension MusubiPlayerViewController: MusubiDelegate {
