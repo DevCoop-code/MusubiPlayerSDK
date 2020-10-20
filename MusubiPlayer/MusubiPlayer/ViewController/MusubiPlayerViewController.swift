@@ -40,6 +40,7 @@ open class MusubiPlayerViewController: UIViewController {
     open var mediaURL: String?
     
     var userAction: userBehaviour = .none
+    var currentPlayerTime: Float = 0.0
     
     open override func viewDidLoad() {
         super.viewDidLoad()
@@ -100,17 +101,22 @@ open class MusubiPlayerViewController: UIViewController {
     }
     
     @IBAction func seekBarTouchDown(_ sender: Any) {
+        NSLog("Touch Down")
         userAction = .seeking
     }
     
     @IBAction func seekBarTouchUp(_ sender: Any) {
         let seekbar = sender as! UISlider
         NSLog("Touch Up")
-        if let player = musubiPlayer {
-            player.seek(seekbar.value)
-            
-            musubiSeekbar.value = seekbar.value
-            userAction = .none
+        if userAction == .seeking {
+            if let player = musubiPlayer {
+                player.seek(seekbar.value)
+                
+//                NSLog("=====Seekvar value: %d", seekbar.value)
+                currentPlayerTime = seekbar.value
+//                musubiSeekbar.value = seekbar.value
+                userAction = .none
+            }
         }
     }
 }
@@ -125,7 +131,11 @@ extension MusubiPlayerViewController: MusubiDelegate {
         elapsedTimeLabel.text = /*String(describing: curTime)*/ convertTimeFormat(time: curTime)
         
         if userAction != userBehaviour.seeking {
-            musubiSeekbar.value = Float(curTime.doubleValue)
+            if userAction == .none {
+                if !(Double(currentPlayerTime) - time > 1.0 || Double(currentPlayerTime) - time < -1.0) {
+                    musubiSeekbar.value = Float(curTime.doubleValue)
+                }
+            }
         }
     }
     
