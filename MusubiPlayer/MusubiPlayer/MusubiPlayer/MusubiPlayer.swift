@@ -217,7 +217,7 @@ class MusubiPlayer:NSObject, AVPlayerItemOutputPullDelegate {
 }
 
 // MARK: Musubi Player Action API
-extension MusubiPlayer {
+extension MusubiPlayer: MusubiPlayerAction {
      func open(_ mediaPath: String, mediaType: mediaType) {
         var mediaURL_: NSURL?
         if let player = avPlayer_, let videoOutput = videoOutput_ {

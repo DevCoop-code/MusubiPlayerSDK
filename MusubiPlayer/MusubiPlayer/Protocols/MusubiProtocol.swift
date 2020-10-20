@@ -14,3 +14,11 @@ protocol MusubiDelegate: class {
     func currentTime(time: Float64)
     func totalTime(time: Float64)
 }
+
+protocol MusubiPlayerAction: class {
+    func open(_ mediaPath: String, mediaType: mediaType)
+    func start()
+    func pause()
+    func getPlayerState() -> playerState
+    func seek(_ time: Float)
+}
