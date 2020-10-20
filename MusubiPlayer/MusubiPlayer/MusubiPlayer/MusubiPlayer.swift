@@ -143,7 +143,82 @@ class MusubiPlayer:NSObject, AVPlayerItemOutputPullDelegate {
         }
     }
     
-    func open(_ mediaPath: String, mediaType: mediaType) {
+    private func addPeriodicTimeObserver() {
+        let interval = CMTime(seconds: 1.0, preferredTimescale: CMTimeScale(NSEC_PER_SEC))
+        
+        // Add time observer. Invoke closure on the main queue
+        if let avPlayer = avPlayer_ {
+            avPlayer.addPeriodicTimeObserver(forInterval: interval, queue: .main) { time in
+                
+//                NSLog("Player Time: %f", CMTimeGetSeconds(time))
+                self.musubiDelegate?.currentTime(time: CMTimeGetSeconds(time))
+            }
+        }
+    }
+    
+    private func renderObject(drawable: CAMetalDrawable, pixelBuffer: CVPixelBuffer) {
+        if let commandQueue = commandQueue_, let pipelineState = pipelineState_ {
+            objectToDraw_?.render(commandQueue,
+                                  renderPipelineState: pipelineState,
+                                  drawable: drawable,
+                                  pixelBuffer: pixelBuffer)
+        }
+    }
+    
+    // MARK: Initialize the Properties
+    private func initProperties() {
+        musubiDispatchQueue = DispatchQueue(label: "musubiStatus")
+        
+        lastFrameTimestamp_ = 0.0
+    }
+    
+    /*
+     KVO
+     */
+    override func observeValue(forKeyPath keyPath: String?,
+                                     of object: Any?,
+                                     change: [NSKeyValueChangeKey : Any]?,
+                                     context: UnsafeMutableRawPointer?) {
+        guard context == &playerItemContext else {
+            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
+            
+            return
+        }
+        
+        if keyPath == #keyPath(AVPlayerItem.status) {
+            let status_: AVPlayerItem.Status?
+            if let statusNumber = change?[.newKey] as? NSNumber {
+                status_ = AVPlayerItem.Status(rawValue: statusNumber.intValue)
+            } else {
+                status_ = .unknown
+            }
+            
+            if let status = status_ {
+                switch status {
+                case .readyToPlay:
+                    // Player item is ready to play.
+                    if let avPlayer = avPlayer_ {
+                        self.totalPlayTime_ = avPlayer.currentItem?.asset.duration
+                        if let totalPlayTime = self.totalPlayTime_ {
+                            self.musubiDelegate?.totalTime(time: CMTimeGetSeconds(totalPlayTime))
+                        }
+                    }
+                    break
+                case .failed:
+                    // Player ittem failed. See error.
+                    break
+                case .unknown:
+                    // Player item is not yet ready
+                    break
+                }
+            }
+        }
+    }
+}
+
+// MARK: Musubi Player Action API
+extension MusubiPlayer {
+     func open(_ mediaPath: String, mediaType: mediaType) {
         var mediaURL_: NSURL?
         if let player = avPlayer_, let videoOutput = videoOutput_ {
             NSLog("Media Content URI: %@", mediaPath)
@@ -192,100 +267,28 @@ class MusubiPlayer:NSObject, AVPlayerItemOutputPullDelegate {
         }
     }
     
-    func addPeriodicTimeObserver() {
-        let interval = CMTime(seconds: 1.0, preferredTimescale: CMTimeScale(NSEC_PER_SEC))
-        
-        // Add time observer. Invoke closure on the main queue
-        if let avPlayer = avPlayer_ {
-            avPlayer.addPeriodicTimeObserver(forInterval: interval, queue: .main) { time in
-                
-//                NSLog("Player Time: %f", CMTimeGetSeconds(time))
-                self.musubiDelegate?.currentTime(time: CMTimeGetSeconds(time))
-            }
-        }
-    }
-    
-    func renderObject(drawable: CAMetalDrawable, pixelBuffer: CVPixelBuffer) {
-        if let commandQueue = commandQueue_, let pipelineState = pipelineState_ {
-            objectToDraw_?.render(commandQueue,
-                                  renderPipelineState: pipelineState,
-                                  drawable: drawable,
-                                  pixelBuffer: pixelBuffer)
-        }
-    }
-    
     func start() {
-        if let avPlayer = avPlayer_ {
-            musubiPlayerState = .play
-            avPlayer.play()
-        }
-    }
-    
-    func pause() {
-        if let avPlayer = avPlayer_ {
-            musubiPlayerState = .pause
-            avPlayer.pause()
-        }
-    }
-    
-    func getPlayerState() -> playerState {
-        return musubiPlayerState;
-    }
-    
-    func seek(_ time: Float) {
-        if let avPlayer = avPlayer_ {
-            let cmTime: CMTime = CMTimeMake(value: Int64(time), timescale: Int32(1.0))
-            avPlayer.seek(to: cmTime)
-        }
-    }
-    
-    // MARK: Initialize the Properties
-    func initProperties() {
-        musubiDispatchQueue = DispatchQueue(label: "musubiStatus")
-        
-        lastFrameTimestamp_ = 0.0
-    }
-    
-    /*
-     KVO
-     */
-    override func observeValue(forKeyPath keyPath: String?,
-                                     of object: Any?,
-                                     change: [NSKeyValueChangeKey : Any]?,
-                                     context: UnsafeMutableRawPointer?) {
-        guard context == &playerItemContext else {
-            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
-            
-            return
-        }
-        
-        if keyPath == #keyPath(AVPlayerItem.status) {
-            let status_: AVPlayerItem.Status?
-            if let statusNumber = change?[.newKey] as? NSNumber {
-                status_ = AVPlayerItem.Status(rawValue: statusNumber.intValue)
-            } else {
-                status_ = .unknown
-            }
-            
-            if let status = status_ {
-                switch status {
-                case .readyToPlay:
-                    // Player item is ready to play.
-                    if let avPlayer = avPlayer_ {
-                        self.totalPlayTime_ = avPlayer.currentItem?.asset.duration
-                        if let totalPlayTime = self.totalPlayTime_ {
-                            self.musubiDelegate?.totalTime(time: CMTimeGetSeconds(totalPlayTime))
-                        }
-                    }
-                    break
-                case .failed:
-                    // Player ittem failed. See error.
-                    break
-                case .unknown:
-                    // Player item is not yet ready
-                    break
-                }
-            }
-        }
-    }
+           if let avPlayer = avPlayer_ {
+               musubiPlayerState = .play
+               avPlayer.play()
+           }
+       }
+       
+   func pause() {
+       if let avPlayer = avPlayer_ {
+           musubiPlayerState = .pause
+           avPlayer.pause()
+       }
+   }
+   
+   func getPlayerState() -> playerState {
+       return musubiPlayerState;
+   }
+   
+   func seek(_ time: Float) {
+       if let avPlayer = avPlayer_ {
+           let cmTime: CMTime = CMTimeMake(value: Int64(time), timescale: Int32(1.0))
+           avPlayer.seek(to: cmTime)
+       }
+   }
 }
