@@ -9,17 +9,18 @@
 import UIKit
 
 open class MusubiDevice: NSObject {
+    var filemgr: FileManager?
     
+    public override init() {
+        filemgr = FileManager.default
+    }
 }
 
 class MusubiDeviceImpl: MusubiDevice {
-    
-    var filemgr: FileManager?
-    
     override init() {
         NSLog("Initialize MusubiDevice")
+        super.init()
         
-        filemgr = FileManager.default
         let dirPaths = filemgr?.urls(for: .documentDirectory, in: .userDomainMask)
         if let dirPath = dirPaths?[0] {
             let docsURL = dirPath

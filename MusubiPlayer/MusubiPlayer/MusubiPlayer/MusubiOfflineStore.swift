@@ -12,10 +12,11 @@ open class MusubiOfflineStore: NSObject {
     
     var streamingURI: String?
     var musubiOfflineDispatchQueue: DispatchQueue?
+    var device: MusubiDevice?
     
-    public init(_ willStoreURI: String?) {
+    public init(_ willStoreURI: String?, device: MusubiDevice?) {
         self.streamingURI = willStoreURI
-        
+        self.device = device
         musubiOfflineDispatchQueue = DispatchQueue(label: "offlineStoreQueue")
     }
     
@@ -35,7 +36,15 @@ open class MusubiOfflineStore: NSObject {
                             return
                         }
                         NSLog("Master PlayList %@", mediaPlayList)
-                        // Making Directory for Stored the playlist
+                        
+                        
+                        let masterPlayList = "<url>\(streamingURL.path)</url>\n"
+                        
+                        if let fileManager = self.device?.filemgr {
+                            if !fileManager.fileExists(atPath: "offlinePlayList") {
+                                fileManager.createFile(atPath: "offlinePlayList", contents: masterPlayList.data(using: .utf8), attributes: nil)
+                            }
+                        }
                     })
                     
                     // Execute the Connection to Media Server
