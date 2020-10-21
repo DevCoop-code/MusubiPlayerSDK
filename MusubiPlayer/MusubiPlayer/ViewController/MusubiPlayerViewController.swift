@@ -121,6 +121,11 @@ open class MusubiPlayerViewController: UIViewController {
         }
     }
     
+    @IBAction func back(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    // When Rotate the Screen
     open override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         

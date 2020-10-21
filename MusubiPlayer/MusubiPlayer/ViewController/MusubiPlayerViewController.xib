@@ -80,10 +80,19 @@
                                 <constraint firstItem="94U-XM-ZRB" firstAttribute="top" secondItem="w5M-C1-diM" secondAttribute="bottom" constant="8" id="wvR-eA-Xlv"/>
                             </constraints>
                         </view>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5zb-eO-1eC">
+                            <rect key="frame" x="10" y="10" width="34" height="30"/>
+                            <state key="normal" title="Back"/>
+                            <connections>
+                                <action selector="back:" destination="-1" eventType="touchDown" id="Rgh-2Z-kG4"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="UM5-yP-Ljp" secondAttribute="trailing" constant="8" id="9HZ-uB-ebI"/>
+                        <constraint firstItem="5zb-eO-1eC" firstAttribute="leading" secondItem="G0c-UG-QPm" secondAttribute="leading" constant="10" id="VcX-OW-9jr"/>
+                        <constraint firstItem="5zb-eO-1eC" firstAttribute="top" secondItem="G0c-UG-QPm" secondAttribute="top" constant="10" id="jPx-Tc-5Jf"/>
                         <constraint firstItem="UM5-yP-Ljp" firstAttribute="leading" secondItem="G0c-UG-QPm" secondAttribute="leading" constant="8" id="nXK-mn-xeM"/>
                         <constraint firstAttribute="bottom" secondItem="UM5-yP-Ljp" secondAttribute="bottom" constant="67" id="v8w-XV-nuF"/>
                     </constraints>
