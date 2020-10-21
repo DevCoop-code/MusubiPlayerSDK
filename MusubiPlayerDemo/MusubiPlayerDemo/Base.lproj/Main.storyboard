@@ -10,16 +10,16 @@
         <!--PlayList-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="MusubiPlayerDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="PlayListViewController" customModule="MusubiPlayerDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="RvM-cI-p6F">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="RvM-cI-p6F" userLabel="playlistTableView">
                                 <rect key="frame" x="20" y="44" width="374" height="769"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="86" id="751-Cf-2Z8">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="mediaPlayListCell" rowHeight="86" id="751-Cf-2Z8" customClass="mediaPlaylistCell" customModule="MusubiPlayerDemo" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="374" height="86"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="751-Cf-2Z8" id="tNb-Wp-Dqz">
@@ -54,6 +54,10 @@
                                                 <constraint firstAttribute="trailing" secondItem="xOw-11-Lfm" secondAttribute="trailing" id="q2j-5j-BYM"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="mediaPlaylistTitle" destination="xOw-11-Lfm" id="U03-sX-i7M"/>
+                                            <outlet property="mediaPlaylistURL" destination="EGO-4r-lJ0" id="PgM-uT-Ukp"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -68,6 +72,9 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="PlayList" id="2PO-tc-2XQ"/>
+                    <connections>
+                        <outlet property="playlistTableView" destination="RvM-cI-p6F" id="fUw-Pm-V9j"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -76,7 +83,6 @@
         <!--Setting-->
         <scene sceneID="5rA-Q4-dxF">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dAX-co-iD8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController id="h4O-Ob-1bN" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8dK-UH-mFx">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -86,13 +92,13 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Setting" id="gSe-GH-153"/>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dAX-co-iD8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1899" y="441"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Pb6-qp-rNP">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="zFJ-jV-pH0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <tabBarController id="ifQ-4F-kc3" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="yrt-me-oeA">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
@@ -104,6 +110,7 @@
                         <segue destination="h4O-Ob-1bN" kind="relationship" relationship="viewControllers" id="pgG-ST-P8k"/>
                     </connections>
                 </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zFJ-jV-pH0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="980" y="118"/>
         </scene>

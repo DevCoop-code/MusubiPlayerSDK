@@ -7,15 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7866B9C1253FBC1900F9BCB1 /* utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7866B9C0253FBC1900F9BCB1 /* utils.swift */; };
 		78792285252FE14200D02FDB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78792284252FE14200D02FDB /* AppDelegate.swift */; };
 		78792287252FE14200D02FDB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78792286252FE14200D02FDB /* SceneDelegate.swift */; };
-		78792289252FE14200D02FDB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78792288252FE14200D02FDB /* ViewController.swift */; };
+		78792289252FE14200D02FDB /* PlayListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78792288252FE14200D02FDB /* PlayListViewController.swift */; };
 		7879228C252FE14200D02FDB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7879228A252FE14200D02FDB /* Main.storyboard */; };
 		7879228E252FE14800D02FDB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7879228D252FE14800D02FDB /* Assets.xcassets */; };
 		78792291252FE14800D02FDB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7879228F252FE14800D02FDB /* LaunchScreen.storyboard */; };
 		7879229A252FE2CF00D02FDB /* MusubiPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78792299252FE2CF00D02FDB /* MusubiPlayer.framework */; };
 		7879229B252FE2CF00D02FDB /* MusubiPlayer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 78792299252FE2CF00D02FDB /* MusubiPlayer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		78DA845D253FB47F0058EC50 /* mediaList.json in Resources */ = {isa = PBXBuildFile; fileRef = 78DA845C253FB47F0058EC50 /* mediaList.json */; };
+		78DA845D253FB47F0058EC50 /* hlsMediaList.json in Resources */ = {isa = PBXBuildFile; fileRef = 78DA845C253FB47F0058EC50 /* hlsMediaList.json */; };
+		78DA8460253FB92D0058EC50 /* mediaPlaylistCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78DA845F253FB92D0058EC50 /* mediaPlaylistCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -33,16 +35,18 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		7866B9C0253FBC1900F9BCB1 /* utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = utils.swift; sourceTree = "<group>"; };
 		78792281252FE14200D02FDB /* MusubiPlayerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusubiPlayerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		78792284252FE14200D02FDB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		78792286252FE14200D02FDB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		78792288252FE14200D02FDB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		78792288252FE14200D02FDB /* PlayListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayListViewController.swift; sourceTree = "<group>"; };
 		7879228B252FE14200D02FDB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7879228D252FE14800D02FDB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		78792290252FE14800D02FDB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		78792292252FE14800D02FDB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		78792299252FE2CF00D02FDB /* MusubiPlayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MusubiPlayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		78DA845C253FB47F0058EC50 /* mediaList.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mediaList.json; sourceTree = "<group>"; };
+		78DA845C253FB47F0058EC50 /* hlsMediaList.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = hlsMediaList.json; sourceTree = "<group>"; };
+		78DA845F253FB92D0058EC50 /* mediaPlaylistCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mediaPlaylistCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +61,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7866B9BF253FBC0400F9BCB1 /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				7866B9C0253FBC1900F9BCB1 /* utils.swift */,
+			);
+			path = utils;
+			sourceTree = "<group>";
+		};
 		78792278252FE14200D02FDB = {
 			isa = PBXGroup;
 			children = (
@@ -77,11 +89,12 @@
 		78792283252FE14200D02FDB /* MusubiPlayerDemo */ = {
 			isa = PBXGroup;
 			children = (
+				7866B9BF253FBC0400F9BCB1 /* utils */,
+				78DA8461253FB9D70058EC50 /* viewControl */,
 				78DA845E253FB86F0058EC50 /* viewCell */,
 				78DA845B253FB4490058EC50 /* mediaStorage */,
 				78792284252FE14200D02FDB /* AppDelegate.swift */,
 				78792286252FE14200D02FDB /* SceneDelegate.swift */,
-				78792288252FE14200D02FDB /* ViewController.swift */,
 				7879228A252FE14200D02FDB /* Main.storyboard */,
 				7879228D252FE14800D02FDB /* Assets.xcassets */,
 				7879228F252FE14800D02FDB /* LaunchScreen.storyboard */,
@@ -101,7 +114,7 @@
 		78DA845B253FB4490058EC50 /* mediaStorage */ = {
 			isa = PBXGroup;
 			children = (
-				78DA845C253FB47F0058EC50 /* mediaList.json */,
+				78DA845C253FB47F0058EC50 /* hlsMediaList.json */,
 			);
 			path = mediaStorage;
 			sourceTree = "<group>";
@@ -109,8 +122,17 @@
 		78DA845E253FB86F0058EC50 /* viewCell */ = {
 			isa = PBXGroup;
 			children = (
+				78DA845F253FB92D0058EC50 /* mediaPlaylistCell.swift */,
 			);
 			path = viewCell;
+			sourceTree = "<group>";
+		};
+		78DA8461253FB9D70058EC50 /* viewControl */ = {
+			isa = PBXGroup;
+			children = (
+				78792288252FE14200D02FDB /* PlayListViewController.swift */,
+			);
+			path = viewControl;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -174,7 +196,7 @@
 			files = (
 				78792291252FE14800D02FDB /* LaunchScreen.storyboard in Resources */,
 				7879228E252FE14800D02FDB /* Assets.xcassets in Resources */,
-				78DA845D253FB47F0058EC50 /* mediaList.json in Resources */,
+				78DA845D253FB47F0058EC50 /* hlsMediaList.json in Resources */,
 				7879228C252FE14200D02FDB /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -186,7 +208,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				78792289252FE14200D02FDB /* ViewController.swift in Sources */,
+				7866B9C1253FBC1900F9BCB1 /* utils.swift in Sources */,
+				78DA8460253FB92D0058EC50 /* mediaPlaylistCell.swift in Sources */,
+				78792289252FE14200D02FDB /* PlayListViewController.swift in Sources */,
 				78792285252FE14200D02FDB /* AppDelegate.swift in Sources */,
 				78792287252FE14200D02FDB /* SceneDelegate.swift in Sources */,
 			);
