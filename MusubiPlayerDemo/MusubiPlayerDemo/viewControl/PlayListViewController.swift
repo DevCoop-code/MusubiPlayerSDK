@@ -86,5 +86,11 @@ extension PlayListViewController: actionPopupDelegate {
                 self.present(musubiPlayerController, animated: true, completion: nil)
             }
         }
+        else if action == .store {
+            if let mediaPath = mediaURL {
+                let musubiOfflineStore: MusubiOfflineStore = MusubiOfflineStore(mediaPath)
+                musubiOfflineStore.startStore()
+            }
+        }
     }
 }
