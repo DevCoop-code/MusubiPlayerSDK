@@ -15,6 +15,7 @@
 		78792291252FE14800D02FDB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7879228F252FE14800D02FDB /* LaunchScreen.storyboard */; };
 		7879229A252FE2CF00D02FDB /* MusubiPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78792299252FE2CF00D02FDB /* MusubiPlayer.framework */; };
 		7879229B252FE2CF00D02FDB /* MusubiPlayer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 78792299252FE2CF00D02FDB /* MusubiPlayer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		78DA845D253FB47F0058EC50 /* mediaList.json in Resources */ = {isa = PBXBuildFile; fileRef = 78DA845C253FB47F0058EC50 /* mediaList.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -41,6 +42,7 @@
 		78792290252FE14800D02FDB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		78792292252FE14800D02FDB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		78792299252FE2CF00D02FDB /* MusubiPlayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MusubiPlayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		78DA845C253FB47F0058EC50 /* mediaList.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mediaList.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +77,8 @@
 		78792283252FE14200D02FDB /* MusubiPlayerDemo */ = {
 			isa = PBXGroup;
 			children = (
+				78DA845E253FB86F0058EC50 /* viewCell */,
+				78DA845B253FB4490058EC50 /* mediaStorage */,
 				78792284252FE14200D02FDB /* AppDelegate.swift */,
 				78792286252FE14200D02FDB /* SceneDelegate.swift */,
 				78792288252FE14200D02FDB /* ViewController.swift */,
@@ -92,6 +96,21 @@
 				78792299252FE2CF00D02FDB /* MusubiPlayer.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		78DA845B253FB4490058EC50 /* mediaStorage */ = {
+			isa = PBXGroup;
+			children = (
+				78DA845C253FB47F0058EC50 /* mediaList.json */,
+			);
+			path = mediaStorage;
+			sourceTree = "<group>";
+		};
+		78DA845E253FB86F0058EC50 /* viewCell */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = viewCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -155,6 +174,7 @@
 			files = (
 				78792291252FE14800D02FDB /* LaunchScreen.storyboard in Resources */,
 				7879228E252FE14800D02FDB /* Assets.xcassets in Resources */,
+				78DA845D253FB47F0058EC50 /* mediaList.json in Resources */,
 				7879228C252FE14200D02FDB /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
