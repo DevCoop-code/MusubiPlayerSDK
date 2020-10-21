@@ -71,7 +71,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="PlayList" id="2PO-tc-2XQ"/>
+                    <tabBarItem key="tabBarItem" title="PlayList" image="list.dash" catalog="system" id="2PO-tc-2XQ"/>
                     <connections>
                         <outlet property="playlistTableView" destination="RvM-cI-p6F" id="fUw-Pm-V9j"/>
                     </connections>
@@ -90,7 +90,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="eJf-7L-FgJ"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Setting" id="gSe-GH-153"/>
+                    <tabBarItem key="tabBarItem" title="Setting" image="ellipsis" catalog="system" id="gSe-GH-153"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dAX-co-iD8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -115,4 +115,8 @@
             <point key="canvasLocation" x="980" y="118"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="ellipsis" catalog="system" width="128" height="37"/>
+        <image name="list.dash" catalog="system" width="128" height="85"/>
+    </resources>
 </document>
