@@ -14,6 +14,7 @@ class PlayListViewController: UIViewController {
     @IBOutlet weak var playlistTableView: UITableView!
     
     var mediaArray = [mediaPlayList]()
+    var mediaURL: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,11 +63,28 @@ extension PlayListViewController: UITableViewDataSource, UITableViewDelegate {
     
     // MARK: Cell Click Event
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let storyBoard = UIStoryboard.init(name: "Main", bundle: nil)
+        let popupMusubiAction = storyBoard.instantiateViewController(identifier: "PlayStorePopupViewController") as PlayStorePopupViewController
+        popupMusubiAction.modalPresentationStyle = .overCurrentContext
+        popupMusubiAction.actionDelegate = self
+        present(popupMusubiAction, animated: true, completion: nil)
+        
+        NSLog("Action: \(popupMusubiAction.action)")
+        
         let row = indexPath.row
-        
-        let musubiPlayerController:MusubiPlayerViewController = MusubiPlayerViewController()
-        musubiPlayerController.mediaURL = mediaArray[row].url
-        
-        self.present(musubiPlayerController, animated: true, completion: nil)
+        mediaURL = mediaArray[row].url
+    }
+}
+
+extension PlayListViewController: actionPopupDelegate {
+    func didAction(action: musubiAction) {
+        if action == .play {
+            if let mediaPath = mediaURL {
+                let musubiPlayerController:MusubiPlayerViewController = MusubiPlayerViewController()
+                musubiPlayerController.mediaURL = mediaPath
+                
+                self.present(musubiPlayerController, animated: true, completion: nil)
+            }
+        }
     }
 }

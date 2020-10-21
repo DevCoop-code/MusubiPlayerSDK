@@ -12,3 +12,13 @@ struct mediaPlayList {
     var title: String
     var url: String
 }
+
+enum musubiAction {
+    case none
+    case play
+    case store
+}
+
+protocol actionPopupDelegate: class {
+    func didAction(action: musubiAction)
+}

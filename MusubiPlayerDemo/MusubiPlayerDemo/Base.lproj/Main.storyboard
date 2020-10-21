@@ -96,6 +96,75 @@
             </objects>
             <point key="canvasLocation" x="1899" y="441"/>
         </scene>
+        <!--PlayStorePopupViewController-->
+        <scene sceneID="odv-Rm-qUJ">
+            <objects>
+                <viewController restorationIdentifier="PlayStorePopupViewController" storyboardIdentifier="PlayStorePopupViewController" title="PlayStorePopupViewController" id="ucA-Lt-ctR" customClass="PlayStorePopupViewController" customModule="MusubiPlayerDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="608-of-VJU">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x4M-EJ-4vH">
+                                <rect key="frame" x="87" y="298" width="240" height="300"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mix-L3-Izx">
+                                        <rect key="frame" x="0.0" y="220" width="120" height="80"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="120" id="Z6g-0u-Jxd"/>
+                                            <constraint firstAttribute="height" constant="80" id="c12-l4-FE5"/>
+                                        </constraints>
+                                        <state key="normal" title="Play"/>
+                                        <connections>
+                                            <action selector="playAction:" destination="ucA-Lt-ctR" eventType="touchDown" id="vjn-fi-kFb"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fPj-Ss-2DN">
+                                        <rect key="frame" x="120" y="220" width="120" height="80"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="80" id="1U3-GN-fGm"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="80" id="e3G-49-xZs"/>
+                                            <constraint firstAttribute="width" constant="120" id="lHg-jp-EMs"/>
+                                        </constraints>
+                                        <state key="normal" title="Store"/>
+                                        <connections>
+                                            <action selector="storeAction:" destination="ucA-Lt-ctR" eventType="touchDown" id="Cgg-Bo-BKb"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Musubi Action" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lgT-CK-jHO">
+                                        <rect key="frame" x="8" y="105" width="224" height="35"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="29"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="4uA-TM-1Ww"/>
+                                    <constraint firstAttribute="bottom" secondItem="fPj-Ss-2DN" secondAttribute="bottom" id="5YF-L6-ocZ"/>
+                                    <constraint firstAttribute="height" constant="300" id="6aO-E0-uXg"/>
+                                    <constraint firstItem="fPj-Ss-2DN" firstAttribute="leading" secondItem="Mix-L3-Izx" secondAttribute="trailing" id="K1x-0L-VdQ"/>
+                                    <constraint firstItem="lgT-CK-jHO" firstAttribute="top" secondItem="x4M-EJ-4vH" secondAttribute="top" constant="105" id="KAY-Ld-W4d"/>
+                                    <constraint firstAttribute="trailing" secondItem="fPj-Ss-2DN" secondAttribute="trailing" id="ZBz-w6-rGA"/>
+                                    <constraint firstAttribute="bottom" secondItem="Mix-L3-Izx" secondAttribute="bottom" id="ZUT-ym-5Dt"/>
+                                    <constraint firstItem="Mix-L3-Izx" firstAttribute="leading" secondItem="x4M-EJ-4vH" secondAttribute="leading" id="f1d-If-WWL"/>
+                                    <constraint firstAttribute="trailing" secondItem="lgT-CK-jHO" secondAttribute="trailing" constant="8" id="h4L-Qf-ovi"/>
+                                    <constraint firstItem="lgT-CK-jHO" firstAttribute="leading" secondItem="x4M-EJ-4vH" secondAttribute="leading" constant="8" id="i6q-Iv-1BO"/>
+                                    <constraint firstAttribute="bottom" secondItem="fPj-Ss-2DN" secondAttribute="bottom" id="pgH-Yn-kDk"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.39612676056338031" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="x4M-EJ-4vH" firstAttribute="centerY" secondItem="608-of-VJU" secondAttribute="centerY" id="oft-P1-L7P"/>
+                            <constraint firstItem="x4M-EJ-4vH" firstAttribute="centerX" secondItem="608-of-VJU" secondAttribute="centerX" id="uLa-PT-1zS"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="3kA-wU-1Oo"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AaA-2o-jVD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1898.5507246376812" y="-953.57142857142856"/>
+        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Pb6-qp-rNP">
             <objects>

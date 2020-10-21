@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7866B9C1253FBC1900F9BCB1 /* utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7866B9C0253FBC1900F9BCB1 /* utils.swift */; };
+		7866B9C7254013E900F9BCB1 /* PlayStorePopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7866B9C6254013E900F9BCB1 /* PlayStorePopupViewController.swift */; };
 		78792285252FE14200D02FDB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78792284252FE14200D02FDB /* AppDelegate.swift */; };
 		78792287252FE14200D02FDB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78792286252FE14200D02FDB /* SceneDelegate.swift */; };
 		78792289252FE14200D02FDB /* PlayListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78792288252FE14200D02FDB /* PlayListViewController.swift */; };
@@ -36,6 +37,7 @@
 
 /* Begin PBXFileReference section */
 		7866B9C0253FBC1900F9BCB1 /* utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = utils.swift; sourceTree = "<group>"; };
+		7866B9C6254013E900F9BCB1 /* PlayStorePopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayStorePopupViewController.swift; sourceTree = "<group>"; };
 		78792281252FE14200D02FDB /* MusubiPlayerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusubiPlayerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		78792284252FE14200D02FDB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		78792286252FE14200D02FDB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 			isa = PBXGroup;
 			children = (
 				78792288252FE14200D02FDB /* PlayListViewController.swift */,
+				7866B9C6254013E900F9BCB1 /* PlayStorePopupViewController.swift */,
 			);
 			path = viewControl;
 			sourceTree = "<group>";
@@ -213,6 +216,7 @@
 				78792289252FE14200D02FDB /* PlayListViewController.swift in Sources */,
 				78792285252FE14200D02FDB /* AppDelegate.swift in Sources */,
 				78792287252FE14200D02FDB /* SceneDelegate.swift in Sources */,
+				7866B9C7254013E900F9BCB1 /* PlayStorePopupViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
