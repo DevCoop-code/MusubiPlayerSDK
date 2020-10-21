@@ -15,6 +15,7 @@ class PlayListViewController: UIViewController {
     
     var mediaArray = [mediaPlayList]()
     var mediaURL: String?
+    var device: MusubiDevice?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +40,8 @@ class PlayListViewController: UIViewController {
                 }
             }
         }
+        
+        device = MusubiDeviceFactory.defaultDevice
     }
 }
 
