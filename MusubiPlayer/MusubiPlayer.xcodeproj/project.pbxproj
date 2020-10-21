@@ -23,6 +23,7 @@
 		785907532532A2B2006D4AA3 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 785907522532A2B2006D4AA3 /* CoreVideo.framework */; };
 		785907562532A960006D4AA3 /* SquarePlain.h in Headers */ = {isa = PBXBuildFile; fileRef = 785907542532A960006D4AA3 /* SquarePlain.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		785907572532A960006D4AA3 /* SquarePlain.m in Sources */ = {isa = PBXBuildFile; fileRef = 785907552532A960006D4AA3 /* SquarePlain.m */; };
+		7866B9C3253FFB5900F9BCB1 /* MusubiOfflineStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7866B9C2253FFB5900F9BCB1 /* MusubiOfflineStore.swift */; };
 		7873AFC2253ED2AC001D73EB /* musubiMediaProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 7873AFC0253ED2AC001D73EB /* musubiMediaProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7873AFC3253ED2AC001D73EB /* musubiMediaProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 7873AFC1253ED2AC001D73EB /* musubiMediaProtocol.m */; };
 		78792272252FE11D00D02FDB /* MusubiPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 78792270252FE11D00D02FDB /* MusubiPlayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -51,6 +52,7 @@
 		785907522532A2B2006D4AA3 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/CoreVideo.framework; sourceTree = DEVELOPER_DIR; };
 		785907542532A960006D4AA3 /* SquarePlain.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SquarePlain.h; sourceTree = "<group>"; };
 		785907552532A960006D4AA3 /* SquarePlain.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SquarePlain.m; sourceTree = "<group>"; };
+		7866B9C2253FFB5900F9BCB1 /* MusubiOfflineStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusubiOfflineStore.swift; sourceTree = "<group>"; };
 		7873AFC0253ED2AC001D73EB /* musubiMediaProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = musubiMediaProtocol.h; sourceTree = "<group>"; };
 		7873AFC1253ED2AC001D73EB /* musubiMediaProtocol.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = musubiMediaProtocol.m; sourceTree = "<group>"; };
 		7879226D252FE11D00D02FDB /* MusubiPlayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MusubiPlayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -172,6 +174,7 @@
 			isa = PBXGroup;
 			children = (
 				78CFE822252FF25700650951 /* MusubiPlayer.swift */,
+				7866B9C2253FFB5900F9BCB1 /* MusubiOfflineStore.swift */,
 			);
 			path = MusubiPlayer;
 			sourceTree = "<group>";
@@ -279,6 +282,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7866B9C3253FFB5900F9BCB1 /* MusubiOfflineStore.swift in Sources */,
 				7859074225329E4B006D4AA3 /* BufferProvider.m in Sources */,
 				7859073325328928006D4AA3 /* MusubiPlayerView.swift in Sources */,
 				7859073A25329D13006D4AA3 /* Vertex.m in Sources */,
