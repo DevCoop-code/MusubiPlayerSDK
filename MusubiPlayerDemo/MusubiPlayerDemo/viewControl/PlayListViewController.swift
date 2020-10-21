@@ -39,12 +39,6 @@ class PlayListViewController: UIViewController {
             }
         }
     }
-
-//    override func viewDidAppear(_ animated: Bool) {
-//        var musubiPlayerController:MusubiPlayerViewController = MusubiPlayerViewController()
-//        musubiPlayerController.mediaURL = "https://bitdash-a.akamaihd.net/content/MI201109210084_1/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8"
-//        self.present(musubiPlayerController, animated: true, completion: nil)
-//    }
 }
 
 extension PlayListViewController: UITableViewDataSource, UITableViewDelegate {
@@ -66,5 +60,13 @@ extension PlayListViewController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     
-    
+    // MARK: Cell Click Event
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let row = indexPath.row
+        
+        let musubiPlayerController:MusubiPlayerViewController = MusubiPlayerViewController()
+        musubiPlayerController.mediaURL = mediaArray[row].url
+        
+        self.present(musubiPlayerController, animated: true, completion: nil)
+    }
 }
