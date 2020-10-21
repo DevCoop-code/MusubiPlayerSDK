@@ -309,4 +309,11 @@ extension MusubiPlayer: MusubiPlayerAction {
            avPlayer.seek(to: cmTime)
        }
    }
+    
+    func close() {
+        if let avPlayer = avPlayer_, let videoOutput = videoOutput_{
+            avPlayer.currentItem?.remove(videoOutput)
+        }
+        avPlayer_ = nil
+    }
 }

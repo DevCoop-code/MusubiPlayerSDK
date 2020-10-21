@@ -69,6 +69,10 @@ open class MusubiPlayerViewController: UIViewController {
         self.musubiPlayPauseBtn.setBackgroundImage(UIImage(systemName: "pause.fill"), for: .normal)
     }
     
+    open override func viewWillDisappear(_ animated: Bool) {
+        musubiPlayer?.close()
+    }
+    
     // MARK: - UI Event Action
     @IBAction func playPauseAction(_ sender: Any) {
         NSLog("playpause action")
