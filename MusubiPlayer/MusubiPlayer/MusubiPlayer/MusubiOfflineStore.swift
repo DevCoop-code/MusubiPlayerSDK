@@ -61,7 +61,7 @@ open class MusubiOfflineStore: NSObject {
                             let condSelectSQL = "SELECT ID FROM MEDIAOFFLINEINFO WHERE URL = '\(streamingURL)'"
                             let results:FMResultSet? = db.executeQuery(condSelectSQL, withParameterDictionary: nil)
                             
-                            if results == nil || results?.next() == false {
+                            if results?.next() == false {
                                 let insertSQL = "INSERT INTO MEDIAOFFLINEINFO (URL) VALUES ('\(streamingURL)')"
                                 
                                 let result = db.executeUpdate(insertSQL, withArgumentsIn: [])
