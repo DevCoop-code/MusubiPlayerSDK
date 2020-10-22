@@ -64,7 +64,9 @@ open class MusubiOfflineStore: NSObject {
                             if results?.next() == false {
                                 let insertSQL = "INSERT INTO MEDIAOFFLINEINFO (URL) VALUES ('\(streamingURL)')"
                                 
-                                let result = db.executeUpdate(insertSQL, withArgumentsIn: [])
+                                db.executeUpdate(insertSQL, withArgumentsIn: [])
+                                
+                                
                             }
                             db.close()
                         }
@@ -82,7 +84,7 @@ open class MusubiOfflineStore: NSObject {
             if let db:FMDatabase = self.offlineDB {
                 if db.open() {
                     let removeSQL = "DELETE FROM MEDIAOFFLINEINFO WHERE URL = ?"
-                    let results = db.executeUpdate(removeSQL, withArgumentsIn: [streamingURI])
+                    db.executeUpdate(removeSQL, withArgumentsIn: [streamingURI])
                     
                     db.close()
                 }
