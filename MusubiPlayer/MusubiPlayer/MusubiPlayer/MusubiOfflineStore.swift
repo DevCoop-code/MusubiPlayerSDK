@@ -49,15 +49,7 @@ open class MusubiOfflineStore: NSObject {
                             return
                         }
                         NSLog("Master PlayList %@", mediaPlayList)
-                        
-                        
-//                        let masterPlayList = "<url>\(streamingURL.path)</url>\n"
-//
-//                        if let fileManager = self.device?.filemgr {
-//                            if !fileManager.fileExists(atPath: "offlinePlayList") {
-//                                fileManager.createFile(atPath: "offlinePlayList", contents: masterPlayList.data(using: .utf8), attributes: nil)
-//                            }
-//                        }
+          
                         if let db:FMDatabase = self.offlineDB {
                             if db.open() {
                                 let condSelectSQL = "SELECT ID FROM MEDIAOFFLINEINFO WHERE URL = '\(streamingURL)'"
