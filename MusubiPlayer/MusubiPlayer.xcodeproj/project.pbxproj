@@ -7,6 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		782354E92541057A00B85083 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 782354E82541057A00B85083 /* libsqlite3.tbd */; };
+		782354F625410B1200B85083 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 782354EB25410B1100B85083 /* FMDatabase.m */; };
+		782354F725410B1200B85083 /* FMDB.h in Headers */ = {isa = PBXBuildFile; fileRef = 782354EC25410B1100B85083 /* FMDB.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		782354F825410B1200B85083 /* FMDatabasePool.h in Headers */ = {isa = PBXBuildFile; fileRef = 782354ED25410B1100B85083 /* FMDatabasePool.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		782354F925410B1200B85083 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 782354EE25410B1100B85083 /* FMDatabasePool.m */; };
+		782354FA25410B1200B85083 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 782354EF25410B1100B85083 /* FMDatabaseAdditions.m */; };
+		782354FB25410B1200B85083 /* FMDatabaseQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 782354F025410B1200B85083 /* FMDatabaseQueue.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		782354FC25410B1200B85083 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 782354F125410B1200B85083 /* FMResultSet.m */; };
+		782354FD25410B1200B85083 /* FMDatabaseAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 782354F225410B1200B85083 /* FMDatabaseAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		782354FE25410B1200B85083 /* FMDatabase.h in Headers */ = {isa = PBXBuildFile; fileRef = 782354F325410B1200B85083 /* FMDatabase.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		782354FF25410B1200B85083 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 782354F425410B1200B85083 /* FMDatabaseQueue.m */; };
+		7823550025410B1200B85083 /* FMResultSet.h in Headers */ = {isa = PBXBuildFile; fileRef = 782354F525410B1200B85083 /* FMResultSet.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7859073325328928006D4AA3 /* MusubiPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7859073225328928006D4AA3 /* MusubiPlayerView.swift */; };
 		7859073925329D13006D4AA3 /* Vertex.h in Headers */ = {isa = PBXBuildFile; fileRef = 7859073725329D13006D4AA3 /* Vertex.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7859073A25329D13006D4AA3 /* Vertex.m in Sources */ = {isa = PBXBuildFile; fileRef = 7859073825329D13006D4AA3 /* Vertex.m */; };
@@ -37,6 +49,18 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		782354E82541057A00B85083 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/usr/lib/libsqlite3.tbd; sourceTree = DEVELOPER_DIR; };
+		782354EB25410B1100B85083 /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
+		782354EC25410B1100B85083 /* FMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDB.h; sourceTree = "<group>"; };
+		782354ED25410B1100B85083 /* FMDatabasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabasePool.h; sourceTree = "<group>"; };
+		782354EE25410B1100B85083 /* FMDatabasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabasePool.m; sourceTree = "<group>"; };
+		782354EF25410B1100B85083 /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseAdditions.m; sourceTree = "<group>"; };
+		782354F025410B1200B85083 /* FMDatabaseQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseQueue.h; sourceTree = "<group>"; };
+		782354F125410B1200B85083 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
+		782354F225410B1200B85083 /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
+		782354F325410B1200B85083 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
+		782354F425410B1200B85083 /* FMDatabaseQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseQueue.m; sourceTree = "<group>"; };
+		782354F525410B1200B85083 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
 		7859073225328928006D4AA3 /* MusubiPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusubiPlayerView.swift; sourceTree = "<group>"; };
 		7859073725329D13006D4AA3 /* Vertex.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Vertex.h; sourceTree = "<group>"; };
 		7859073825329D13006D4AA3 /* Vertex.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Vertex.m; sourceTree = "<group>"; };
@@ -74,6 +98,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				782354E92541057A00B85083 /* libsqlite3.tbd in Frameworks */,
 				785907512532A2AE006D4AA3 /* VideoToolbox.framework in Frameworks */,
 				785907492532A0B3006D4AA3 /* QuartzCore.framework in Frameworks */,
 				7859074B2532A195006D4AA3 /* UIKit.framework in Frameworks */,
@@ -85,6 +110,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		782354EA25410AF400B85083 /* FMDB */ = {
+			isa = PBXGroup;
+			children = (
+				782354F325410B1200B85083 /* FMDatabase.h */,
+				782354EB25410B1100B85083 /* FMDatabase.m */,
+				782354F225410B1200B85083 /* FMDatabaseAdditions.h */,
+				782354EF25410B1100B85083 /* FMDatabaseAdditions.m */,
+				782354ED25410B1100B85083 /* FMDatabasePool.h */,
+				782354EE25410B1100B85083 /* FMDatabasePool.m */,
+				782354F025410B1200B85083 /* FMDatabaseQueue.h */,
+				782354F425410B1200B85083 /* FMDatabaseQueue.m */,
+				782354EC25410B1100B85083 /* FMDB.h */,
+				782354F525410B1200B85083 /* FMResultSet.h */,
+				782354F125410B1200B85083 /* FMResultSet.m */,
+			);
+			path = FMDB;
+			sourceTree = "<group>";
+		};
 		7859072C253190A8006D4AA3 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -113,6 +156,7 @@
 		7859074325329E6E006D4AA3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				782354E82541057A00B85083 /* libsqlite3.tbd */,
 				785907522532A2B2006D4AA3 /* CoreVideo.framework */,
 				785907502532A2AD006D4AA3 /* VideoToolbox.framework */,
 				7859074A2532A195006D4AA3 /* UIKit.framework */,
@@ -152,6 +196,7 @@
 		7879226F252FE11D00D02FDB /* MusubiPlayer */ = {
 			isa = PBXGroup;
 			children = (
+				782354EA25410AF400B85083 /* FMDB */,
 				7873AFBF253ED245001D73EB /* MediaProtocol */,
 				7859073625329CAE006D4AA3 /* GraphicRendering */,
 				7859072C253190A8006D4AA3 /* View */,
@@ -210,10 +255,16 @@
 			files = (
 				78792272252FE11D00D02FDB /* MusubiPlayer.h in Headers */,
 				7859073925329D13006D4AA3 /* Vertex.h in Headers */,
+				782354F725410B1200B85083 /* FMDB.h in Headers */,
+				782354FB25410B1200B85083 /* FMDatabaseQueue.h in Headers */,
 				7859073D25329E25006D4AA3 /* Node.h in Headers */,
+				782354F825410B1200B85083 /* FMDatabasePool.h in Headers */,
 				7859074125329E4B006D4AA3 /* BufferProvider.h in Headers */,
+				782354FE25410B1200B85083 /* FMDatabase.h in Headers */,
 				7859074E2532A253006D4AA3 /* MetalTexture.h in Headers */,
+				7823550025410B1200B85083 /* FMResultSet.h in Headers */,
 				785907562532A960006D4AA3 /* SquarePlain.h in Headers */,
+				782354FD25410B1200B85083 /* FMDatabaseAdditions.h in Headers */,
 				7873AFC2253ED2AC001D73EB /* musubiMediaProtocol.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -291,15 +342,20 @@
 				7866B9C3253FFB5900F9BCB1 /* MusubiOfflineStore.swift in Sources */,
 				7859074225329E4B006D4AA3 /* BufferProvider.m in Sources */,
 				7859073325328928006D4AA3 /* MusubiPlayerView.swift in Sources */,
+				782354F625410B1200B85083 /* FMDatabase.m in Sources */,
+				782354FA25410B1200B85083 /* FMDatabaseAdditions.m in Sources */,
 				7859073A25329D13006D4AA3 /* Vertex.m in Sources */,
+				782354FC25410B1200B85083 /* FMResultSet.m in Sources */,
 				7859073E25329E25006D4AA3 /* Node.m in Sources */,
 				7873AFC3253ED2AC001D73EB /* musubiMediaProtocol.m in Sources */,
+				782354FF25410B1200B85083 /* FMDatabaseQueue.m in Sources */,
 				78CFE826252FF58500650951 /* Shader.metal in Sources */,
 				785907572532A960006D4AA3 /* SquarePlain.m in Sources */,
 				7866B9CD25404E0400F9BCB1 /* MusubiDevice.swift in Sources */,
 				78CFE81F252FE73A00650951 /* MusubiPlayerViewController.swift in Sources */,
 				78CFE829253039D600650951 /* MusubiProtocol.swift in Sources */,
 				7859074F2532A253006D4AA3 /* MetalTexture.m in Sources */,
+				782354F925410B1200B85083 /* FMDatabasePool.m in Sources */,
 				7866B9C92540488A00F9BCB1 /* MusubiDeviceFactory.swift in Sources */,
 				78CFE823252FF25700650951 /* MusubiPlayer.swift in Sources */,
 			);

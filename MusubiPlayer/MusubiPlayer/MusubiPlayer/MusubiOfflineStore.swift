@@ -14,6 +14,8 @@ open class MusubiOfflineStore: NSObject {
     var musubiOfflineDispatchQueue: DispatchQueue?
     var device: MusubiDevice?
     
+    let offlineStoreDB: String = "offlineStoreDB.db"
+    
     public init(_ willStoreURI: String?, device: MusubiDevice?) {
         self.streamingURI = willStoreURI
         self.device = device
@@ -38,11 +40,30 @@ open class MusubiOfflineStore: NSObject {
                         NSLog("Master PlayList %@", mediaPlayList)
                         
                         
-                        let masterPlayList = "<url>\(streamingURL.path)</url>\n"
-                        
-                        if let fileManager = self.device?.filemgr {
-                            if !fileManager.fileExists(atPath: "offlinePlayList") {
-                                fileManager.createFile(atPath: "offlinePlayList", contents: masterPlayList.data(using: .utf8), attributes: nil)
+//                        let masterPlayList = "<url>\(streamingURL.path)</url>\n"
+//
+//                        if let fileManager = self.device?.filemgr {
+//                            if !fileManager.fileExists(atPath: "offlinePlayList") {
+//                                fileManager.createFile(atPath: "offlinePlayList", contents: masterPlayList.data(using: .utf8), attributes: nil)
+//                            }
+//                        }
+                        if let fileManager = self .device?.filemgr {
+                            if !fileManager.fileExists(atPath: self.offlineStoreDB) {
+                                let contactDB = FMDatabase(path: self.offlineStoreDB)
+                                
+                                if contactDB == nil {
+                                    NSLog("Error: \(contactDB.lastErrorMessage())")
+                                }
+                                
+                                if contactDB.open() {
+                                    let sql_stmt = "CREATE TABLE IF NOT EXISTS MEDIAOFFLINEINFO (ID INTEGER PRIMARY KEY AUTOINCREMENT, URL TEXT)"
+                                    if !contactDB.executeStatements(sql_stmt) {
+                                        NSLog("Error: \(contactDB.lastErrorMessage())")
+                                    }
+                                    contactDB.close()
+                                } else {
+                                    NSLog("Error: \(contactDB.lastErrorMessage())")
+                                }
                             }
                         }
                     })
