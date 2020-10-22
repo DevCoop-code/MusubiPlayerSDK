@@ -9,22 +9,33 @@
 import UIKit
 
 open class MusubiOfflineStore: NSObject {
-    
-    var streamingURI: String?
     var musubiOfflineDispatchQueue: DispatchQueue?
     var device: MusubiDevice?
     
     let offlineStoreDB: String = "offlineStoreDB.db"
+    var offlineDB: FMDatabase?
     
-    public init(_ willStoreURI: String?, device: MusubiDevice?) {
-        self.streamingURI = willStoreURI
+    public init(device: MusubiDevice?) {
         self.device = device
         musubiOfflineDispatchQueue = DispatchQueue(label: "offlineStoreQueue")
+        
+        offlineDB = FMDatabase(path: self.offlineStoreDB)
+        if let db:FMDatabase = offlineDB {
+            if db.open() {
+                let sql_stmt = "CREATE TABLE IF NOT EXISTS MEDIAOFFLINEINFO (ID INTEGER PRIMARY KEY AUTOINCREMENT, URL TEXT)"
+                if !db.executeStatements(sql_stmt) {
+                    NSLog("Error: \(db.lastErrorMessage())")
+                }
+                db.close()
+            } else {
+                NSLog("Error: \(db.lastErrorMessage())")
+            }
+        }
     }
     
-    open func startStore() {
+    open func startStore(_ streamingURI: String?) {
         musubiOfflineDispatchQueue?.async {
-            if let streamingPath = self.streamingURI {
+            if let streamingPath = streamingURI {
                 let url = URL(string: streamingPath)
                 
                 if let streamingURL = url {
@@ -47,23 +58,17 @@ open class MusubiOfflineStore: NSObject {
 //                                fileManager.createFile(atPath: "offlinePlayList", contents: masterPlayList.data(using: .utf8), attributes: nil)
 //                            }
 //                        }
-                        if let fileManager = self .device?.filemgr {
-                            if !fileManager.fileExists(atPath: self.offlineStoreDB) {
-                                let contactDB = FMDatabase(path: self.offlineStoreDB)
+                        if let db:FMDatabase = self.offlineDB {
+                            if db.open() {
+                                let condSelectSQL = "SELECT ID FROM MEDIAOFFLINEINFO WHERE URL = '\(streamingURL)'"
+                                let results:FMResultSet? = db.executeQuery(condSelectSQL, withParameterDictionary: nil)
                                 
-                                if contactDB == nil {
-                                    NSLog("Error: \(contactDB.lastErrorMessage())")
+                                if results == nil || results?.next() == false {
+                                    let insertSQL = "INSERT INTO MEDIAOFFLINEINFO (URL) VALUES ('\(streamingURL)')"
+                                    
+                                    let result = db.executeUpdate(insertSQL, withArgumentsIn: [])
                                 }
-                                
-                                if contactDB.open() {
-                                    let sql_stmt = "CREATE TABLE IF NOT EXISTS MEDIAOFFLINEINFO (ID INTEGER PRIMARY KEY AUTOINCREMENT, URL TEXT)"
-                                    if !contactDB.executeStatements(sql_stmt) {
-                                        NSLog("Error: \(contactDB.lastErrorMessage())")
-                                    }
-                                    contactDB.close()
-                                } else {
-                                    NSLog("Error: \(contactDB.lastErrorMessage())")
-                                }
+                                db.close()
                             }
                         }
                     })
