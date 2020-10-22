@@ -79,42 +79,45 @@ open class MusubiOfflineStore: NSObject {
 }
 
 extension MusubiOfflineStore: MusubiNetworkCallback {
-    func httpGetResult(url:String, httpStatusCode: Int, httpGetResult: String?) {
+    func httpGetResult(url:String, httpStatusCode: Int, httpGetResult: String?, mimeType: String?) {
         if let db:FMDatabase = self.offlineDB {
-        if db.open() {
-            let condSelectSQL = "SELECT ID FROM MEDIAOFFLINEINFO WHERE URL = '\(url)'"
-            let selectResult: FMResultSet? = db.executeQuery(condSelectSQL, withParameterDictionary: nil)
-            if selectResult?.next() == true {
-                // Make Directory for store the media Content
-                let columnID = selectResult?.string(forColumn: "ID")
-    //                                    NSLog("Selected ID \(columnID)")
-                if let fileManager = self.device?.filemgr, let directoryName = columnID {
-                    if !fileManager.fileExists(atPath: directoryName) {
-                        // New Offline Content
-                        let newDirPaths = fileManager.urls(for: .documentDirectory, in: .userDomainMask)
-                        
-                        let rootDirectory = newDirPaths[0].appendingPathComponent("musubi")
-                        let newDir = rootDirectory.appendingPathComponent(directoryName)
-                        do {
-                            try fileManager.createDirectory(at: newDir,
-                                                            withIntermediateDirectories: true,
-                                                            attributes: nil)
-                        } catch let error as NSError {
-                            NSLog("Error: \(error.localizedDescription)")
+            if db.open() {
+                let condSelectSQL = "SELECT ID FROM MEDIAOFFLINEINFO WHERE URL = '\(url)'"
+                let selectResult: FMResultSet? = db.executeQuery(condSelectSQL, withParameterDictionary: nil)
+                if selectResult?.next() == true {
+                    // Make Directory for store the media Content
+                    let columnID = selectResult?.string(forColumn: "ID")
+        //                                    NSLog("Selected ID \(columnID)")
+                    if let fileManager = self.device?.filemgr, let directoryName = columnID {
+                        if !fileManager.fileExists(atPath: directoryName) {
+                            // New Offline Content
+                            let newDirPaths = fileManager.urls(for: .documentDirectory, in: .userDomainMask)
+                            
+                            let rootDirectory = newDirPaths[0].appendingPathComponent("musubi")
+                            let newDir = rootDirectory.appendingPathComponent(directoryName)
+                            do {
+                                try fileManager.createDirectory(at: newDir,
+                                                                withIntermediateDirectories: true,
+                                                                attributes: nil)
+                            } catch let error as NSError {
+                                NSLog("Error: \(error.localizedDescription)")
+                            }
+                            
+                            // Store the Master PlayList
+                            fileManager.createFile(atPath: "\(directoryName)/master.m3u8", contents: httpGetResult?.data(using: .utf8), attributes: nil)
+                            
+                            // To Analyze PlayList
+                            
+                        } else {
+                            // Store the Content
+                            
                         }
-                        
-                        // Store the Master PlayList
-                        fileManager.createFile(atPath: "\(directoryName)/master.m3u8", contents: httpGetResult?.data(using: .utf8), attributes: nil)
-                        
-                    } else {
-                        // Store the Content
                     }
+                } else {
+                    
                 }
-            } else {
-                
+                db.close()
             }
-        }
-        db.close()
         }
     }
     

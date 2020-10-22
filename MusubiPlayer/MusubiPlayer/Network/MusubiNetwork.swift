@@ -19,7 +19,7 @@ class MusubiNetwork: NSObject {
             let task = URLSession.shared.dataTask(with: httpPath, completionHandler: {
                 (data, response, error) -> Void in
                 guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
-                    self.networkCallback?.httpGetResult(url: httpURL, httpStatusCode: (response as? HTTPURLResponse)?.statusCode ?? 0, httpGetResult: nil)
+                    self.networkCallback?.httpGetResult(url: httpURL, httpStatusCode: (response as? HTTPURLResponse)?.statusCode ?? 0, httpGetResult: nil, mimeType: nil)
                     return
                 }
                 
@@ -27,7 +27,7 @@ class MusubiNetwork: NSObject {
                 guard let mediaPlayList = String(data: data!, encoding: .utf8) else {
                     return
                 }
-                self.networkCallback?.httpGetResult(url: httpURL, httpStatusCode: 200, httpGetResult: mediaPlayList)
+                self.networkCallback?.httpGetResult(url: httpURL, httpStatusCode: 200, httpGetResult: mediaPlayList, mimeType: httpResponse.mimeType)
             })
             
             // Execute the connection to server
