@@ -19,6 +19,13 @@ open class MusubiOfflineStore: NSObject {
         self.device = device
         musubiOfflineDispatchQueue = DispatchQueue(label: "offlineStoreQueue")
         
+        if let fileManager = self.device?.filemgr {
+            if !fileManager.fileExists(atPath: self.offlineStoreDB) {
+                let attributes: [FileAttributeKey:AnyObject] = [FileAttributeKey.posixPermissions: NSNumber(value: 0o777)]
+                fileManager.createFile(atPath: offlineStoreDB, contents: nil, attributes: attributes)
+            }
+        }
+        
         offlineDB = FMDatabase(path: self.offlineStoreDB)
         if let db:FMDatabase = offlineDB {
             if db.open() {
@@ -33,40 +40,51 @@ open class MusubiOfflineStore: NSObject {
         }
     }
     
-    open func startStore(_ streamingURI: String?) {
+    open func startStore(_ streamingURI: String) {
         musubiOfflineDispatchQueue?.async {
-            if let streamingPath = streamingURI {
-                let url = URL(string: streamingPath)
-                
-                if let streamingURL = url {
-                    let task = URLSession.shared.dataTask(with: streamingURL, completionHandler: {
-                        (data, response, error) -> Void in
-                        guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
-                            return
-                        }
-                        // Success to Connection of Server
-                        guard let mediaPlayList = String(data: data!, encoding: .utf8) else {
-                            return
-                        }
-                        NSLog("Master PlayList %@", mediaPlayList)
-          
-                        if let db:FMDatabase = self.offlineDB {
-                            if db.open() {
-                                let condSelectSQL = "SELECT ID FROM MEDIAOFFLINEINFO WHERE URL = '\(streamingURL)'"
-                                let results:FMResultSet? = db.executeQuery(condSelectSQL, withParameterDictionary: nil)
+            let url = URL(string: streamingURI)
+            
+            if let streamingURL = url {
+                let task = URLSession.shared.dataTask(with: streamingURL, completionHandler: {
+                    (data, response, error) -> Void in
+                    guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+                        return
+                    }
+                    // Success to Connection of Server
+                    guard let mediaPlayList = String(data: data!, encoding: .utf8) else {
+                        return
+                    }
+                    NSLog("Master PlayList %@", mediaPlayList)
+      
+                    if let db:FMDatabase = self.offlineDB {
+                        if db.open() {
+                            let condSelectSQL = "SELECT ID FROM MEDIAOFFLINEINFO WHERE URL = '\(streamingURL)'"
+                            let results:FMResultSet? = db.executeQuery(condSelectSQL, withParameterDictionary: nil)
+                            
+                            if results == nil || results?.next() == false {
+                                let insertSQL = "INSERT INTO MEDIAOFFLINEINFO (URL) VALUES ('\(streamingURL)')"
                                 
-                                if results == nil || results?.next() == false {
-                                    let insertSQL = "INSERT INTO MEDIAOFFLINEINFO (URL) VALUES ('\(streamingURL)')"
-                                    
-                                    let result = db.executeUpdate(insertSQL, withArgumentsIn: [])
-                                }
-                                db.close()
+                                let result = db.executeUpdate(insertSQL, withArgumentsIn: [])
                             }
+                            db.close()
                         }
-                    })
+                    }
+                })
+                
+                // Execute the Connection to Media Server
+                task.resume()
+            }
+        }
+    }
+    
+    open func remove(_ streamingURI: String) {
+        musubiOfflineDispatchQueue?.async {
+            if let db:FMDatabase = self.offlineDB {
+                if db.open() {
+                    let removeSQL = "DELETE FROM MEDIAOFFLINEINFO WHERE URL = ?"
+                    let results = db.executeUpdate(removeSQL, withArgumentsIn: [streamingURI])
                     
-                    // Execute the Connection to Media Server
-                    task.resume()
+                    db.close()
                 }
             }
         }

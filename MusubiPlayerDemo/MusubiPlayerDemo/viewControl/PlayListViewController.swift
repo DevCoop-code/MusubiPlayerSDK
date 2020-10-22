@@ -15,6 +15,8 @@ class PlayListViewController: UIViewController {
     
     var mediaArray = [mediaPlayList]()
     var mediaURL: String?
+    
+    var musubiOfflineStore: MusubiOfflineStore?
     var device: MusubiDevice?
     
     override func viewDidLoad() {
@@ -42,6 +44,7 @@ class PlayListViewController: UIViewController {
         }
         
         device = MusubiDeviceFactory.defaultDevice
+        musubiOfflineStore = MusubiOfflineStore(device: device)
     }
 }
 
@@ -77,6 +80,20 @@ extension PlayListViewController: UITableViewDataSource, UITableViewDelegate {
         let row = indexPath.row
         mediaURL = mediaArray[row].url
     }
+    
+    // MARK: Swipe To Delete Data
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let row = indexPath.row
+            
+            musubiOfflineStore?.remove(mediaArray[row].url)
+            mediaArray.remove(at: row)
+        }
+    }
 }
 
 extension PlayListViewController: actionPopupDelegate {
@@ -91,8 +108,7 @@ extension PlayListViewController: actionPopupDelegate {
         }
         else if action == .store {
             if let mediaPath = mediaURL {
-                let musubiOfflineStore: MusubiOfflineStore = MusubiOfflineStore(device: device)
-                musubiOfflineStore.startStore(mediaPath)
+                musubiOfflineStore?.startStore(mediaPath)
             }
         }
     }
