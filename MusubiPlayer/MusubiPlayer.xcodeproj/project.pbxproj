@@ -20,6 +20,7 @@
 		782354FF25410B1200B85083 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 782354F425410B1200B85083 /* FMDatabaseQueue.m */; };
 		7823550025410B1200B85083 /* FMResultSet.h in Headers */ = {isa = PBXBuildFile; fileRef = 782354F525410B1200B85083 /* FMResultSet.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		782355032541606600B85083 /* MusubiNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782355022541606600B85083 /* MusubiNetwork.swift */; };
+		782355052541759400B85083 /* MusubiMediaProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782355042541759400B85083 /* MusubiMediaProtocol.swift */; };
 		7859073325328928006D4AA3 /* MusubiPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7859073225328928006D4AA3 /* MusubiPlayerView.swift */; };
 		7859073925329D13006D4AA3 /* Vertex.h in Headers */ = {isa = PBXBuildFile; fileRef = 7859073725329D13006D4AA3 /* Vertex.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7859073A25329D13006D4AA3 /* Vertex.m in Sources */ = {isa = PBXBuildFile; fileRef = 7859073825329D13006D4AA3 /* Vertex.m */; };
@@ -39,8 +40,6 @@
 		7866B9C3253FFB5900F9BCB1 /* MusubiOfflineStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7866B9C2253FFB5900F9BCB1 /* MusubiOfflineStore.swift */; };
 		7866B9C92540488A00F9BCB1 /* MusubiDeviceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7866B9C82540488A00F9BCB1 /* MusubiDeviceFactory.swift */; };
 		7866B9CD25404E0400F9BCB1 /* MusubiDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7866B9CC25404E0400F9BCB1 /* MusubiDevice.swift */; };
-		7873AFC2253ED2AC001D73EB /* musubiMediaProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 7873AFC0253ED2AC001D73EB /* musubiMediaProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7873AFC3253ED2AC001D73EB /* musubiMediaProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 7873AFC1253ED2AC001D73EB /* musubiMediaProtocol.m */; };
 		78792272252FE11D00D02FDB /* MusubiPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 78792270252FE11D00D02FDB /* MusubiPlayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		78CFE81F252FE73A00650951 /* MusubiPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CFE81D252FE73A00650951 /* MusubiPlayerViewController.swift */; };
 		78CFE820252FE73A00650951 /* MusubiPlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78CFE81E252FE73A00650951 /* MusubiPlayerViewController.xib */; };
@@ -63,6 +62,7 @@
 		782354F425410B1200B85083 /* FMDatabaseQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseQueue.m; sourceTree = "<group>"; };
 		782354F525410B1200B85083 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
 		782355022541606600B85083 /* MusubiNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusubiNetwork.swift; sourceTree = "<group>"; };
+		782355042541759400B85083 /* MusubiMediaProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusubiMediaProtocol.swift; sourceTree = "<group>"; };
 		7859073225328928006D4AA3 /* MusubiPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusubiPlayerView.swift; sourceTree = "<group>"; };
 		7859073725329D13006D4AA3 /* Vertex.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Vertex.h; sourceTree = "<group>"; };
 		7859073825329D13006D4AA3 /* Vertex.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Vertex.m; sourceTree = "<group>"; };
@@ -83,8 +83,6 @@
 		7866B9C2253FFB5900F9BCB1 /* MusubiOfflineStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusubiOfflineStore.swift; sourceTree = "<group>"; };
 		7866B9C82540488A00F9BCB1 /* MusubiDeviceFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusubiDeviceFactory.swift; sourceTree = "<group>"; };
 		7866B9CC25404E0400F9BCB1 /* MusubiDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusubiDevice.swift; sourceTree = "<group>"; };
-		7873AFC0253ED2AC001D73EB /* musubiMediaProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = musubiMediaProtocol.h; sourceTree = "<group>"; };
-		7873AFC1253ED2AC001D73EB /* musubiMediaProtocol.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = musubiMediaProtocol.m; sourceTree = "<group>"; };
 		7879226D252FE11D00D02FDB /* MusubiPlayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MusubiPlayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		78792270252FE11D00D02FDB /* MusubiPlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MusubiPlayer.h; sourceTree = "<group>"; };
 		78792271252FE11D00D02FDB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -180,8 +178,7 @@
 		7873AFBF253ED245001D73EB /* MediaProtocol */ = {
 			isa = PBXGroup;
 			children = (
-				7873AFC0253ED2AC001D73EB /* musubiMediaProtocol.h */,
-				7873AFC1253ED2AC001D73EB /* musubiMediaProtocol.m */,
+				782355042541759400B85083 /* MusubiMediaProtocol.swift */,
 			);
 			path = MediaProtocol;
 			sourceTree = "<group>";
@@ -276,7 +273,6 @@
 				7823550025410B1200B85083 /* FMResultSet.h in Headers */,
 				785907562532A960006D4AA3 /* SquarePlain.h in Headers */,
 				782354FD25410B1200B85083 /* FMDatabaseAdditions.h in Headers */,
-				7873AFC2253ED2AC001D73EB /* musubiMediaProtocol.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -353,12 +349,12 @@
 				7866B9C3253FFB5900F9BCB1 /* MusubiOfflineStore.swift in Sources */,
 				7859074225329E4B006D4AA3 /* BufferProvider.m in Sources */,
 				7859073325328928006D4AA3 /* MusubiPlayerView.swift in Sources */,
+				782355052541759400B85083 /* MusubiMediaProtocol.swift in Sources */,
 				782354F625410B1200B85083 /* FMDatabase.m in Sources */,
 				782354FA25410B1200B85083 /* FMDatabaseAdditions.m in Sources */,
 				7859073A25329D13006D4AA3 /* Vertex.m in Sources */,
 				782354FC25410B1200B85083 /* FMResultSet.m in Sources */,
 				7859073E25329E25006D4AA3 /* Node.m in Sources */,
-				7873AFC3253ED2AC001D73EB /* musubiMediaProtocol.m in Sources */,
 				782355032541606600B85083 /* MusubiNetwork.swift in Sources */,
 				782354FF25410B1200B85083 /* FMDatabaseQueue.m in Sources */,
 				78CFE826252FF58500650951 /* Shader.metal in Sources */,

@@ -104,7 +104,6 @@ extension MusubiOfflineStore: MusubiNetworkCallback {
                         }
                         
                         // Store the Master PlayList
-                        
                         fileManager.createFile(atPath: "\(directoryName)/master.m3u8", contents: httpGetResult?.data(using: .utf8), attributes: nil)
                         
                     } else {
