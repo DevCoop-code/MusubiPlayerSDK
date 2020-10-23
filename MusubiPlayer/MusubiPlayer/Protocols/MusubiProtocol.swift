@@ -22,3 +22,7 @@ protocol MusubiPlayerAction: class {
     func getPlayerState() -> playerState
     func seek(_ time: Float)
 }
+
+protocol MusubiNetworkCallback {
+    func httpGetResult(url:String, httpStatusCode:Int, httpGetResult: String?, mimeType: String?)
+}

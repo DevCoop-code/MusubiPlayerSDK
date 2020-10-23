@@ -10,9 +10,11 @@ import UIKit
 
 open class MusubiDevice: NSObject {
     var filemgr: FileManager?
+    var musubiProtocol: MusubiMediaProtocol?
     
     public override init() {
         filemgr = FileManager.default
+        musubiProtocol = MusubiMediaProtocol()
     }
 }
 
