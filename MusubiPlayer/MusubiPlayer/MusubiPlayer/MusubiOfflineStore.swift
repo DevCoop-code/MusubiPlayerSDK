@@ -80,48 +80,52 @@ open class MusubiOfflineStore: NSObject {
 
 extension MusubiOfflineStore: MusubiNetworkCallback {
     func httpGetResult(url:String, httpStatusCode: Int, httpGetResult: String?, mimeType: String?) {
-        if let db:FMDatabase = self.offlineDB {
-            if db.open() {
-                let condSelectSQL = "SELECT ID FROM MEDIAOFFLINEINFO WHERE URL = '\(url)'"
-                let selectResult: FMResultSet? = db.executeQuery(condSelectSQL, withParameterDictionary: nil)
-                if selectResult?.next() == true {
-                    // Make Directory for store the media Content
-                    let columnID = selectResult?.string(forColumn: "ID")
-        //                                    NSLog("Selected ID \(columnID)")
-                    if let fileManager = self.device?.filemgr, let directoryName = columnID {
-                        if !fileManager.fileExists(atPath: directoryName) {
-                            // New Offline Content
-                            let newDirPaths = fileManager.urls(for: .documentDirectory, in: .userDomainMask)
-                            
-                            let rootDirectory = newDirPaths[0].appendingPathComponent("musubi")
-                            let newDir = rootDirectory.appendingPathComponent(directoryName)
-                            do {
-                                try fileManager.createDirectory(at: newDir,
-                                                                withIntermediateDirectories: true,
-                                                                attributes: nil)
-                            } catch let error as NSError {
-                                NSLog("Error: \(error.localizedDescription)")
-                            }
-                            
-                            // Store the Master PlayList
-                            fileManager.createFile(atPath: "\(directoryName)/master.m3u8", contents: httpGetResult?.data(using: .utf8), attributes: nil)
-                            
-                            // To Analyze PlayList - Throw String Data Not FILE
-                            if let manifestStr = httpGetResult {
-                                let musubiProtocol = device?.musubiProtocol
-                                musubiProtocol?.checkNeedToRequestMoreContent(manifest: manifestStr)
-                            }
-                        } else {
-                            // Store the Content
-                            
-                        }
-                    }
-                } else {
-                    
-                }
-                db.close()
-            }
+        if httpStatusCode == 200 {
+            if let db:FMDatabase = self.offlineDB {
+               if db.open() {
+                   let condSelectSQL = "SELECT ID FROM MEDIAOFFLINEINFO WHERE URL = '\(url)'"
+                   let selectResult: FMResultSet? = db.executeQuery(condSelectSQL, withParameterDictionary: nil)
+                   if selectResult?.next() == true {
+                       // Make Directory for store the media Content
+                       let columnID = selectResult?.string(forColumn: "ID")
+           //                                    NSLog("Selected ID \(columnID)")
+                       if let fileManager = self.device?.filemgr, let directoryName = columnID {
+                           if !fileManager.fileExists(atPath: directoryName) {
+                               // New Offline Content
+                               let newDirPaths = fileManager.urls(for: .documentDirectory, in: .userDomainMask)
+                               
+                               let rootDirectory = newDirPaths[0].appendingPathComponent("musubi")
+                               let newDir = rootDirectory.appendingPathComponent(directoryName)
+                               do {
+                                   try fileManager.createDirectory(at: newDir,
+                                                                   withIntermediateDirectories: true,
+                                                                   attributes: nil)
+                               } catch let error as NSError {
+                                   NSLog("Error: \(error.localizedDescription)")
+                               }
+                               
+                               // Store the Master PlayList
+                               fileManager.createFile(atPath: "\(directoryName)/master.m3u8", contents: httpGetResult?.data(using: .utf8), attributes: nil)
+                               
+                               // To Analyze PlayList - Throw String Data Not FILE
+                               if let manifestStr = httpGetResult {
+                                   let musubiProtocol = device?.musubiProtocol
+                                   musubiProtocol?.checkNeedToRequestMoreContent(manifest: manifestStr)
+                               }
+                           } else {
+                               // Store the Content
+                               
+                           }
+                       }
+                   } else {
+                       
+                   }
+                   db.close()
+               }
+           }
+        }
+        else {
+            NSLog("Offline Store Network Error")
         }
     }
-    
 }
