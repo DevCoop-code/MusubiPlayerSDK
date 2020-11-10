@@ -31,6 +31,13 @@ enum playerState {
     case pause
 }
 
+enum hlsPlayListType {
+    case none
+    case master
+    case vod
+    case live
+}
+
 // Key-Value observing context
 private var playerItemContext = 0
 

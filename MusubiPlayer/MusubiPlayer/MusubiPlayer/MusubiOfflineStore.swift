@@ -110,7 +110,7 @@ extension MusubiOfflineStore: MusubiNetworkCallback {
                                // To Analyze PlayList - Throw String Data Not FILE
                                if let manifestStr = httpGetResult {
                                    let musubiProtocol = device?.musubiProtocol
-                                   musubiProtocol?.checkNeedToRequestMoreContent(manifest: manifestStr)
+                                   musubiProtocol?.parsingMasterPlayList(manifest: manifestStr)
                                }
                            } else {
                                // Store the Content
