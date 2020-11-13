@@ -79,6 +79,8 @@ extension PlayListViewController: UITableViewDataSource, UITableViewDelegate {
         
         let row = indexPath.row
         mediaURL = mediaArray[row].url
+        
+        playlistTableView.deselectRow(at: indexPath, animated: true)
     }
     
     // MARK: Swipe To Delete Data
