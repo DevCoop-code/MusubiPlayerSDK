@@ -8,6 +8,23 @@
 
 import Foundation
 
+enum musubiAction {
+    case none
+    case play
+    case store
+}
+
+enum settingMode {
+    case none
+    case playerMode
+}
+
+enum videoPlayMode {
+    case none
+    case rawPlayer
+    case viewController
+}
+
 struct mediaPlayList {
     var title: String
     var url: String
@@ -15,14 +32,13 @@ struct mediaPlayList {
 
 struct modeCellStruct {
     var title: String
-}
-
-enum musubiAction {
-    case none
-    case play
-    case store
+    var mode: settingMode
 }
 
 protocol actionPopupDelegate: class {
     func didAction(action: musubiAction)
+}
+
+protocol settingDelegate: class {
+    func musubiPlayerMode(onOff: Bool)
 }

@@ -21,7 +21,7 @@ class SettingViewController: UIViewController {
         settingTableView.delegate = self
         settingTableView.dataSource = self
         
-        let modeCell: modeCellStruct = modeCellStruct(title: "Use Musubi Player")
+        let modeCell: modeCellStruct = modeCellStruct(title: "Use Musubi Player", mode: .playerMode)
         settingArray.append(modeCell)
     }
 }
@@ -41,6 +41,20 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
         let row = indexPath.row
         cell.modeName.text = settingArray[row].title
         
+        if settingArray[row].mode == .playerMode {
+            cell.delegate = self
+        }
+        
         return cell
+    }
+}
+
+extension SettingViewController: settingDelegate {
+    func musubiPlayerMode(onOff: Bool) {
+        if onOff {
+            VideoSettings.playMode = .rawPlayer
+        } else {
+            VideoSettings.playMode = .viewController
+        }
     }
 }

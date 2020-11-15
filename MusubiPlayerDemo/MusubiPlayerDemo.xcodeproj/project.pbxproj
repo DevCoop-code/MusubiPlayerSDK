@@ -21,6 +21,7 @@
 		78DA8460253FB92D0058EC50 /* mediaPlaylistCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78DA845F253FB92D0058EC50 /* mediaPlaylistCell.swift */; };
 		78E2704D2560C165007ACBDC /* switchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E2704C2560C165007ACBDC /* switchCell.swift */; };
 		78F2EE9F2560C7530031ACCA /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F2EE9E2560C7530031ACCA /* SettingViewController.swift */; };
+		78F2EEA42560D86A0031ACCA /* VideoSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F2EEA32560D86A0031ACCA /* VideoSettings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -53,6 +54,7 @@
 		78DA845F253FB92D0058EC50 /* mediaPlaylistCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mediaPlaylistCell.swift; sourceTree = "<group>"; };
 		78E2704C2560C165007ACBDC /* switchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = switchCell.swift; sourceTree = "<group>"; };
 		78F2EE9E2560C7530031ACCA /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		78F2EEA32560D86A0031ACCA /* VideoSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoSettings.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +97,7 @@
 		78792283252FE14200D02FDB /* MusubiPlayerDemo */ = {
 			isa = PBXGroup;
 			children = (
+				78F2EEA22560D8510031ACCA /* data */,
 				7866B9BF253FBC0400F9BCB1 /* utils */,
 				78DA8461253FB9D70058EC50 /* viewControl */,
 				78DA845E253FB86F0058EC50 /* viewCell */,
@@ -142,6 +145,14 @@
 				78F2EE9E2560C7530031ACCA /* SettingViewController.swift */,
 			);
 			path = viewControl;
+			sourceTree = "<group>";
+		};
+		78F2EEA22560D8510031ACCA /* data */ = {
+			isa = PBXGroup;
+			children = (
+				78F2EEA32560D86A0031ACCA /* VideoSettings.swift */,
+			);
+			path = data;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -220,6 +231,7 @@
 				78E2704D2560C165007ACBDC /* switchCell.swift in Sources */,
 				7866B9C1253FBC1900F9BCB1 /* utils.swift in Sources */,
 				78DA8460253FB92D0058EC50 /* mediaPlaylistCell.swift in Sources */,
+				78F2EEA42560D86A0031ACCA /* VideoSettings.swift in Sources */,
 				78F2EE9F2560C7530031ACCA /* SettingViewController.swift in Sources */,
 				78792289252FE14200D02FDB /* PlayListViewController.swift in Sources */,
 				78792285252FE14200D02FDB /* AppDelegate.swift in Sources */,
