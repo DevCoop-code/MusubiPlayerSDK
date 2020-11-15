@@ -22,6 +22,7 @@
 		78E2704D2560C165007ACBDC /* switchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E2704C2560C165007ACBDC /* switchCell.swift */; };
 		78F2EE9F2560C7530031ACCA /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F2EE9E2560C7530031ACCA /* SettingViewController.swift */; };
 		78F2EEA42560D86A0031ACCA /* VideoSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F2EEA32560D86A0031ACCA /* VideoSettings.swift */; };
+		78F2EEA62560DB660031ACCA /* RawPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F2EEA52560DB660031ACCA /* RawPlayerViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -55,6 +56,7 @@
 		78E2704C2560C165007ACBDC /* switchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = switchCell.swift; sourceTree = "<group>"; };
 		78F2EE9E2560C7530031ACCA /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		78F2EEA32560D86A0031ACCA /* VideoSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoSettings.swift; sourceTree = "<group>"; };
+		78F2EEA52560DB660031ACCA /* RawPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RawPlayerViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +145,7 @@
 				78792288252FE14200D02FDB /* PlayListViewController.swift */,
 				7866B9C6254013E900F9BCB1 /* PlayStorePopupViewController.swift */,
 				78F2EE9E2560C7530031ACCA /* SettingViewController.swift */,
+				78F2EEA52560DB660031ACCA /* RawPlayerViewController.swift */,
 			);
 			path = viewControl;
 			sourceTree = "<group>";
@@ -236,6 +239,7 @@
 				78792289252FE14200D02FDB /* PlayListViewController.swift in Sources */,
 				78792285252FE14200D02FDB /* AppDelegate.swift in Sources */,
 				78792287252FE14200D02FDB /* SceneDelegate.swift in Sources */,
+				78F2EEA62560DB660031ACCA /* RawPlayerViewController.swift in Sources */,
 				7866B9C7254013E900F9BCB1 /* PlayStorePopupViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
