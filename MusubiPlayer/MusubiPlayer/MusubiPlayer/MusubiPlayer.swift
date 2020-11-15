@@ -18,13 +18,13 @@ var ONE_FRAME_DURATION: Double {
     }
 }
 
-enum mediaType {
+public enum mediaType {
     case local
     case hls
     case dash
 }
 
-enum playerState {
+public enum playerState {
     case none
     case open
     case play
@@ -41,7 +41,7 @@ enum hlsPlayListType {
 // Key-Value observing context
 private var playerItemContext = 0
 
-class MusubiPlayer:NSObject, AVPlayerItemOutputPullDelegate {
+open class MusubiPlayer:NSObject, AVPlayerItemOutputPullDelegate {
     var device_: MTLDevice?
     var metalLayer_: CAMetalLayer?
     var pipelineState_: MTLRenderPipelineState?
@@ -67,7 +67,7 @@ class MusubiPlayer:NSObject, AVPlayerItemOutputPullDelegate {
     var musubiPlayerState: playerState = .none
     var musubiDispatchQueue: DispatchQueue?
     
-    init(_ videoPlayerView: UIView) {
+    public init(_ videoPlayerView: UIView) {
         super.init()
         
         device_ = MTLCreateSystemDefaultDevice()
@@ -199,7 +199,7 @@ class MusubiPlayer:NSObject, AVPlayerItemOutputPullDelegate {
     /*
      KVO
      */
-    override func observeValue(forKeyPath keyPath: String?,
+    open override func observeValue(forKeyPath keyPath: String?,
                                      of object: Any?,
                                      change: [NSKeyValueChangeKey : Any]?,
                                      context: UnsafeMutableRawPointer?) {
@@ -242,7 +242,7 @@ class MusubiPlayer:NSObject, AVPlayerItemOutputPullDelegate {
 
 // MARK: Musubi Player Action API
 extension MusubiPlayer: MusubiPlayerAction {
-     func open(_ mediaPath: String, mediaType: mediaType) {
+     public func open(_ mediaPath: String, mediaType: mediaType) {
         var mediaURL_: NSURL?
         if let player = avPlayer_, let videoOutput = videoOutput_ {
             NSLog("Media Content URI: %@", mediaPath)
@@ -292,32 +292,32 @@ extension MusubiPlayer: MusubiPlayerAction {
         }
     }
     
-    func start() {
+    public func start() {
            if let avPlayer = avPlayer_ {
                musubiPlayerState = .play
                avPlayer.play()
            }
        }
        
-   func pause() {
+   public func pause() {
        if let avPlayer = avPlayer_ {
            musubiPlayerState = .pause
            avPlayer.pause()
        }
    }
    
-   func getPlayerState() -> playerState {
+   public func getPlayerState() -> playerState {
        return musubiPlayerState;
    }
    
-   func seek(_ time: Float) {
+   public func seek(_ time: Float) {
        if let avPlayer = avPlayer_ {
            let cmTime: CMTime = CMTimeMake(value: Int64(time), timescale: Int32(1.0))
            avPlayer.seek(to: cmTime)
        }
    }
     
-    func close() {
+   public func close() {
         if let avPlayer = avPlayer_, let videoOutput = videoOutput_{
             avPlayer.currentItem?.remove(videoOutput)
         }

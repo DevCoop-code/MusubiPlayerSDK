@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MusubiPlayer
 
 class RawPlayerViewController: UIViewController {
 
@@ -19,9 +20,13 @@ class RawPlayerViewController: UIViewController {
     
     @IBOutlet weak var seekBar: UISlider!
     
+    var player: MusubiPlayer?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-
+        player = MusubiPlayer(videoPreview)
+        player?.open("https://devstreaming-cdn.apple.com/videos/streaming/examples/bipbop_4x3/bipbop_4x3_variant.m3u8", mediaType: .hls)
+        player?.start()
     }
 }
