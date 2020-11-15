@@ -46,21 +46,21 @@ open class MusubiOfflineStore: NSObject {
     
     open func startStore(_ streamingURI: String) {
         musubiOfflineDispatchQueue?.async {
-            if let db:FMDatabase = self.offlineDB {
-                if db.open() {
-                    let condSelectSQL = "SELECT ID FROM MEDIAOFFLINEINFO WHERE URL = '\(streamingURI)'"
-                    let results:FMResultSet? = db.executeQuery(condSelectSQL, withParameterDictionary: nil)
-                    
-                    if results?.next() == false {
-                        let insertSQL = "INSERT INTO MEDIAOFFLINEINFO (URL) VALUES ('\(streamingURI)')"
-                        
-                        db.executeUpdate(insertSQL, withArgumentsIn: [])
+//            if let db:FMDatabase = self.offlineDB {
+//                if db.open() {
+//                    let condSelectSQL = "SELECT ID FROM MEDIAOFFLINEINFO WHERE URL = '\(streamingURI)'"
+//                    let results:FMResultSet? = db.executeQuery(condSelectSQL, withParameterDictionary: nil)
+//
+//                    if results?.next() == false {
+//                        let insertSQL = "INSERT INTO MEDIAOFFLINEINFO (URL) VALUES ('\(streamingURI)')"
+//
+//                        db.executeUpdate(insertSQL, withArgumentsIn: [])
                         
                         self.musubiNetwork?.httpGet(httpURL: streamingURI)
-                    }
-                    db.close()
-                }
-            }
+//                    }
+//                    db.close()
+//                }
+//            }
         }
     }
     
@@ -83,43 +83,113 @@ extension MusubiOfflineStore: MusubiNetworkCallback {
         if httpStatusCode == 200 {
             if let db:FMDatabase = self.offlineDB {
                if db.open() {
-                   let condSelectSQL = "SELECT ID FROM MEDIAOFFLINEINFO WHERE URL = '\(url)'"
-                   let selectResult: FMResultSet? = db.executeQuery(condSelectSQL, withParameterDictionary: nil)
-                   if selectResult?.next() == true {
+//                   let condSelectSQL = "SELECT ID FROM MEDIAOFFLINEINFO WHERE URL = '\(url)'"
+//                   let selectResult: FMResultSet? = db.executeQuery(condSelectSQL, withParameterDictionary: nil)
+//                   if selectResult?.next() == true {
                        // Make Directory for store the media Content
-                       let columnID = selectResult?.string(forColumn: "ID")
+//                       let columnID = selectResult?.string(forColumn: "ID")
            //                                    NSLog("Selected ID \(columnID)")
-                       if let fileManager = self.device?.filemgr, let directoryName = columnID {
-                           if !fileManager.fileExists(atPath: directoryName) {
+//                       if let fileManager = self.device?.filemgr, let directoryName = columnID {
+//                           if !fileManager.fileExists(atPath: directoryName) {
                                // New Offline Content
-                               let newDirPaths = fileManager.urls(for: .documentDirectory, in: .userDomainMask)
-                               
-                               let rootDirectory = newDirPaths[0].appendingPathComponent("musubi")
-                               let newDir = rootDirectory.appendingPathComponent(directoryName)
-                               do {
-                                   try fileManager.createDirectory(at: newDir,
-                                                                   withIntermediateDirectories: true,
-                                                                   attributes: nil)
-                               } catch let error as NSError {
-                                   NSLog("Error: \(error.localizedDescription)")
-                               }
+//                               let newDirPaths = fileManager.urls(for: .documentDirectory, in: .userDomainMask)
+//
+//                               let rootDirectory = newDirPaths[0].appendingPathComponent("musubi")
+//                               let newDir = rootDirectory.appendingPathComponent(directoryName)
+//                               do {
+//                                   try fileManager.createDirectory(at: newDir,
+//                                                                   withIntermediateDirectories: true,
+//                                                                   attributes: nil)
+//                               } catch let error as NSError {
+//                                   NSLog("Error: \(error.localizedDescription)")
+//                               }
                                
                                // Store the Master PlayList
-                               fileManager.createFile(atPath: "\(directoryName)/master.m3u8", contents: httpGetResult?.data(using: .utf8), attributes: nil)
-                               
-                               // To Analyze PlayList - Throw String Data Not FILE
-                               if let manifestStr = httpGetResult {
-                                   let musubiProtocol = device?.musubiProtocol
-                                   musubiProtocol?.parsingMasterPlayList(manifest: manifestStr)
-                               }
-                           } else {
-                               // Store the Content
-                               
-                           }
-                       }
-                   } else {
-                       
-                   }
+//                               fileManager.createFile(atPath: "\(directoryName)/master.m3u8", contents: httpGetResult?.data(using: .utf8), attributes: nil)
+                
+                let fileManager = self.device?.filemgr
+                let newDirPaths = fileManager?.urls(for: .documentDirectory, in: .userDomainMask)
+                let rootDirectory = newDirPaths![0].appendingPathComponent("musubi")
+                let newDir = rootDirectory.appendingPathComponent("1")
+                do {
+                    try fileManager!.createDirectory(at: newDir,
+                                                   withIntermediateDirectories: true,
+                                                   attributes: nil)
+                } catch let error as NSError {
+                   NSLog("Error: \(error.localizedDescription)")
+                }
+                
+                // Check the Downloaded File
+                NSLog("MimeType: \(mimeType)")
+                let musubiProtocol = device?.musubiProtocol
+                if let mime = mimeType, mime.contains("mpegurl"), let manifestStr = httpGetResult {
+                    let hlsType = musubiProtocol?.checkPlayListType(manifest: manifestStr)
+                    
+                    if hlsType == hlsPlayListType.master {
+                        fileManager?.createFile(atPath: "1/master.m3u8", contents: httpGetResult?.data(using: .utf8), attributes: nil)
+                        
+                        let _subPlayLists = musubiProtocol?.parsingMasterPlayList(manifest: manifestStr)
+                        if let subPlayLists = _subPlayLists {
+                            for subPlayList in subPlayLists {
+                                // Absolute Path
+                                if subPlayList.contains("http") {
+                                    self.musubiNetwork?.httpGet(httpURL: subPlayList)
+                                } else {    // Relative Path
+                                    var mediaSubURL: String = ""
+                                    let mediaMasterURL = url.split(separator: "/")
+                                    for index in 0...mediaMasterURL.count - 2 {
+                                        mediaSubURL = mediaSubURL + String(mediaMasterURL[index]) + "/"
+                                    }
+                                    mediaSubURL = mediaSubURL + subPlayList
+                                    NSLog("mediaSubURL : \(mediaSubURL)")
+                                    self.musubiNetwork?.httpGet(httpURL: mediaSubURL)
+                                }
+                            }
+                        }
+                    }
+                    else if hlsType == hlsPlayListType.vod {
+                        if let fileManager = fileManager {
+                            var index:Int = 1
+                            while (index < 10) {    // TODO: Should Get the sub playlist numbers
+                                
+                                if !fileManager.fileExists(atPath: "1/sub\(index).m3u8") {
+                                    fileManager.createFile(atPath: "1/sub\(index).m3u8", contents: httpGetResult?.data(using: .utf8), attributes: nil)
+                                    
+                                    let _avFileLists = musubiProtocol?.parsingVODPlayList(manifest: manifestStr)
+                                    if let avFileLists = _avFileLists {
+                                        for avFileList in avFileLists {
+                                            // Absolute Path
+                                            if avFileList.contains("http") {
+                                                self.musubiNetwork?.httpGet(httpURL: avFileList)
+                                            } else {    // Relative Path
+                                                var avFileURL: String = ""
+                                                let mediaSubURL = url.split(separator: "/")
+                                                for index in 0...mediaSubURL.count - 2 {
+                                                    avFileURL = avFileURL + String(mediaSubURL[index]) + "/"
+                                                }
+                                                avFileURL = avFileURL + avFileList
+                                                NSLog("avFileURL : \(avFileURL)")
+                                                self.musubiNetwork?.httpGet(httpURL: avFileURL)
+                                            }
+                                        }
+                                    }
+                                    break
+                                }
+                                index+=1;
+                            }
+                        }
+                    }
+                } else if let mime = mimeType, mime.contains("video") || mime.contains("octectstream"){
+                    
+                }
+//                           } else {
+//                               // Store the Content
+//
+//                           }
+//                       }
+//                   } else {
+//
+//                   }
                    db.close()
                }
            }

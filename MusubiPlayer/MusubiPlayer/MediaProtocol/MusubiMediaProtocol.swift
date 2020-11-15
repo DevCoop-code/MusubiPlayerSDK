@@ -10,6 +10,7 @@ import Foundation
 
 class MusubiMediaProtocol: NSObject {
     func checkPlayListType(manifest: String) -> hlsPlayListType {
+        var playListType: hlsPlayListType = .none
         let manifestArr = Array(manifest)
         if manifestArr[0] == "#" && manifestArr[1] == "E" && manifestArr[2] == "X" &&
             manifestArr[3] == "T" && manifestArr[4] == "M" && manifestArr[5] == "3" &&
@@ -28,27 +29,28 @@ class MusubiMediaProtocol: NSObject {
                         manifestArr[index + 3] == "E" && manifestArr[index + 4] == "A" && manifestArr[index + 5] == "M" &&
                         manifestArr[index + 6] == "-" && manifestArr[index + 7] == "I" && manifestArr[index + 8] == "N" &&
                         manifestArr[index + 9] == "F" {
-                        return .master
+                        playListType = .master
+//                        return .master
                     }
                     // PLAYLIST-TYPE
                     else if manifestArr[index] == "P" && manifestArr[index + 1] == "L" && manifestArr[index + 2] == "A" &&
                         manifestArr[index + 3] == "Y" && manifestArr[index + 4] == "L" && manifestArr[index + 5] == "I" &&
                         manifestArr[index + 6] == "S" && manifestArr[index + 7] == "T" {
+                        index += 8
                         index += 5 // Skip '-TYPE'
-                        
                         // Try to find ':'
                         while !(manifestArr[index] == ":") {
                             index += 1
                         }
                         index += 1
                         
+                        NSLog("hankyo: \(manifestArr[index]), \(manifestArr[index + 1]), \(manifestArr[index + 2]),")
+                        
                         // VOD
-                        if manifestArr[index] == "V" && manifestArr[index] == "O" && manifestArr[index] == "D" {
-                            return .vod
+                        if manifestArr[index] == "V" && manifestArr[index + 1] == "O" && manifestArr[index + 2] == "D" {
+                            playListType = .vod
+//                            return .vod
                         }
-                    }
-                    else {
-                        return .live
                     }
                 } else {
                     index += 1
@@ -59,10 +61,11 @@ class MusubiMediaProtocol: NSObject {
             NSLog("File is not HLS PlayList")
             return .none
         }
-        return .none
+        return playListType
     }
     
     func parsingMasterPlayList(manifest: String) -> [String]? {
+        var subManifests: [String]? = []
         let manifestArr = Array(manifest)
         if manifestArr[0] == "#" && manifestArr[1] == "E" && manifestArr[2] == "X" && manifestArr[3] == "T" && manifestArr[4] == "M" && manifestArr[5] == "3" && manifestArr[6] == "U" {
             
@@ -95,6 +98,7 @@ class MusubiMediaProtocol: NSObject {
                             index += 1
                         }
                         NSLog("hankyo sub url: \(playListURL)")
+                        subManifests?.append(playListURL)
                         index += 1
                     }
                 }
@@ -108,19 +112,20 @@ class MusubiMediaProtocol: NSObject {
             NSLog("File is not HLS PlayList")
             return nil
         }
-        return nil
+        return subManifests
     }
     
     func parsingVODPlayList(manifest: String) -> [String]? {
+        var avFiles: [String]? = []
         let manifestArr = Array(manifest)
         if manifestArr[0] == "#" && manifestArr[1] == "E" && manifestArr[2] == "X" && manifestArr[3] == "T" && manifestArr[4] == "M" && manifestArr[5] == "3" && manifestArr[6] == "U" {
             
             var index: Int = 7
             while index < manifest.count - 1 {
                 // #EXTINF
-                if manifestArr[0] == "#" && manifestArr[0] == "E" && manifestArr[0] == "X" &&
-                    manifestArr[0] == "T" && manifestArr[0] == "I" && manifestArr[0] == "N" && manifestArr[0] == "F"{
-                    
+                if manifestArr[index] == "#" && manifestArr[index + 1] == "E" && manifestArr[index + 2] == "X" &&
+                    manifestArr[index + 3] == "T" && manifestArr[index + 4] == "I" && manifestArr[index + 5] == "N" && manifestArr[index + 6] == "F"{
+                    index += 7
                     while !(manifestArr[index] == "\n") {
                         index += 1
                     }
@@ -133,6 +138,7 @@ class MusubiMediaProtocol: NSObject {
                         index += 1
                     }
                     NSLog("hankyo media url: \(mediaURL)")
+                    avFiles?.append(mediaURL)
                 }
                 else {
                     index += 1
@@ -142,6 +148,6 @@ class MusubiMediaProtocol: NSObject {
         else {
             NSLog("File is not HLS PlayList")
         }
-        return nil
+        return avFiles
     }
 }
