@@ -19,6 +19,8 @@
 		7879229B252FE2CF00D02FDB /* MusubiPlayer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 78792299252FE2CF00D02FDB /* MusubiPlayer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		78DA845D253FB47F0058EC50 /* hlsMediaList.json in Resources */ = {isa = PBXBuildFile; fileRef = 78DA845C253FB47F0058EC50 /* hlsMediaList.json */; };
 		78DA8460253FB92D0058EC50 /* mediaPlaylistCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78DA845F253FB92D0058EC50 /* mediaPlaylistCell.swift */; };
+		78E2704D2560C165007ACBDC /* switchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E2704C2560C165007ACBDC /* switchCell.swift */; };
+		78F2EE9F2560C7530031ACCA /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F2EE9E2560C7530031ACCA /* SettingViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -49,6 +51,8 @@
 		78792299252FE2CF00D02FDB /* MusubiPlayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MusubiPlayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		78DA845C253FB47F0058EC50 /* hlsMediaList.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = hlsMediaList.json; sourceTree = "<group>"; };
 		78DA845F253FB92D0058EC50 /* mediaPlaylistCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mediaPlaylistCell.swift; sourceTree = "<group>"; };
+		78E2704C2560C165007ACBDC /* switchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = switchCell.swift; sourceTree = "<group>"; };
+		78F2EE9E2560C7530031ACCA /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +129,7 @@
 			isa = PBXGroup;
 			children = (
 				78DA845F253FB92D0058EC50 /* mediaPlaylistCell.swift */,
+				78E2704C2560C165007ACBDC /* switchCell.swift */,
 			);
 			path = viewCell;
 			sourceTree = "<group>";
@@ -134,6 +139,7 @@
 			children = (
 				78792288252FE14200D02FDB /* PlayListViewController.swift */,
 				7866B9C6254013E900F9BCB1 /* PlayStorePopupViewController.swift */,
+				78F2EE9E2560C7530031ACCA /* SettingViewController.swift */,
 			);
 			path = viewControl;
 			sourceTree = "<group>";
@@ -211,8 +217,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				78E2704D2560C165007ACBDC /* switchCell.swift in Sources */,
 				7866B9C1253FBC1900F9BCB1 /* utils.swift in Sources */,
 				78DA8460253FB92D0058EC50 /* mediaPlaylistCell.swift in Sources */,
+				78F2EE9F2560C7530031ACCA /* SettingViewController.swift in Sources */,
 				78792289252FE14200D02FDB /* PlayListViewController.swift in Sources */,
 				78792285252FE14200D02FDB /* AppDelegate.swift in Sources */,
 				78792287252FE14200D02FDB /* SceneDelegate.swift in Sources */,

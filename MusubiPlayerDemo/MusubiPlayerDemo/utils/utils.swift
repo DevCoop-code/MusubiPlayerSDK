@@ -13,6 +13,10 @@ struct mediaPlayList {
     var url: String
 }
 
+struct modeCellStruct {
+    var title: String
+}
+
 enum musubiAction {
     case none
     case play

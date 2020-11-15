@@ -83,18 +83,88 @@
         <!--Setting-->
         <scene sceneID="5rA-Q4-dxF">
             <objects>
-                <viewController id="h4O-Ob-1bN" sceneMemberID="viewController">
+                <viewController id="h4O-Ob-1bN" customClass="SettingViewController" customModule="MusubiPlayerDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8dK-UH-mFx">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rhX-xj-iiB">
+                                <rect key="frame" x="20" y="44" width="374" height="43"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="36"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Eci-8W-alE">
+                                <rect key="frame" x="20" y="97" width="374" height="706"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="playModeSwitchCell" rowHeight="64" id="fGo-tL-3cv" customClass="switchCell" customModule="MusubiPlayerDemo" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="374" height="64"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="fGo-tL-3cv" id="gzf-Av-1eB">
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="64"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="2Om-yd-Jsf">
+                                                    <rect key="frame" x="10" y="10" width="134" height="44"/>
+                                                    <subviews>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="video" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="htD-xh-gul">
+                                                            <rect key="frame" x="0.0" y="9" width="30" height="26"/>
+                                                            <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="30" id="3St-9U-Can"/>
+                                                                <constraint firstAttribute="width" constant="30" id="x5N-Lx-N7R"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Play Mode" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Q0-3s-I5u">
+                                                            <rect key="frame" x="54" y="12" width="80" height="20.5"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zGd-sF-Bak">
+                                                    <rect key="frame" x="295" y="16.5" width="51" height="31"/>
+                                                </switch>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="zGd-sF-Bak" secondAttribute="trailing" constant="10" id="ID2-ci-vhn"/>
+                                                <constraint firstAttribute="bottom" secondItem="2Om-yd-Jsf" secondAttribute="bottom" constant="10" id="PzR-5D-RDU"/>
+                                                <constraint firstItem="zGd-sF-Bak" firstAttribute="centerY" secondItem="2Om-yd-Jsf" secondAttribute="centerY" id="WG8-TN-uMg"/>
+                                                <constraint firstItem="2Om-yd-Jsf" firstAttribute="top" secondItem="gzf-Av-1eB" secondAttribute="top" constant="10" id="gZu-KW-CYS"/>
+                                                <constraint firstItem="2Om-yd-Jsf" firstAttribute="leading" secondItem="gzf-Av-1eB" secondAttribute="leading" constant="10" id="tjd-mu-3t7"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="modeImage" destination="htD-xh-gul" id="jQy-cx-wjb"/>
+                                            <outlet property="modeName" destination="9Q0-3s-I5u" id="jLi-t4-jAw"/>
+                                            <outlet property="modeSwitch" destination="zGd-sF-Bak" id="vxC-dH-Gdq"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="rhX-xj-iiB" firstAttribute="leading" secondItem="eJf-7L-FgJ" secondAttribute="leading" constant="20" id="542-j9-x46"/>
+                            <constraint firstItem="rhX-xj-iiB" firstAttribute="top" secondItem="eJf-7L-FgJ" secondAttribute="top" id="6NQ-1o-0Ij"/>
+                            <constraint firstItem="eJf-7L-FgJ" firstAttribute="trailing" secondItem="rhX-xj-iiB" secondAttribute="trailing" constant="20" id="EN9-4e-w5U"/>
+                            <constraint firstItem="Eci-8W-alE" firstAttribute="top" secondItem="rhX-xj-iiB" secondAttribute="bottom" constant="10" id="HVF-QN-fF8"/>
+                            <constraint firstItem="eJf-7L-FgJ" firstAttribute="trailing" secondItem="Eci-8W-alE" secondAttribute="trailing" constant="20" id="UIp-MU-AD5"/>
+                            <constraint firstItem="eJf-7L-FgJ" firstAttribute="bottom" secondItem="Eci-8W-alE" secondAttribute="bottom" constant="10" id="eJr-9r-W3E"/>
+                            <constraint firstItem="Eci-8W-alE" firstAttribute="leading" secondItem="eJf-7L-FgJ" secondAttribute="leading" constant="20" id="quq-u2-ZEy"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="eJf-7L-FgJ"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Setting" image="ellipsis" catalog="system" id="gSe-GH-153"/>
+                    <connections>
+                        <outlet property="settingTableView" destination="Eci-8W-alE" id="Zsh-YI-jZN"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dAX-co-iD8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1899" y="441"/>
+            <point key="canvasLocation" x="1898.5507246376812" y="440.625"/>
         </scene>
         <!--PlayStorePopupViewController-->
         <scene sceneID="odv-Rm-qUJ">
@@ -187,5 +257,6 @@
     <resources>
         <image name="ellipsis" catalog="system" width="128" height="37"/>
         <image name="list.dash" catalog="system" width="128" height="85"/>
+        <image name="video" catalog="system" width="128" height="83"/>
     </resources>
 </document>
