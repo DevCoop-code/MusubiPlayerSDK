@@ -25,6 +25,18 @@ class RawPlayerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        NSLog("videoPreview Frame: \(videoPreview.frame)")
+        
+//        if #available(iOS 11.0, *) {
+//            let window = UIApplication.shared.keyWindow
+//            let topPadding = window?.safeAreaInsets.top
+//            let bottomPadding = window?.safeAreaInsets.bottom
+//            let leadingPadding = window?.safeAreaInsets.left
+//            let trailingPadding = window?.safeAreaInsets.right
+//
+//            NSLog("\(topPadding), \(bottomPadding), \(leadingPadding), \(trailingPadding)")
+//        }
+        
         player = MusubiPlayer(videoPreview)
         player?.open("https://devstreaming-cdn.apple.com/videos/streaming/examples/bipbop_4x3/bipbop_4x3_variant.m3u8", mediaType: .hls)
         player?.start()

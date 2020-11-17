@@ -77,7 +77,11 @@ open class MusubiPlayer:NSObject, AVPlayerItemOutputPullDelegate {
             metalLayer.device = metalDevice
             metalLayer.pixelFormat = .bgra8Unorm
             metalLayer.framebufferOnly = true
-            metalLayer.frame = videoPlayerView.layer.frame
+//            metalLayer.frame = videoPlayerView.layer.frame
+            metalLayer.frame = videoPlayerView.bounds
+//            metalLayer.frame.size.width -= 40
+            NSLog("metalLayer Frame: \(metalLayer.frame)")
+//            metalLayer.bounds = videoPlayerView.layer.bounds
             //            videoPlayerView.layer.addSublayer(metalLayer)
             videoPlayerView.layer.insertSublayer(metalLayer, at: 0)
             
