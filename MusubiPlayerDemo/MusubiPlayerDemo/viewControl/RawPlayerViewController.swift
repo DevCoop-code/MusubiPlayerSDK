@@ -9,6 +9,12 @@
 import UIKit
 import MusubiPlayer
 
+enum seekBehavior {
+    case none;
+    case seeking;
+    case seekEnd;
+}
+
 class RawPlayerViewController: UIViewController {
 
     @IBOutlet weak var videoPreview: UIView!
@@ -21,6 +27,11 @@ class RawPlayerViewController: UIViewController {
     @IBOutlet weak var seekBar: UISlider!
     
     var player: MusubiPlayer?
+    
+    var videoURL: String?
+    var currentPlayerTime: Float = 0.0
+    
+    var userAction: seekBehavior = .none
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +49,57 @@ class RawPlayerViewController: UIViewController {
 //        }
         
         player = MusubiPlayer(videoPreview)
-        player?.open("https://devstreaming-cdn.apple.com/videos/streaming/examples/bipbop_4x3/bipbop_4x3_variant.m3u8", mediaType: .hls)
-        player?.start()
+        if let mediaURL = videoURL {
+            player?.open(mediaURL, mediaType: .hls)
+            player?.start()
+            
+            playpauseBtn.setBackgroundImage(UIImage(systemName: "pause.fill"), for: .normal)
+        }
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        player?.close()
+    }
+    
+    @IBAction func playPauseAction(_ sender: Any) {
+        if let musubiPlayer = player {
+            switch musubiPlayer.getPlayerState() {
+            case .play:
+                musubiPlayer.pause()
+                playpauseBtn.setBackgroundImage(UIImage(systemName: "play.fill"), for: .normal)
+                break
+            case .pause:
+                musubiPlayer.start()
+                playpauseBtn.setBackgroundImage(UIImage(systemName: "pause.fill"), for: .normal)
+                break
+            default:
+                
+                break
+            }
+        }
+    }
+    
+    @IBAction func backAction(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func seekBarTouchDown(_ sender: Any) {
+        userAction = .seeking
+    }
+
+    @IBAction func seekBarTouchUp(_ sender: Any) {
+        let seekbar = sender as! UISlider
+        if userAction == .seeking {
+            if let player = player {
+                player.seek(seekbar.value)
+                
+                currentPlayerTime = seekbar.value
+                userAction = .seekEnd
+            }
+        }
+    }
+}
+
+extension RawPlayerViewController: MusubiCallback {
+    
 }

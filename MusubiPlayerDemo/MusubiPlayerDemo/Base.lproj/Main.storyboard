@@ -178,14 +178,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w4p-Ig-o7m" userLabel="videoPreview">
-                                <rect key="frame" x="20" y="44" width="374" height="300"/>
+                                <rect key="frame" x="20" y="88" width="374" height="300"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="300" id="Cnv-U4-tne"/>
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="22" translatesAutoresizingMaskIntoConstraints="NO" id="tEE-z7-6YX" userLabel="PlayerControlStackView">
-                                <rect key="frame" x="0.0" y="364" width="414" height="67.5"/>
+                                <rect key="frame" x="0.0" y="408" width="414" height="67.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Ycs-fW-IVr" userLabel="ButtonsStackView">
                                         <rect key="frame" x="30" y="0.0" width="354" height="25"/>
@@ -205,6 +205,9 @@
                                                     <constraint firstAttribute="height" constant="25" id="lXg-VO-D7w"/>
                                                 </constraints>
                                                 <state key="normal" backgroundImage="play.fill" catalog="system"/>
+                                                <connections>
+                                                    <action selector="playPauseAction:" destination="g6G-HZ-uDt" eventType="touchUpInside" id="joz-RG-se1"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TUw-xh-HJu" userLabel="seekForwardBtn">
                                                 <rect key="frame" x="329" y="0.0" width="25" height="25"/>
@@ -227,6 +230,10 @@
                                             </label>
                                             <slider opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="100" verticalCompressionResistancePriority="100" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="g5h-0X-j7k">
                                                 <rect key="frame" x="59" y="0.0" width="236" height="21.5"/>
+                                                <connections>
+                                                    <action selector="seekBarTouchDown:" destination="g6G-HZ-uDt" eventType="touchDown" id="5SJ-5D-uWp"/>
+                                                    <action selector="seekBarTouchUp:" destination="g6G-HZ-uDt" eventType="touchUpInside" id="vbw-BM-5CQ"/>
+                                                </connections>
                                             </slider>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qMW-ww-s8s" userLabel="totalTime">
                                                 <rect key="frame" x="308" y="0.0" width="46" height="20.5"/>
@@ -251,13 +258,24 @@
                                     <constraint firstItem="Ycs-fW-IVr" firstAttribute="top" secondItem="tEE-z7-6YX" secondAttribute="top" id="yBS-mx-sQP"/>
                                 </constraints>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rfh-hw-NcP">
+                                <rect key="frame" x="20" y="44" width="44" height="36"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Back"/>
+                                <connections>
+                                    <action selector="backAction:" destination="g6G-HZ-uDt" eventType="touchUpInside" id="5MD-JX-QIY"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="tEE-z7-6YX" firstAttribute="leading" secondItem="Tc0-is-MN3" secondAttribute="leading" id="2Sk-Mq-Yp8"/>
                             <constraint firstItem="g3p-Yw-bsi" firstAttribute="trailing" secondItem="tEE-z7-6YX" secondAttribute="trailing" id="3P2-P9-lRG"/>
+                            <constraint firstItem="w4p-Ig-o7m" firstAttribute="top" secondItem="Rfh-hw-NcP" secondAttribute="bottom" constant="8" id="7NW-oW-kIB"/>
+                            <constraint firstItem="Rfh-hw-NcP" firstAttribute="leading" secondItem="g3p-Yw-bsi" secondAttribute="leading" constant="20" id="GLf-7W-xjG"/>
+                            <constraint firstItem="Rfh-hw-NcP" firstAttribute="leading" secondItem="g3p-Yw-bsi" secondAttribute="leading" constant="20" id="MD6-MF-SoQ"/>
                             <constraint firstItem="g3p-Yw-bsi" firstAttribute="trailing" secondItem="w4p-Ig-o7m" secondAttribute="trailing" constant="20" id="P8l-L3-iYu"/>
-                            <constraint firstItem="w4p-Ig-o7m" firstAttribute="top" secondItem="g3p-Yw-bsi" secondAttribute="top" id="mIf-dV-o1o"/>
+                            <constraint firstItem="Rfh-hw-NcP" firstAttribute="top" secondItem="g3p-Yw-bsi" secondAttribute="top" id="aOq-gw-tkf"/>
                             <constraint firstItem="w4p-Ig-o7m" firstAttribute="leading" secondItem="g3p-Yw-bsi" secondAttribute="leading" constant="20" id="poC-I8-sry"/>
                             <constraint firstItem="tEE-z7-6YX" firstAttribute="top" secondItem="w4p-Ig-o7m" secondAttribute="bottom" constant="20" id="xwi-9A-9jV"/>
                         </constraints>

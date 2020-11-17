@@ -70,6 +70,9 @@ extension PlayListViewController: UITableViewDataSource, UITableViewDelegate {
     // MARK: Cell Click Event
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let storyBoard = UIStoryboard.init(name: "Main", bundle: nil)
+        let row = indexPath.row
+        mediaURL = mediaArray[row].url
+        
         if VideoSettings.playMode == .viewController {
             let popupMusubiAction = storyBoard.instantiateViewController(identifier: "PlayStorePopupViewController") as PlayStorePopupViewController
             popupMusubiAction.modalPresentationStyle = .overCurrentContext
@@ -77,13 +80,11 @@ extension PlayListViewController: UITableViewDataSource, UITableViewDelegate {
             present(popupMusubiAction, animated: true, completion: nil)
             
             NSLog("Action: \(popupMusubiAction.action)")
-            
-            let row = indexPath.row
-            mediaURL = mediaArray[row].url
         }
         else if VideoSettings.playMode == .rawPlayer {
             NSLog("Video should be played by raw MusubiPlayer")
             let rawVideoViewController = storyBoard.instantiateViewController(identifier: "RawPlayerViewController") as RawPlayerViewController
+            rawVideoViewController.videoURL = mediaURL
             rawVideoViewController.modalPresentationStyle = .overCurrentContext
             present(rawVideoViewController, animated: true, completion: nil)
         }
