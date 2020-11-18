@@ -60,7 +60,7 @@ open class MusubiPlayer:NSObject, AVPlayerItemOutputPullDelegate {
     var currentPlayTime_: CMTime?
     var totalPlayTime_: CMTime?
     
-    weak var musubiDelegate: MusubiDelegate?
+    open weak var musubiDelegate: MusubiDelegate?
     
     var objectToDraw_: SquarePlain?
     

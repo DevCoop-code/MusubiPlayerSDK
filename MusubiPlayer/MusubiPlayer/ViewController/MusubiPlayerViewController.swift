@@ -138,11 +138,11 @@ open class MusubiPlayerViewController: UIViewController {
 }
 
 extension MusubiPlayerViewController: MusubiDelegate {
-    func renderObject(drawable: CAMetalDrawable, pixelBuffer: CVPixelBuffer) {
+    public func renderObject(drawable: CAMetalDrawable, pixelBuffer: CVPixelBuffer) {
         // Add the code for rendering video
     }
     
-    func currentTime(time: Float64) {
+    public func currentTime(time: Float64) {
         let curTime = Int(time)
         elapsedTimeLabel.text = /*String(describing: curTime)*/ convertTimeFormat(time: curTime)
         
@@ -158,7 +158,7 @@ extension MusubiPlayerViewController: MusubiDelegate {
         }
     }
     
-    func totalTime(time: Float64) {
+    public func totalTime(time: Float64) {
         let curTime = Int(time)
         remainTimeLabel.text = /*String(describing: time)*/ convertTimeFormat(time: curTime)
         

@@ -48,13 +48,20 @@ class RawPlayerViewController: UIViewController {
 //            NSLog("\(topPadding), \(bottomPadding), \(leadingPadding), \(trailingPadding)")
 //        }
         
+        seekBar.minimumValue = 0.0
+        
         player = MusubiPlayer(videoPreview)
         if let mediaURL = videoURL {
+            player?.musubiDelegate = self
             player?.open(mediaURL, mediaType: .hls)
             player?.start()
             
             playpauseBtn.setBackgroundImage(UIImage(systemName: "pause.fill"), for: .normal)
         }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -100,6 +107,75 @@ class RawPlayerViewController: UIViewController {
     }
 }
 
-extension RawPlayerViewController: MusubiCallback {
+extension RawPlayerViewController: MusubiDelegate {
+    func renderObject(drawable: CAMetalDrawable, pixelBuffer: CVPixelBuffer) {
+        // Can see the video pixelbuffer
+    }
     
+    func currentTime(time: Float64) {
+        let curTime = Int(time)
+        elapsedTime.text = convertTimeFormat(time: curTime)
+        
+        if userAction != seekBehavior.seeking {
+            if userAction == .seekEnd {
+                if !(Double(currentPlayerTime) - time > 1.0 || Double(currentPlayerTime) - time < -1.0) {
+                    seekBar.value = Float(curTime.doubleValue)
+                    userAction = .none
+                }
+            } else {
+                seekBar.value = Float(curTime.doubleValue)
+            }
+        }
+    }
+    
+    func totalTime(time: Float64) {
+        let curTime = Int(time)
+        totalTime.text = convertTimeFormat(time: curTime)
+        
+        seekBar.maximumValue = Float(curTime.doubleValue)
+    }
+    
+    func convertTimeFormat(time: Int) -> String {
+        var result: String
+        var hour: Int = 0
+        var minute: Int = 0
+        var second: Int = 0
+        
+        hour = time / 3600
+        
+        let extraMinutes = time % 3600
+        
+        minute = extraMinutes / 60
+        second = extraMinutes % 60
+        
+        if hour != 0 {
+            if second >= 0 && second < 10 && minute > 9{
+                result = "\(hour):\(minute):0\(second)"
+            } else if second >= 0 && second < 10 && minute >= 0 && minute < 10 {
+                result = "\(hour):0\(minute):0\(second)"
+            } else if minute >= 0 && minute < 10 && second > 9 {
+                result = "\(hour):0\(minute):\(second)"
+            } else {
+                 result = "\(hour):\(minute):\(second)"
+            }
+        } else {
+            if second >= 0 && second < 10 && minute > 9{
+                result = "\(hour):\(minute):0\(second)"
+            } else if second >= 0 && second < 10 && minute >= 0 && minute < 10 {
+                result = "0\(minute):0\(second)"
+            } else if minute >= 0 && minute < 10 && second > 9 {
+                result = "0\(minute):\(second)"
+            } else {
+                 result = "\(minute):\(second)"
+            }
+        }
+        
+        return result
+    }
+}
+
+extension Int {
+    var doubleValue: Double {
+        return Double(self)
+    }
 }
