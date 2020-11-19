@@ -70,9 +70,6 @@ open class MusubiPlayer:NSObject, AVPlayerItemOutputPullDelegate {
     public init(_ videoPlayerView: UIView) {
         super.init()
         
-        var subtitleWrapper: MusubiSubtitleWrapper? = MusubiSubtitleWrapper()
-        subtitleWrapper?.initMusubiSubtitle("hello subtitle")
-        
         device_ = MTLCreateSystemDefaultDevice()
         metalLayer_ = CAMetalLayer()
         
@@ -329,5 +326,10 @@ extension MusubiPlayer: MusubiPlayerAction {
             avPlayer.currentItem?.remove(videoOutput)
         }
         avPlayer_ = nil
+    }
+    
+    public func setExternalSubtitle(_ subtitlePath: String) {
+        let subtitleWrapper: MusubiSubtitleWrapper? = MusubiSubtitleWrapper()
+        subtitleWrapper?.initMusubiSubtitle(subtitlePath, type: SubtitleType(rawValue: 2))
     }
 }

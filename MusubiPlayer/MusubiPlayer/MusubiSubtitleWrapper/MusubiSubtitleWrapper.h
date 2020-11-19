@@ -10,9 +10,14 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef enum SubtitleType: NSUInteger {
+    remote = 1,
+    local = 2
+} SubtitleType;
+
 @interface MusubiSubtitleWrapper : NSObject
 
-- (void)initMusubiSubtitle:(NSString*)subtitlePath;
+- (void)initMusubiSubtitle:(NSString*)subtitlePath Type:(SubtitleType)type;
 
 @end
 

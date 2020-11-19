@@ -11,7 +11,7 @@
 
 @implementation MusubiSubtitleWrapper
 
-- (void)initMusubiSubtitle:(NSString*)subtitlePath {
+- (void)initMusubiSubtitle:(NSString*)subtitlePath Type:(SubtitleType)type {
     MusubiSubtitles* musubiSubtitle = [[MusubiSubtitles alloc] init];
     
     [musubiSubtitle setSubtitleFile:subtitlePath];
