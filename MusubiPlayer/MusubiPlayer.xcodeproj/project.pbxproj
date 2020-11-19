@@ -42,7 +42,7 @@
 		7866B9CD25404E0400F9BCB1 /* MusubiDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7866B9CC25404E0400F9BCB1 /* MusubiDevice.swift */; };
 		786AFA80256610F500295FED /* MusubiSubtitleWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 786AFA7E256610F500295FED /* MusubiSubtitleWrapper.m */; };
 		786AFA852566164200295FED /* MusubiSubtitleWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 786AFA7D256610F500295FED /* MusubiSubtitleWrapper.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		786AFA942567156900295FED /* libMusubiSubtitles.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 786AFA932567156900295FED /* libMusubiSubtitles.a */; };
+		786AFA9A256724AF00295FED /* libMusubiSubtitles.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 786AFA99256724AF00295FED /* libMusubiSubtitles.a */; };
 		78792272252FE11D00D02FDB /* MusubiPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 78792270252FE11D00D02FDB /* MusubiPlayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		78CFE81F252FE73A00650951 /* MusubiPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CFE81D252FE73A00650951 /* MusubiPlayerViewController.swift */; };
 		78CFE820252FE73A00650951 /* MusubiPlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78CFE81E252FE73A00650951 /* MusubiPlayerViewController.xib */; };
@@ -91,7 +91,7 @@
 		786AFA7D256610F500295FED /* MusubiSubtitleWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MusubiSubtitleWrapper.h; sourceTree = "<group>"; };
 		786AFA7E256610F500295FED /* MusubiSubtitleWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MusubiSubtitleWrapper.m; sourceTree = "<group>"; };
 		786AFA92256714CD00295FED /* libMusubiSubtitles.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libMusubiSubtitles.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		786AFA932567156900295FED /* libMusubiSubtitles.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMusubiSubtitles.a; sourceTree = "<group>"; };
+		786AFA99256724AF00295FED /* libMusubiSubtitles.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMusubiSubtitles.a; sourceTree = "<group>"; };
 		7879226D252FE11D00D02FDB /* MusubiPlayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MusubiPlayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		78792270252FE11D00D02FDB /* MusubiPlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MusubiPlayer.h; sourceTree = "<group>"; };
 		78792271252FE11D00D02FDB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -108,7 +108,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				782354E92541057A00B85083 /* libsqlite3.tbd in Frameworks */,
-				786AFA942567156900295FED /* libMusubiSubtitles.a in Frameworks */,
+				786AFA9A256724AF00295FED /* libMusubiSubtitles.a in Frameworks */,
 				785907512532A2AE006D4AA3 /* VideoToolbox.framework in Frameworks */,
 				785907492532A0B3006D4AA3 /* QuartzCore.framework in Frameworks */,
 				7859074B2532A195006D4AA3 /* UIKit.framework in Frameworks */,
@@ -207,7 +207,7 @@
 		786AFA6F25660C4900295FED /* lib */ = {
 			isa = PBXGroup;
 			children = (
-				786AFA932567156900295FED /* libMusubiSubtitles.a */,
+				786AFA99256724AF00295FED /* libMusubiSubtitles.a */,
 			);
 			path = lib;
 			sourceTree = "<group>";

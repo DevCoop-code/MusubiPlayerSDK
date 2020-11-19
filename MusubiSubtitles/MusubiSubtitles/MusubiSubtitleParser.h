@@ -10,7 +10,16 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef struct ExternalSubtitle {
+    NSString* subtitleText;
+    NSInteger subtitleTime;
+} ExternalSubtitle;
+
 @interface MusubiSubtitleParser : NSObject
+
+@property(nonatomic) NSFileManager* filemgr;
+
+- (id)initWithExternalSubtitle:(NSString*)subtitlePath;
 
 @end
 

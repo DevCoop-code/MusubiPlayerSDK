@@ -25,10 +25,10 @@
     MusubiSubtitleParser* subtitleParser;
     
     if ([subtitleExtension  isEqual: @"smi"] || [subtitleExtension  isEqual: @"SMI"]) {
-        subtitleParser = [[MusubiSMIParser alloc] init];
+        subtitleParser = [[MusubiSMIParser alloc] initWithExternalSubtitle: filePath];
     }
     else if ([subtitleExtension  isEqual: @"srt"] || [subtitleExtension  isEqual: @"SRT"]) {
-        subtitleParser = [[MusubiSRTParser alloc] init];
+        subtitleParser = [[MusubiSRTParser alloc] initWithExternalSubtitle: filePath];
     }
     else {
         NSLog(@"NOT Support Subtitle extension Format: %@", subtitleExtension);
