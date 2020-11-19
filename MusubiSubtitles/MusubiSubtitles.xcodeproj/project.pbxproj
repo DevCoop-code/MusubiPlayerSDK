@@ -27,6 +27,8 @@
 		786AFA892566BC3800295FED /* MusubiSMIParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 786AFA872566BC3800295FED /* MusubiSMIParser.m */; };
 		786AFA8C2566BC6000295FED /* MusubiSRTParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 786AFA8A2566BC6000295FED /* MusubiSRTParser.h */; };
 		786AFA8D2566BC6000295FED /* MusubiSRTParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 786AFA8B2566BC6000295FED /* MusubiSRTParser.m */; };
+		786AFA972567171600295FED /* MusubiSubtitleParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 786AFA952567171600295FED /* MusubiSubtitleParser.h */; };
+		786AFA982567171600295FED /* MusubiSubtitleParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 786AFA962567171600295FED /* MusubiSubtitleParser.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +39,8 @@
 		786AFA872566BC3800295FED /* MusubiSMIParser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MusubiSMIParser.m; sourceTree = "<group>"; };
 		786AFA8A2566BC6000295FED /* MusubiSRTParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MusubiSRTParser.h; sourceTree = "<group>"; };
 		786AFA8B2566BC6000295FED /* MusubiSRTParser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MusubiSRTParser.m; sourceTree = "<group>"; };
+		786AFA952567171600295FED /* MusubiSubtitleParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MusubiSubtitleParser.h; sourceTree = "<group>"; };
+		786AFA962567171600295FED /* MusubiSubtitleParser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MusubiSubtitleParser.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +79,8 @@
 				786AFA872566BC3800295FED /* MusubiSMIParser.m */,
 				786AFA8A2566BC6000295FED /* MusubiSRTParser.h */,
 				786AFA8B2566BC6000295FED /* MusubiSRTParser.m */,
+				786AFA952567171600295FED /* MusubiSubtitleParser.h */,
+				786AFA962567171600295FED /* MusubiSubtitleParser.m */,
 			);
 			path = MusubiSubtitles;
 			sourceTree = "<group>";
@@ -88,6 +94,7 @@
 			files = (
 				786AFA882566BC3800295FED /* MusubiSMIParser.h in Headers */,
 				786AFA8C2566BC6000295FED /* MusubiSRTParser.h in Headers */,
+				786AFA972567171600295FED /* MusubiSubtitleParser.h in Headers */,
 				786AFA822566114E00295FED /* MusubiSubtitles.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -176,6 +183,7 @@
 				786AFA60256605B000295FED /* MusubiSubtitles.m in Sources */,
 				786AFA8D2566BC6000295FED /* MusubiSRTParser.m in Sources */,
 				786AFA892566BC3800295FED /* MusubiSMIParser.m in Sources */,
+				786AFA982567171600295FED /* MusubiSubtitleParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

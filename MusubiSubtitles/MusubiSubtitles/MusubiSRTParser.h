@@ -7,10 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "MusubiSubtitleParser.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MusubiSRTParser : NSObject
+@interface MusubiSRTParser : MusubiSubtitleParser
 
 @end
 
