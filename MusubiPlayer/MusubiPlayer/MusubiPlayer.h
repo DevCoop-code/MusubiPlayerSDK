@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "SquarePlain.h"
 #import "FMDB.h"
+#import "MusubiSubtitleWrapper.h"
 
 //! Project version number for MusubiPlayer.
 FOUNDATION_EXPORT double MusubiPlayerVersionNumber;

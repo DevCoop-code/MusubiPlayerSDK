@@ -10,4 +10,6 @@
 
 @interface MusubiSubtitles : NSObject
 
+- (void) setSubtitleFile:(NSString*) filePath;
+
 @end

@@ -10,4 +10,8 @@
 
 @implementation MusubiSubtitles
 
+- (void) setSubtitleFile:(NSString*) filePath {
+    NSLog(@"Subtitle File Path: %@", filePath);
+}
+
 @end

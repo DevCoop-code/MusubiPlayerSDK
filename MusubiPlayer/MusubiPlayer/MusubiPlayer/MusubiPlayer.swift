@@ -70,6 +70,9 @@ open class MusubiPlayer:NSObject, AVPlayerItemOutputPullDelegate {
     public init(_ videoPlayerView: UIView) {
         super.init()
         
+        var subtitleWrapper: MusubiSubtitleWrapper? = MusubiSubtitleWrapper()
+        subtitleWrapper?.initMusubiSubtitle("hello subtitle")
+        
         device_ = MTLCreateSystemDefaultDevice()
         metalLayer_ = CAMetalLayer()
         
