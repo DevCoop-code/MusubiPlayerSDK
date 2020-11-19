@@ -50,7 +50,13 @@ class RawPlayerViewController: UIViewController {
         
         seekBar.minimumValue = 0.0
         
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        print("\(videoPreview.bounds)")
+        
         player = MusubiPlayer(videoPreview)
+        print("\(videoPreview.bounds)")
         if let mediaURL = videoURL {
             player?.musubiDelegate = self
             player?.open(mediaURL, mediaType: .hls)
@@ -59,10 +65,6 @@ class RawPlayerViewController: UIViewController {
             
             playpauseBtn.setBackgroundImage(UIImage(systemName: "pause.fill"), for: .normal)
         }
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
