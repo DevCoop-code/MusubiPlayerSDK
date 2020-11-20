@@ -8,7 +8,9 @@
 
 #import "MusubiSubtitleParser.h"
 
-@implementation MusubiSubtitleParser
+@implementation MusubiSubtitleParser {
+    NSURL* newDir;
+}
 
 - (id)initWithExternalSubtitle:(NSString*)subtitlePath {
     self = [super init];
@@ -18,7 +20,7 @@
     if (dirPaths != nil) {
         NSURL* dirPath = dirPaths[0];
         if (dirPath != nil) {
-            NSURL* newDir = [dirPath URLByAppendingPathComponent:@"musubi"];
+            newDir = [dirPath URLByAppendingPathComponent:@"musubi"];
             
             NSError* error;
             [self.filemgr createDirectoryAtURL:newDir withIntermediateDirectories:true attributes:nil error:&error];
@@ -32,8 +34,11 @@
         }
     }
     
-    
     return self;
+}
+
+- (NSString*) getCurrentRootDirectoory {
+    return newDir.absoluteString;
 }
 
 @end

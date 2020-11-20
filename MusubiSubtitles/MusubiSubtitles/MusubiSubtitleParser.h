@@ -21,6 +21,8 @@ typedef struct ExternalSubtitle {
 
 - (id)initWithExternalSubtitle:(NSString*)subtitlePath;
 
+- (NSString*) getCurrentRootDirectoory;
+
 @end
 
 NS_ASSUME_NONNULL_END
