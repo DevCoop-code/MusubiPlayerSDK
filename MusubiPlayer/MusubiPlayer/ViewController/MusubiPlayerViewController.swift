@@ -166,6 +166,10 @@ extension MusubiPlayerViewController: MusubiDelegate {
         musubiSeekbar.maximumValue = Float(curTime.doubleValue)
     }
     
+    public func onSubtitleData(time: Int, text: String) {
+        
+    }
+    
     func convertTimeFormat(time: Int) -> String {
         var result: String
         var hour: Int = 0

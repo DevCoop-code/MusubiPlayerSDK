@@ -13,6 +13,7 @@ public protocol MusubiDelegate: class {
     func renderObject(drawable: CAMetalDrawable, pixelBuffer: CVPixelBuffer)
     func currentTime(time: Float64)
     func totalTime(time: Float64)
+    func onSubtitleData(time: Int, text: String)
 }
 
 protocol MusubiPlayerAction: class {

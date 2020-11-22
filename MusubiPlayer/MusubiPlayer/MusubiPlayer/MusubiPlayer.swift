@@ -67,6 +67,9 @@ open class MusubiPlayer:NSObject, AVPlayerItemOutputPullDelegate {
     var musubiPlayerState: playerState = .none
     var musubiDispatchQueue: DispatchQueue?
     
+    let subtitleWrapper: MusubiSubtitleWrapper? = MusubiSubtitleWrapper()
+    var subtitleIndex: NSInteger = 0
+    
     public init(_ videoPlayerView: UIView) {
         super.init()
         
@@ -163,6 +166,20 @@ open class MusubiPlayer:NSObject, AVPlayerItemOutputPullDelegate {
                 
 //                NSLog("Player Time: %f", CMTimeGetSeconds(time))
                 self.musubiDelegate?.currentTime(time: CMTimeGetSeconds(time))
+                
+                if let subtitleData = self.subtitleWrapper?.getSubtitleSet() {
+                    let subData = subtitleData.object(at: self.subtitleIndex) as! ExternalSubtitle
+                    
+                    let subTimeSec = subData.subtitleTime / 1000
+                    NSLog("hankyo: \(Double(subTimeSec)) , \(CMTimeGetSeconds(time))")
+                    if ( (Double(subTimeSec) - CMTimeGetSeconds(time) <= 1 && Double(subTimeSec) - CMTimeGetSeconds(time) >= 0) ||
+                        (Double(subTimeSec) - CMTimeGetSeconds(time) <= 0 && Double(subTimeSec) - CMTimeGetSeconds(time) >= -1) ) {
+                        if let subDataText = subData.subtitleText {
+                            self.musubiDelegate?.onSubtitleData(time: subData.subtitleTime, text: subDataText)
+                            self.subtitleIndex = self.subtitleIndex + 1
+                        }
+                    }
+                }
             }
         }
     }
@@ -329,15 +346,14 @@ extension MusubiPlayer: MusubiPlayerAction {
     }
     
     public func setExternalSubtitle(_ subtitlePath: String) {
-        let subtitleWrapper: MusubiSubtitleWrapper? = MusubiSubtitleWrapper()
         subtitleWrapper?.initMusubiSubtitle(subtitlePath, type: SubtitleType(rawValue: 2))
         
         // Check the Subtitle Data
-        if let subtitleSet = subtitleWrapper?.getSubtitleSet() {
-            for subtitle in subtitleSet {
-                let subData = subtitle as! ExternalSubtitle
-                NSLog("Time: \(subData.subtitleTime), Text: \(subData.subtitleText)")
-            }
-        }
+//        if let subtitleSet = subtitleWrapper?.getSubtitleSet() {
+//            for subtitle in subtitleSet {
+//                let subData = subtitle as! ExternalSubtitle
+//                NSLog("Time: \(subData.subtitleTime), Text: \(subData.subtitleText)")
+//            }
+//        }
     }
 }

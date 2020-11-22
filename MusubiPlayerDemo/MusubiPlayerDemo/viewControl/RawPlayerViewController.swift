@@ -138,6 +138,10 @@ extension RawPlayerViewController: MusubiDelegate {
         seekBar.maximumValue = Float(curTime.doubleValue)
     }
     
+    func onSubtitleData(time: Int, text: String) {
+        NSLog("TextRender: \(text)")
+    }
+    
     func convertTimeFormat(time: Int) -> String {
         var result: String
         var hour: Int = 0
