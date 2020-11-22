@@ -36,9 +36,25 @@
             NSUInteger subtitleStartIndex = 0;
             NSUInteger subtitleEndIndex = 0;
 
+            NSUInteger subtitleTimeStartIndex = 0;
+            NSUInteger subtitleTimeEndIndex = 0;
             // Search '>'
             while (smiText[index] != '>') {
+                if (smiText[index] == 'S' && smiText[index + 1] == 'T' && smiText[index + 2] == 'A') {
+                    subtitleTimeStartIndex = index + 6;
+                }
                 index++;
+            }
+            if (subtitleTimeStartIndex != 0) {
+                subtitleTimeEndIndex = index - 1;
+                
+                size_t length = (subtitleTimeEndIndex - subtitleTimeStartIndex) + 1;
+                char timeData[length + 1];
+                memcpy(timeData, smiText + subtitleTimeStartIndex, length);
+                
+                NSData* data = [NSData dataWithBytes:timeData length:length];
+                NSString* timeText = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                NSLog(@"subtitle start: %@", timeText);
             }
             
             subtitleStartIndex = index;
