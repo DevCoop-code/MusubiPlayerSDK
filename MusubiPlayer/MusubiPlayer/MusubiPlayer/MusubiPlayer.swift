@@ -334,6 +334,24 @@ extension MusubiPlayer: MusubiPlayerAction {
    public func seek(_ time: Float) {
        if let avPlayer = avPlayer_ {
            let cmTime: CMTime = CMTimeMake(value: Int64(time), timescale: Int32(1.0))
+        
+            if let subtitleSet = subtitleWrapper?.getSubtitleSet() {
+                var subPositionReloc: NSInteger = 0
+                for subtitle in subtitleSet {
+                    let subData = subtitle as! ExternalSubtitle
+                    
+                    let subTimeSec = subData.subtitleTime / 1000
+                    if ( ((Double(subTimeSec) - CMTimeGetSeconds(cmTime) <= 1 && Double(subTimeSec) - CMTimeGetSeconds(cmTime) >= 0)) ||
+                        ((Double(subTimeSec) - CMTimeGetSeconds(cmTime) <= 0 && Double(subTimeSec) - CMTimeGetSeconds(cmTime) >= -1)) ) {
+                        self.musubiDelegate?.onSubtitleData(time: subData.subtitleTime, text: subData.subtitleText)
+                        subPositionReloc += 1;
+                        break
+                    }
+                    subPositionReloc += 1;
+                }
+                subtitleIndex = subPositionReloc
+            }
+        
            avPlayer.seek(to: cmTime)
        }
    }
