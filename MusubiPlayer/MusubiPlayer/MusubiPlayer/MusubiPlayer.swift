@@ -171,10 +171,10 @@ open class MusubiPlayer:NSObject, AVPlayerItemOutputPullDelegate {
                     let subData = subtitleData.object(at: self.subtitleIndex) as! ExternalSubtitle
                     
                     let subTimeSec = subData.subtitleTime / 1000
-                    NSLog("hankyo: \(Double(subTimeSec)) , \(CMTimeGetSeconds(time))")
-                    if ( (Double(subTimeSec) - CMTimeGetSeconds(time) <= 1 && Double(subTimeSec) - CMTimeGetSeconds(time) >= 0) ||
-                        (Double(subTimeSec) - CMTimeGetSeconds(time) <= 0 && Double(subTimeSec) - CMTimeGetSeconds(time) >= -1) ) {
+                    if ( ((Double(subTimeSec) - CMTimeGetSeconds(time) <= 1 && Double(subTimeSec) - CMTimeGetSeconds(time) >= 0)) ||
+                        ((Double(subTimeSec) - CMTimeGetSeconds(time) <= 0 && Double(subTimeSec) - CMTimeGetSeconds(time) >= -1)) ) {
                         if let subDataText = subData.subtitleText {
+                            NSLog("text renderer: \(Double(subTimeSec)) , \(CMTimeGetSeconds(time))")
                             self.musubiDelegate?.onSubtitleData(time: subData.subtitleTime, text: subDataText)
                             self.subtitleIndex = self.subtitleIndex + 1
                         }
