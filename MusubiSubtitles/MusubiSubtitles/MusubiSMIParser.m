@@ -76,6 +76,16 @@
 //                        NSLog(@"[SMI Parser] Debug: %c", smiText[index]);
                     } while (smiText[index] != '>');
                 }
+                
+                // If when 'font' Tag Exists
+                if ( smiText[index] == '<' && ((smiText[index + 1] == 'F') || (smiText[index + 1] == 'f')) &&
+                    ((smiText[index + 2] == 'O') || (smiText[index + 2] == 'o')) ) {
+                    do {
+                        index++;
+                        subtitleStartIndex = index;
+                        NSLog(@"[SMI Parser] Debug: %c", smiText[index]);
+                    } while (smiText[index] != '>');
+                }
                 index++;
             }
             
