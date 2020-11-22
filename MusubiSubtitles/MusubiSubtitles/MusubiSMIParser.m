@@ -62,7 +62,7 @@
             if (subtitleStartIndex != 0 && subtitleEndIndex != 0) {
                 size_t length = subtitleEndIndex - subtitleStartIndex;
                 char textData[length + 1];
-                memcpy(textData, smiText + subtitleStartIndex, length);
+                memcpy(textData, smiText + (subtitleStartIndex + 1), length);
 
                 NSData* data = [NSData dataWithBytes:textData length:length];
                 NSString* smiText;
