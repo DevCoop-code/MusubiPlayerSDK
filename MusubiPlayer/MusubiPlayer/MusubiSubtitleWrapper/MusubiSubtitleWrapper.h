@@ -18,7 +18,7 @@ typedef enum SubtitleType: NSUInteger {
 @interface MusubiSubtitleWrapper : NSObject
 
 - (void)initMusubiSubtitle:(NSString*)subtitlePath Type:(SubtitleType)type;
-
+- (NSMutableArray*) getSubtitleSet;
 @end
 
 NS_ASSUME_NONNULL_END

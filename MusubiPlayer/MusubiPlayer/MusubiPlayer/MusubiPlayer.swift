@@ -331,5 +331,13 @@ extension MusubiPlayer: MusubiPlayerAction {
     public func setExternalSubtitle(_ subtitlePath: String) {
         let subtitleWrapper: MusubiSubtitleWrapper? = MusubiSubtitleWrapper()
         subtitleWrapper?.initMusubiSubtitle(subtitlePath, type: SubtitleType(rawValue: 2))
+        
+        // Check the Subtitle Data
+        if let subtitleSet = subtitleWrapper?.getSubtitleSet() {
+            for subtitle in subtitleSet {
+                let subData = subtitle as! ExternalSubtitle
+                NSLog("Time: \(subData.subtitleTime), Text: \(subData.subtitleText)")
+            }
+        }
     }
 }

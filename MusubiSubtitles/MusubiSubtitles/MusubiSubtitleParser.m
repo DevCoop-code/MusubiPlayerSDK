@@ -41,4 +41,14 @@
     return newDir.absoluteString;
 }
 
+- (void) setSubtitleLinkArray:(NSMutableArray*) array {
+    if (array != nil) {
+        _subtitleLinkArray = array;
+    }
+}
+
+- (NSMutableArray*) setSubtitleLinkArray {
+    return _subtitleLinkArray;
+}
+
 @end

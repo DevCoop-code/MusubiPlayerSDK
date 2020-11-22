@@ -20,18 +20,22 @@
     
     NSData* dataBuffer = [filemgr contentsAtPath:smiSubPath];
     
-    [self getTheSubtitleData:dataBuffer];
+    [self setSubtitleLinkArray:[self getTheSubtitleData:dataBuffer]];
     
     return self;
 }
 
-- (NSArray*) getTheSubtitleData:(NSData*) subtitleData {
+- (NSMutableArray*) getTheSubtitleData:(NSData*) subtitleData {
     const char* smiText = (const char*)[subtitleData bytes];
     NSUInteger smiTextLength = subtitleData.length;
     NSUInteger index = 0;
+    
+    NSMutableArray* smiSubtitleArray = [[NSMutableArray alloc] init];
     while (index < smiTextLength) {
         if (smiText[index] == '<' && smiText[index + 1] == 'S' && smiText[index + 2] == 'Y') {  // 'SYNC' Property
             index += 2;
+            
+            ExternalSubtitle* smiData = [[ExternalSubtitle alloc] init];
             
             NSUInteger subtitleStartIndex = 0;
             NSUInteger subtitleEndIndex = 0;
@@ -54,7 +58,9 @@
                 
                 NSData* data = [NSData dataWithBytes:timeData length:length];
                 NSString* timeText = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-                NSLog(@"subtitle start: %@", timeText);
+//                NSLog(@"subtitle start: %@", timeText);
+                
+                smiData.subtitleTime = [timeText intValue];
             }
             
             subtitleStartIndex = index;
@@ -67,7 +73,7 @@
                     do {
                         index++;
                         subtitleStartIndex = index;
-                        NSLog(@"[SMI Parser] Debug: %c", smiText[index]);
+//                        NSLog(@"[SMI Parser] Debug: %c", smiText[index]);
                     } while (smiText[index] != '>');
                 }
                 index++;
@@ -81,20 +87,24 @@
                 memcpy(textData, smiText + (subtitleStartIndex + 1), length);
 
                 NSData* data = [NSData dataWithBytes:textData length:length];
-                NSString* smiText;
-                smiText = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-                if (smiText == nil) {
+                NSString* smiSubtitleData;
+                smiSubtitleData = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                if (smiSubtitleData == nil) {
                     NSUInteger encoding = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingEUC_KR);
-                    smiText = [[NSString alloc] initWithData:data encoding:encoding];
+                    smiSubtitleData = [[NSString alloc] initWithData:data encoding:encoding];
                 }
                 
-                NSLog(@"subtitle Data: %@", smiText);
+                smiData.subtitleText = smiSubtitleData;
+                
+                [smiSubtitleArray addObject:smiData];
+                
+//                NSLog(@"subtitle Data: %@", smiSubtitleData);
             }
         }
         
         index++;
     }
     
-    return nil;
+    return smiSubtitleArray;
 }
 @end

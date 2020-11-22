@@ -8,8 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
+@interface ExternalSubtitle: NSObject
+    @property(nonatomic) NSString* subtitleText;
+    @property(nonatomic) NSInteger subtitleTime;
+@end
+
 @interface MusubiSubtitles : NSObject
 
 - (void) setSubtitleFile:(NSString*) filePath;
+- (NSMutableArray*) getSubtitleSet;
 
 @end

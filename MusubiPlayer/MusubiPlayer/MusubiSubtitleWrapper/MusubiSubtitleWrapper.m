@@ -9,12 +9,18 @@
 #import "MusubiSubtitleWrapper.h"
 #include "MusubiSubtitles.h"
 
-@implementation MusubiSubtitleWrapper
+@implementation MusubiSubtitleWrapper {
+    MusubiSubtitles* musubiSubtitle;
+}
 
 - (void)initMusubiSubtitle:(NSString*)subtitlePath Type:(SubtitleType)type {
-    MusubiSubtitles* musubiSubtitle = [[MusubiSubtitles alloc] init];
+    musubiSubtitle = [[MusubiSubtitles alloc] init];
     
     [musubiSubtitle setSubtitleFile:subtitlePath];
+}
+
+- (NSMutableArray*) getSubtitleSet {
+    return [musubiSubtitle getSubtitleSet];
 }
 
 @end

@@ -7,23 +7,21 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "MusubiSubtitles.h"
 
 NS_ASSUME_NONNULL_BEGIN
-
-@interface ExternalSubtitle: NSObject
-    @property(nonatomic) NSString* subtitleText;
-    @property(nonatomic) NSInteger subtitleTime;
-@end
 
 @interface MusubiSubtitleParser : NSObject
 
 @property(nonatomic) NSFileManager* filemgr;
-@property(nonatomic) NSArray<ExternalSubtitle *>* subtitleLinkArray;
+@property(nonatomic) NSMutableArray* subtitleLinkArray;
+//@property(nonatomic) NSArray<ExternalSubtitle *>* subtitleLinkArray;
 
 - (id)initWithExternalSubtitle:(NSString*)subtitlePath;
 
 - (NSString*) getCurrentRootDirectoory;
-
+- (void) setSubtitleLinkArray:(NSMutableArray*) array;
+- (NSMutableArray*) setSubtitleLinkArray;
 @end
 
 NS_ASSUME_NONNULL_END

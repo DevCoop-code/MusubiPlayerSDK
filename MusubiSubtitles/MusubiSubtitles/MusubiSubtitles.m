@@ -11,7 +11,13 @@
 #import "MusubiSMIParser.h"
 #import "MusubiSRTParser.h"
 
-@implementation MusubiSubtitles
+@implementation ExternalSubtitle
+
+@end
+
+@implementation MusubiSubtitles {
+    MusubiSubtitleParser* subtitleParser;
+}
 
 - (void) setSubtitleFile:(NSString*) filePath {
     NSLog(@"Subtitle File Path: %@", filePath);
@@ -22,8 +28,6 @@
     
     NSLog(@"Subtitle extension: %@", subtitleExtension);
     
-    MusubiSubtitleParser* subtitleParser;
-    
     if ([subtitleExtension  isEqual: @"smi"] || [subtitleExtension  isEqual: @"SMI"]) {
         subtitleParser = [[MusubiSMIParser alloc] initWithExternalSubtitle: filePath];
     }
@@ -33,6 +37,10 @@
     else {
         NSLog(@"NOT Support Subtitle extension Format: %@", subtitleExtension);
     }
+}
+
+- (NSMutableArray*) getSubtitleSet {
+    return subtitleParser.subtitleLinkArray;
 }
 
 @end
