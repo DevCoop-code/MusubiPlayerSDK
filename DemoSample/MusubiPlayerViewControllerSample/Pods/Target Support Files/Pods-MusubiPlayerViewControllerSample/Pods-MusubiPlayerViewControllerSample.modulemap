@@ -1,0 +1,6 @@
+framework module Pods_MusubiPlayerViewControllerSample {
+  umbrella header "Pods-MusubiPlayerViewControllerSample-umbrella.h"
+
+  export *
+  module * { export * }
+}
