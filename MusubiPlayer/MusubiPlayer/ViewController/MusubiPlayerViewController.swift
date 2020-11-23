@@ -185,8 +185,18 @@ extension MusubiPlayerViewController: MusubiDelegate {
     }
     
     public func onSubtitleData(time: Int, text: String) {
+        var externalSubText: String = text
         musubiSubtitleLabel.textColor = .white
-        musubiSubtitleLabel.text = text
+        musubiSubtitleLabel.numberOfLines = 3
+        
+        externalSubText = externalSubText.replacingOccurrences(of: "<br>", with: "\n")
+        externalSubText = externalSubText.replacingOccurrences(of: "<BR>", with: "\n")
+        
+        if externalSubText.contains("nbsp") {
+            externalSubText = " "
+        }
+        
+        musubiSubtitleLabel.text = externalSubText
     }
     
     func convertTimeFormat(time: Int) -> String {
