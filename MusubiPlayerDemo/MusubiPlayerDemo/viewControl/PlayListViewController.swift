@@ -114,6 +114,7 @@ extension PlayListViewController: actionPopupDelegate {
                 let musubiPlayerController:MusubiPlayerViewController = MusubiPlayerViewController()
                 musubiPlayerController.mediaURL = mediaPath
                 musubiPlayerController.externalSubURI = "/Function_b.smi"
+                musubiPlayerController.externalSubLabelColor = UIColor.red
                 
                 self.present(musubiPlayerController, animated: true, completion: nil)
             }

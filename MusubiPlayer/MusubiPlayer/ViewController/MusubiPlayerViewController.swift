@@ -41,6 +41,7 @@ open class MusubiPlayerViewController: UIViewController {
     
     open var mediaURL: String?
     open var externalSubURI: String?
+    open var externalSubLabelColor: UIColor = .black
     
     var userAction: userBehaviour = .none
     var currentPlayerTime: Float = 0.0
@@ -56,6 +57,10 @@ open class MusubiPlayerViewController: UIViewController {
     }
     
     open override func viewDidAppear(_ animated: Bool) {
+        musubiSubtitleLabel.textColor = externalSubLabelColor
+        musubiSubtitleLabel.numberOfLines = 3
+        musubiSubtitleLabel.text = " "
+        
         if let mediaPath = mediaURL {
             NSLog("Media URL: %@", mediaPath)
             musubiPlayer = MusubiPlayer(musubiPlayerview)
@@ -186,8 +191,6 @@ extension MusubiPlayerViewController: MusubiDelegate {
     
     public func onSubtitleData(time: Int, text: String) {
         var externalSubText: String = text
-        musubiSubtitleLabel.textColor = .white
-        musubiSubtitleLabel.numberOfLines = 3
         
         externalSubText = externalSubText.replacingOccurrences(of: "<br>", with: "\n")
         externalSubText = externalSubText.replacingOccurrences(of: "<BR>", with: "\n")
