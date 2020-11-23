@@ -135,6 +135,19 @@ open class MusubiPlayerViewController: UIViewController {
         
         musubiPlayer?.reSetVideoPlayerViewFrame(musubiPlayerview)
     }
+    
+    // Touch Method
+    open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if let touch = touches.first, touch.view == musubiPlayerview {
+            NSLog("touch start")
+            
+            if musubiControllerGroup.isHidden {
+                musubiControllerGroup.isHidden = false
+            } else {
+                musubiControllerGroup.isHidden = true
+            }
+        }
+    }
 }
 
 extension MusubiPlayerViewController: MusubiDelegate {
