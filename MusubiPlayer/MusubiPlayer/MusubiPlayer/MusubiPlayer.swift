@@ -12,6 +12,8 @@ import MetalKit
 import AVFoundation
 import MobileCoreServices
 
+private var musubiPlayer_version = "0.0.1.beta"
+
 var ONE_FRAME_DURATION: Double {
     get {
         0.03
@@ -72,6 +74,8 @@ open class MusubiPlayer:NSObject, AVPlayerItemOutputPullDelegate {
     
     public init(_ videoPlayerView: UIView) {
         super.init()
+        
+        NSLog("MusubiPlayer Version: \(musubiPlayer_version)")
         
         device_ = MTLCreateSystemDefaultDevice()
         metalLayer_ = CAMetalLayer()
