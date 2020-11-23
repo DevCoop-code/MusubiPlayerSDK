@@ -12,7 +12,7 @@ import MetalKit
 import AVFoundation
 import MobileCoreServices
 
-private var musubiPlayer_version = "0.0.1.beta"
+private var musubiPlayer_version = "0.0.2.beta"
 
 var ONE_FRAME_DURATION: Double {
     get {
