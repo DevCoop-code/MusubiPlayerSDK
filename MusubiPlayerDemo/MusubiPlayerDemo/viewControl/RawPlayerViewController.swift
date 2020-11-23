@@ -25,6 +25,7 @@ class RawPlayerViewController: UIViewController {
     @IBOutlet weak var totalTime: UILabel!
     
     @IBOutlet weak var seekBar: UISlider!
+    @IBOutlet weak var subtitleLabel: UILabel!
     
     var player: MusubiPlayer?
     
@@ -140,6 +141,9 @@ extension RawPlayerViewController: MusubiDelegate {
     
     func onSubtitleData(time: Int, text: String) {
         NSLog("TextRender: \(text)")
+        
+        subtitleLabel.textColor = .white
+        subtitleLabel.text = text
     }
     
     func convertTimeFormat(time: Int) -> String {
