@@ -11,6 +11,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+#define musubiSubtitle_version @"0.0.1.beta"
+
 @interface MusubiSubtitleParser : NSObject
 
 @property(nonatomic) NSFileManager* filemgr;

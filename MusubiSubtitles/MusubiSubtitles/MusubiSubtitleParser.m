@@ -13,6 +13,8 @@
 }
 
 - (id)initWithExternalSubtitle:(NSString*)subtitlePath {
+    NSLog(@"Musubi Subtitle Version: %@", musubiSubtitle_version);
+    
     self = [super init];
     
     self.filemgr = NSFileManager.defaultManager;
