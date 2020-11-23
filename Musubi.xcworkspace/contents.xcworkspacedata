@@ -2,9 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:MusubiSubtitles/MusubiSubtitles.xcodeproj">
-   </FileRef>
-   <FileRef
       location = "group:MusubiPlayerDemo/MusubiPlayerDemo.xcodeproj">
    </FileRef>
    <FileRef
