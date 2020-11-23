@@ -113,6 +113,7 @@ extension PlayListViewController: actionPopupDelegate {
             if let mediaPath = mediaURL {
                 let musubiPlayerController:MusubiPlayerViewController = MusubiPlayerViewController()
                 musubiPlayerController.mediaURL = mediaPath
+                musubiPlayerController.externalSubURI = "/Function_b.smi"
                 
                 self.present(musubiPlayerController, animated: true, completion: nil)
             }

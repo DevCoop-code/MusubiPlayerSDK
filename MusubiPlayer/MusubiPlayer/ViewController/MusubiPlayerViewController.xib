@@ -14,6 +14,7 @@
                 <outlet property="musubiPlayPauseBtn" destination="QJj-wQ-7HS" id="L8q-qq-TXo"/>
                 <outlet property="musubiPlayerview" destination="G0c-UG-QPm" id="cQG-yM-KUC"/>
                 <outlet property="musubiSeekbar" destination="94U-XM-ZRB" id="Euw-UN-wk0"/>
+                <outlet property="musubiSubtitleLabel" destination="jhQ-vG-e6x" id="K8r-7o-W1j"/>
                 <outlet property="remainTimeLabel" destination="KzA-EH-dgn" id="VL0-5T-ELj"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -87,14 +88,26 @@
                                 <action selector="back:" destination="-1" eventType="touchDown" id="Rgh-2Z-kG4"/>
                             </connections>
                         </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jhQ-vG-e6x">
+                            <rect key="frame" x="0.0" y="768" width="414" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="x3U-Nq-mec"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="UM5-yP-Ljp" secondAttribute="trailing" constant="8" id="9HZ-uB-ebI"/>
+                        <constraint firstAttribute="bottom" secondItem="jhQ-vG-e6x" secondAttribute="bottom" constant="20" id="UO4-hR-3eK"/>
                         <constraint firstItem="5zb-eO-1eC" firstAttribute="leading" secondItem="G0c-UG-QPm" secondAttribute="leading" constant="10" id="VcX-OW-9jr"/>
+                        <constraint firstItem="jhQ-vG-e6x" firstAttribute="width" secondItem="G0c-UG-QPm" secondAttribute="width" id="dlp-fd-1hv"/>
                         <constraint firstItem="5zb-eO-1eC" firstAttribute="top" secondItem="G0c-UG-QPm" secondAttribute="top" constant="10" id="jPx-Tc-5Jf"/>
                         <constraint firstItem="UM5-yP-Ljp" firstAttribute="leading" secondItem="G0c-UG-QPm" secondAttribute="leading" constant="8" id="nXK-mn-xeM"/>
                         <constraint firstAttribute="bottom" secondItem="UM5-yP-Ljp" secondAttribute="bottom" constant="67" id="v8w-XV-nuF"/>
+                        <constraint firstItem="jhQ-vG-e6x" firstAttribute="centerX" secondItem="G0c-UG-QPm" secondAttribute="centerX" id="vlN-N2-CQw"/>
                     </constraints>
                 </view>
             </subviews>

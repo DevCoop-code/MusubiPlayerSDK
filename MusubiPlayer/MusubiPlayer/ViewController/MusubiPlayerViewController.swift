@@ -35,10 +35,12 @@ open class MusubiPlayerViewController: UIViewController {
     @IBOutlet weak var elapsedTimeLabel: UILabel!
     @IBOutlet weak var remainTimeLabel: UILabel!
     @IBOutlet weak var musubiPlayerview: MusubiPlayerView!
+    @IBOutlet weak var musubiSubtitleLabel: UILabel!
     
     var musubiPlayer: MusubiPlayer?
     
     open var mediaURL: String?
+    open var externalSubURI: String?
     
     var userAction: userBehaviour = .none
     var currentPlayerTime: Float = 0.0
@@ -58,6 +60,9 @@ open class MusubiPlayerViewController: UIViewController {
             NSLog("Media URL: %@", mediaPath)
             musubiPlayer = MusubiPlayer(musubiPlayerview)
             musubiPlayer?.open(mediaPath, mediaType: .hls)
+            if let externalSubPath = externalSubURI {
+                musubiPlayer?.setExternalSubtitle(externalSubPath)
+            }
             
             musubiPlayer?.musubiDelegate = self
         } else {
@@ -180,7 +185,8 @@ extension MusubiPlayerViewController: MusubiDelegate {
     }
     
     public func onSubtitleData(time: Int, text: String) {
-        
+        musubiSubtitleLabel.textColor = .white
+        musubiSubtitleLabel.text = text
     }
     
     func convertTimeFormat(time: Int) -> String {
