@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-#define musubiSubtitle_version @"0.0.4.beta"
+#define musubiSubtitle_version @"0.0.5.beta"
 
 @interface MusubiSubtitleParser : NSObject
 
