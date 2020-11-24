@@ -1,6 +1,0 @@
-framework module MusubiPlayer {
-  umbrella header "MusubiPlayer-umbrella.h"
-
-  export *
-  module * { export * }
-}

@@ -91,7 +91,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.source_files  = "MusubiPlayer/**/*.{swift,h,m,mm,c,cpp}"
-  spec.resource = "MusubiPlayer/**/*.{bundle,xib,plist}"
+  # spec.resource = "MusubiPlayer/**/*.{bundle,xib}"
   # spec.exclude_files = "Classes/Exclude"
 
   # spec.public_header_files = "Classes/**/*.h"
