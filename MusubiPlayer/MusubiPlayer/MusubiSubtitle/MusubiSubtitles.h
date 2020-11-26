@@ -17,6 +17,7 @@
 @interface MusubiSubtitles : NSObject
 
 - (void) setSubtitleFile:(NSString*) filePath;
+- (void) setSubtitleURL:(NSString*) subtitleURL;
 - (NSMutableArray*) getSubtitleSet;
 
 @end

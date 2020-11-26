@@ -25,6 +25,20 @@
     return self;
 }
 
+- (id)initExternalSubtitleOverHTTP:(NSString*)subtitleURL {
+    
+    NSURL* subURL = [NSURL URLWithString:subtitleURL];
+    
+    NSURLSession* session = [NSURLSession sharedSession];
+    NSURLSessionTask* task = [session dataTaskWithURL:subURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        [self setSubtitleLinkArray:[self getTheSubtitleData:data]];
+    }];
+    
+    [task resume];
+    
+    return self;
+}
+
 - (NSMutableArray*) getTheSubtitleData:(NSData*) subtitleData {
     const char* smiText = (const char*)[subtitleData bytes];
     NSUInteger smiTextLength = subtitleData.length;

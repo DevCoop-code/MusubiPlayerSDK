@@ -375,7 +375,7 @@ extension MusubiPlayer: MusubiPlayerAction {
     }
     
     public func setExternalSubtitle(_ subtitlePath: String) {
-        subtitleWrapper?.initMusubiSubtitle(subtitlePath, type: SubtitleType(rawValue: 2))
+        subtitleWrapper?.initMusubiSubtitle(subtitlePath, type: SubtitleType(rawValue: 1))
         
         // Check the Subtitle Data
 //        if let subtitleSet = subtitleWrapper?.getSubtitleSet() {

@@ -13,6 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MusubiSMIParser : MusubiSubtitleParser
 
+- (id)initExternalSubtitleOverHTTP:(NSString*)subtitleURL;
+
 @end
 
 NS_ASSUME_NONNULL_END

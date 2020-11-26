@@ -16,7 +16,12 @@
 - (void)initMusubiSubtitle:(NSString*)subtitlePath Type:(SubtitleType)type {
     musubiSubtitle = [[MusubiSubtitles alloc] init];
     
-    [musubiSubtitle setSubtitleFile:subtitlePath];
+    if (type == 1) {
+        [musubiSubtitle setSubtitleURL:subtitlePath];
+    }
+    else if (type == 2) {
+        [musubiSubtitle setSubtitleFile:subtitlePath];
+    }
 }
 
 - (NSMutableArray*) getSubtitleSet {

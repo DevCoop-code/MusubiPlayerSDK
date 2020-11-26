@@ -39,6 +39,26 @@
     }
 }
 
+- (void) setSubtitleURL:(NSString*) subtitleURL {
+    NSLog(@"Subtitle URL: %@", subtitleURL);
+    
+    NSArray* arrString = [subtitleURL componentsSeparatedByString:@"."];
+    
+    NSString* subtitleExtension = [arrString objectAtIndex:([arrString count] - 1)];
+    
+    NSLog(@"Subtitle extension: %@", subtitleExtension);
+    
+    if ([subtitleExtension  isEqual: @"smi"] || [subtitleExtension  isEqual: @"SMI"]) {
+        subtitleParser = [[MusubiSMIParser alloc] initExternalSubtitleOverHTTP:subtitleURL];
+    }
+    else if ([subtitleExtension  isEqual: @"srt"] || [subtitleExtension  isEqual: @"SRT"]) {
+        subtitleParser = [[MusubiSRTParser alloc] initExternalSubtitleOverHTTP:subtitleURL];
+    }
+    else {
+        NSLog(@"NOT Support Subtitle extension Format: %@", subtitleExtension);
+    }
+}
+
 - (NSMutableArray*) getSubtitleSet {
     return subtitleParser.subtitleLinkArray;
 }
