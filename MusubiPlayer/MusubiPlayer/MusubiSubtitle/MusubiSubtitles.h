@@ -10,7 +10,8 @@
 
 @interface ExternalSubtitle: NSObject
     @property(nonatomic) NSString* subtitleText;
-    @property(nonatomic) NSInteger subtitleStartTime;
+    @property(nonatomic) NSInteger subtitleStartTime;       // milisecond
+    @property(nonatomic) NSInteger subtitleEndTime;         // milisecond
 @end
 
 @interface MusubiSubtitles : NSObject
