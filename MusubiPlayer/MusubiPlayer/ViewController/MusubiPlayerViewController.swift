@@ -66,7 +66,7 @@ open class MusubiPlayerViewController: UIViewController {
             musubiPlayer = MusubiPlayer(musubiPlayerview)
             musubiPlayer?.open(mediaPath, mediaType: .hls)
             if let externalSubPath = externalSubURI {
-                musubiPlayer?.setExternalSubtitle(externalSubPath)
+                musubiPlayer?.setExternalSubtitle(externalSubPath, SubtitleType(1))
             }
             
             musubiPlayer?.musubiDelegate = self
