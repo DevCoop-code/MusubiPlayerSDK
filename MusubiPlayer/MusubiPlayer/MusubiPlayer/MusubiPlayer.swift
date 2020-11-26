@@ -172,15 +172,17 @@ open class MusubiPlayer:NSObject, AVPlayerItemOutputPullDelegate {
                 self.musubiDelegate?.currentTime(time: CMTimeGetSeconds(time))
                 
                 if let subtitleData = self.subtitleWrapper?.getSubtitleSet() {
-                    let subData = subtitleData.object(at: self.subtitleIndex) as! ExternalSubtitle
-                    
-                    let subTimeSec = subData.subtitleStartTime / 1000
-                    if ( ((Double(subTimeSec) - CMTimeGetSeconds(time) <= 1 && Double(subTimeSec) - CMTimeGetSeconds(time) >= 0)) ||
-                        ((Double(subTimeSec) - CMTimeGetSeconds(time) <= 0 && Double(subTimeSec) - CMTimeGetSeconds(time) >= -1)) ) {
-                        if let subDataText = subData.subtitleText {
-                            NSLog("text renderer: \(Double(subTimeSec)) , \(CMTimeGetSeconds(time))")
-                            self.musubiDelegate?.onSubtitleData(time: subData.subtitleStartTime, text: subDataText)
-                            self.subtitleIndex = self.subtitleIndex + 1
+                    if subtitleData.count < self.subtitleIndex {
+                        let subData = subtitleData.object(at: self.subtitleIndex) as! ExternalSubtitle
+                        
+                        let subTimeSec = subData.subtitleStartTime / 1000
+                        if ( ((Double(subTimeSec) - CMTimeGetSeconds(time) <= 1 && Double(subTimeSec) - CMTimeGetSeconds(time) >= 0)) ||
+                            ((Double(subTimeSec) - CMTimeGetSeconds(time) <= 0 && Double(subTimeSec) - CMTimeGetSeconds(time) >= -1)) ) {
+                            if let subDataText = subData.subtitleText {
+                                NSLog("text renderer: \(Double(subTimeSec)) , \(CMTimeGetSeconds(time))")
+                                self.musubiDelegate?.onSubtitleData(time: subData.subtitleStartTime, text: subDataText)
+                                self.subtitleIndex = self.subtitleIndex + 1
+                            }
                         }
                     }
                 }
