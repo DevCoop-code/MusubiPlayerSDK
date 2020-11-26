@@ -32,10 +32,12 @@
     NSInteger subtitleIndex = 0;
     NSUInteger subtitleLength = 1;
     NSUInteger distinctLabel = 0;   // 0: subtitle index, 1: subtitle time, 2: subtitle
+    
+    ExternalSubtitle* srtData = nil;
     while (index < srtTextLength) {
-        
         switch (distinctLabel) {
             case 0: {       // Parsing Index
+                srtData = [[ExternalSubtitle alloc] init];
                 if (subtitleIndex == 9) {
                     subtitleLength = 2;
                 }
@@ -61,9 +63,9 @@
             break;
                 
             case 1: {       // Parsing Time
-                char startHourData[2];
-                char startMinuteData[2];
-                char startSecondData[2];
+                char startHourData[3];
+                char startMinuteData[3];
+                char startSecondData[3];
                 
                 memcpy(startHourData, srtText + index, 2);
                 index += 3;
@@ -73,6 +75,24 @@
                 
                 memcpy(startSecondData, srtText + index, 2);
                 index += 3;
+                
+                NSData* startSrtHour = [NSData dataWithBytes:startHourData length:2];
+                NSString* startSrtHourStr = [[NSString alloc] initWithData:startSrtHour encoding:NSUTF8StringEncoding];
+                
+                NSData* startSrtMinute = [NSData dataWithBytes:startMinuteData length:2];
+                NSString* startSrtMinuteStr = [[NSString alloc] initWithData:startSrtMinute encoding:NSUTF8StringEncoding];
+                
+                NSData* startSrtSecond = [NSData dataWithBytes:startSecondData length:2];
+                NSString* startSrtSecondStr = [[NSString alloc] initWithData:startSrtSecond encoding:NSUTF8StringEncoding];
+                
+                NSInteger s_hour = [startSrtHourStr intValue];
+                NSInteger s_minute = [startSrtMinuteStr intValue];
+                NSInteger s_second = [startSrtSecondStr intValue];
+                
+                NSLog(@"SRT Index: %ld, hour: %ld, minute: %ld, second: %ld", (long)subtitleIndex, (long)s_hour, (long)s_minute, (long)s_second);
+                
+                NSInteger srtStartTime = (s_hour * 60 * 60) + (s_minute * 60) + s_second;
+                srtData.subtitleStartTime = srtStartTime * 1000;
                 
                 NSInteger nextTimeIndex = index;
                 while (true) {
@@ -93,9 +113,9 @@
                 }
 //                index += 7;     // Skip the miliseconds & ' --> '
                 
-                char endHourData[2];
-                char endMinuteData[2];
-                char endSecondData[2];
+                char endHourData[3];
+                char endMinuteData[3];
+                char endSecondData[3];
                 
                 memcpy(endHourData, srtText + index, 2);
                 index += 3;
@@ -106,10 +126,34 @@
                 memcpy(endSecondData, srtText + index, 2);
                 index += 3;
                 
-                index += 4;
+                NSData* endSrtHour = [NSData dataWithBytes:endHourData length:2];
+                NSString* endSrtHourStr = [[NSString alloc] initWithData:endSrtHour encoding:NSUTF8StringEncoding];
+
+                NSData* endSrtMinute = [NSData dataWithBytes:endMinuteData length:2];
+                NSString* endSrtMinuteStr = [[NSString alloc] initWithData:endSrtMinute encoding:NSUTF8StringEncoding];
+
+                NSData* endSrtSecond = [NSData dataWithBytes:endSecondData length:2];
+                NSString* endSrtSecondStr = [[NSString alloc] initWithData:endSrtSecond encoding:NSUTF8StringEncoding];
+
+                NSInteger e_hour = [endSrtHourStr intValue];
+                NSInteger e_minute = [endSrtMinuteStr intValue];
+                NSInteger e_second = [endSrtSecondStr intValue];
+
+                NSLog(@"SRT Index: %ld, hour: %ld, minute: %ld, second: %ld", (long)subtitleIndex, (long)e_hour, (long)e_minute, (long)e_second);
+
+                NSInteger srtEndTime = (e_hour * 60 * 60) + (e_minute * 60) + e_second;
+                srtData.subtitleEndTime = srtEndTime * 1000;
                 
-                if (srtText[index] == '\n') {
-                    distinctLabel ++;
+                while (true) {
+                    index ++;
+                    
+                    if (srtText[index] == '\n') {
+                        distinctLabel++;
+                        break;
+                    }
+                    if (index > srtTextLength) {
+                        break;
+                    }
                 }
             }
             break;
@@ -156,6 +200,9 @@
                     srtSubtitleData = [[NSString alloc] initWithData:data encoding:encoding];
                 }
                 
+                srtData.subtitleText = srtSubtitleData;
+                [srtSubtitleArray addObject:srtData];
+                
                 NSLog(@"SRT Subtitle: %@", srtSubtitleData);
                 
                 index += (subtitleDataLength + 1);
@@ -172,7 +219,7 @@
         index++;
     }
     
-    return nil;
+    return srtSubtitleArray;
 }
 
 @end
