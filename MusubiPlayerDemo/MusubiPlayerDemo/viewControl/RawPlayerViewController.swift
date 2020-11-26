@@ -63,7 +63,7 @@ class RawPlayerViewController: UIViewController {
         if let mediaURL = videoURL {
             player?.musubiDelegate = self
             player?.open(mediaURL, mediaType: .hls)
-            player?.setExternalSubtitle("/Function_b.smi")
+            player?.setExternalSubtitle("/Function_b.smi", SubtitleType(2))
             player?.start()
             
             playpauseBtn.setBackgroundImage(UIImage(systemName: "pause.fill"), for: .normal)
