@@ -174,12 +174,12 @@ open class MusubiPlayer:NSObject, AVPlayerItemOutputPullDelegate {
                 if let subtitleData = self.subtitleWrapper?.getSubtitleSet() {
                     let subData = subtitleData.object(at: self.subtitleIndex) as! ExternalSubtitle
                     
-                    let subTimeSec = subData.subtitleTime / 1000
+                    let subTimeSec = subData.subtitleStartTime / 1000
                     if ( ((Double(subTimeSec) - CMTimeGetSeconds(time) <= 1 && Double(subTimeSec) - CMTimeGetSeconds(time) >= 0)) ||
                         ((Double(subTimeSec) - CMTimeGetSeconds(time) <= 0 && Double(subTimeSec) - CMTimeGetSeconds(time) >= -1)) ) {
                         if let subDataText = subData.subtitleText {
                             NSLog("text renderer: \(Double(subTimeSec)) , \(CMTimeGetSeconds(time))")
-                            self.musubiDelegate?.onSubtitleData(time: subData.subtitleTime, text: subDataText)
+                            self.musubiDelegate?.onSubtitleData(time: subData.subtitleStartTime, text: subDataText)
                             self.subtitleIndex = self.subtitleIndex + 1
                         }
                     }
@@ -344,10 +344,10 @@ extension MusubiPlayer: MusubiPlayerAction {
                 for subtitle in subtitleSet {
                     let subData = subtitle as! ExternalSubtitle
                     
-                    let subTimeSec = subData.subtitleTime / 1000
+                    let subTimeSec = subData.subtitleStartTime / 1000
                     if ( ((Double(subTimeSec) - CMTimeGetSeconds(cmTime) <= 1 && Double(subTimeSec) - CMTimeGetSeconds(cmTime) >= 0)) ||
                         ((Double(subTimeSec) - CMTimeGetSeconds(cmTime) <= 0 && Double(subTimeSec) - CMTimeGetSeconds(cmTime) >= -1)) ) {
-                        self.musubiDelegate?.onSubtitleData(time: subData.subtitleTime, text: subData.subtitleText)
+                        self.musubiDelegate?.onSubtitleData(time: subData.subtitleStartTime, text: subData.subtitleText)
                         subPositionReloc += 1;
                         break
                     }

@@ -60,7 +60,7 @@
                 NSString* timeText = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
 //                NSLog(@"subtitle start: %@", timeText);
                 
-                smiData.subtitleTime = [timeText intValue];
+                smiData.subtitleStartTime = [timeText intValue];
             }
             
             subtitleStartIndex = index;
