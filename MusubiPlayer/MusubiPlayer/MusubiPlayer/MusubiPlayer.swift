@@ -180,7 +180,7 @@ open class MusubiPlayer:NSObject, AVPlayerItemOutputPullDelegate {
                         if ( ((Double(subTimeSec) - CMTimeGetSeconds(time) <= 1 && Double(subTimeSec) - CMTimeGetSeconds(time) >= 0)) ||
                             ((Double(subTimeSec) - CMTimeGetSeconds(time) <= 0 && Double(subTimeSec) - CMTimeGetSeconds(time) >= -1)) ) {
                             if let subDataText = subData.subtitleText {
-                                NSLog("text renderer: \(Double(subTimeSec)) , \(CMTimeGetSeconds(time))")
+//                                NSLog("text renderer: \(Double(subTimeSec)) , \(CMTimeGetSeconds(time))")
                                 self.musubiDelegate?.onSubtitleData(startTime: subData.subtitleStartTime, endTime: subData.subtitleEndTime, text: subDataText)
                                 self.subtitleIndex = self.subtitleIndex + 1
                             }

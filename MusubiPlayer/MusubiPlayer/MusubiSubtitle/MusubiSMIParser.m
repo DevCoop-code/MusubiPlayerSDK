@@ -83,7 +83,7 @@
                     do {
                         index++;
                         subtitleStartIndex = index;
-                        NSLog(@"[SMI Parser] Debug: %c", smiText[index]);
+//                        NSLog(@"[SMI Parser] Debug: %c", smiText[index]);
                     } while (smiText[index] != '>');
                 }
                 index++;
