@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "MusubiPlayer"
-  spec.version      = "0.0.5"
+  spec.version      = "0.1.6"
   spec.summary      = "MusubiPlayer is the easy to use iOS Video Player SDK But it has powerful function."
 
   # This description is used to generate tags and improve search results.
@@ -92,7 +92,7 @@ Pod::Spec.new do |spec|
 
   spec.source_files  = "MusubiPlayer/**/*.{swift,h,m,mm,c,cpp,metal}"
   # spec.resource = "MusubiPlayer/**/*.{bundle,xib}"
-  # spec.exclude_files = "Classes/Exclude"
+  spec.exclude_files = "MusubiPlayer/ViewController"
 
   # spec.public_header_files = "Classes/**/*.h"
 
