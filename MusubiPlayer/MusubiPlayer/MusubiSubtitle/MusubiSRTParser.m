@@ -74,7 +74,24 @@
                 memcpy(startSecondData, srtText + index, 2);
                 index += 3;
                 
-                index += 7;     // Skip the miliseconds & ' --> '
+                NSInteger nextTimeIndex = index;
+                while (true) {
+                    if (srtText[nextTimeIndex] == '-' && srtText[nextTimeIndex + 1] == '-' && srtText[nextTimeIndex + 2] == '>') {
+                        if (srtText[nextTimeIndex + 3] == ' ') {
+                            index += 7;
+                            break;
+                        } else {
+                            index += 5;
+                            break;
+                        }
+                    }
+                    
+                    if (nextTimeIndex >= srtTextLength) {
+                        break;
+                    }
+                    nextTimeIndex ++;
+                }
+//                index += 7;     // Skip the miliseconds & ' --> '
                 
                 char endHourData[2];
                 char endMinuteData[2];
