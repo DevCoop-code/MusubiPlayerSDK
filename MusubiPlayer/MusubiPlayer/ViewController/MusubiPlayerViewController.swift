@@ -189,7 +189,7 @@ extension MusubiPlayerViewController: MusubiDelegate {
         musubiSeekbar.maximumValue = Float(curTime.doubleValue)
     }
     
-    public func onSubtitleData(time: Int, text: String) {
+    public func onSubtitleData(startTime: Int, endTime: Int, text: String) {
         var externalSubText: String = text
         
         externalSubText = externalSubText.replacingOccurrences(of: "<br>", with: "\n")
