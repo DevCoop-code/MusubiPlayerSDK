@@ -51,6 +51,8 @@ class RawPlayerViewController: UIViewController {
         
         seekBar.minimumValue = 0.0
         
+        subtitleLabel.textColor = .white
+        subtitleLabel.numberOfLines = 0
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -139,10 +141,9 @@ extension RawPlayerViewController: MusubiDelegate {
         seekBar.maximumValue = Float(curTime.doubleValue)
     }
     
-    func onSubtitleData(time: Int, text: String) {
+    func onSubtitleData(startTime: Int, endTime: Int, text: String) {
         NSLog("TextRender: \(text)")
-        
-        subtitleLabel.textColor = .white
+    
         subtitleLabel.text = text
     }
     
