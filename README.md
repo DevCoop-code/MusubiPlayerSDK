@@ -10,7 +10,7 @@ pod 'MusubiPlayer', '~> 0.1'
 ```
 
 # Demo
-<img src="./images/demo1.png" width="50%" height="50%">
+<img src="https://raw.githubusercontent.com/hankyojeong/MusubiPlayerSDK/master/images/demo1.png" width="50%" height="50%">
 
 # Usage
 Easy to use MusubiPlayer
