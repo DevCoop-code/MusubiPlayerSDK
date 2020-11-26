@@ -9,6 +9,9 @@ To install it, simply add the following line to your Podfile
 pod 'MusubiPlayer', '~> 0.0'
 ```
 
+# Demo
+![Demo1](./images/demo1.png)
+
 # Usage
 Easy to use MusubiPlayer
 - HLS
@@ -23,6 +26,16 @@ override func viewDidAppear(_ animated: Bool) {
 
     player?.start()
 }
+```
+
+- Play Video with External Subtitle
+  - MusubiVideo Player Support SMI, SRT Subtitles
+    - SubtitleType(1): Subtitle over HTTP Network
+    - SubtitleType(2): Local Subtitle
+```
+player?.open(mediaURL, mediaType: .hls)
+player?.setExternalSubtitle("/[subtitleName].smi", SubtitleType(2))
+player?.start()
 ```
 
 # Documentation
