@@ -172,7 +172,8 @@ open class MusubiPlayer:NSObject, AVPlayerItemOutputPullDelegate {
                 self.musubiDelegate?.currentTime(time: CMTimeGetSeconds(time))
                 
                 if let subtitleData = self.subtitleWrapper?.getSubtitleSet() {
-                    if subtitleData.count < self.subtitleIndex {
+                    
+                    if subtitleData.count > self.subtitleIndex {
                         let subData = subtitleData.object(at: self.subtitleIndex) as! ExternalSubtitle
                         
                         let subTimeSec = subData.subtitleStartTime / 1000
@@ -347,20 +348,24 @@ extension MusubiPlayer: MusubiPlayerAction {
                     let subData = subtitle as! ExternalSubtitle
                     
                     let subTimeSec = subData.subtitleStartTime / 1000
-                    if ( ((Double(subTimeSec) - CMTimeGetSeconds(cmTime) <= 1 && Double(subTimeSec) - CMTimeGetSeconds(cmTime) >= 0)) ||
-                        ((Double(subTimeSec) - CMTimeGetSeconds(cmTime) <= 0 && Double(subTimeSec) - CMTimeGetSeconds(cmTime) >= -1)) ) {
-                        self.musubiDelegate?.onSubtitleData(time: subData.subtitleStartTime, text: subData.subtitleText)
-                        subPositionReloc += 1;
+                    if ( Double(subTimeSec) >= CMTimeGetSeconds(cmTime) ) {
+                        subPositionReloc -= 1;
+                        if subPositionReloc < 0 {
+                            subPositionReloc = 0
+                        }
                         break
+                    }
+                    if (subPositionReloc >= subtitleSet.count) {
+                        subPositionReloc = 0;
+                        break;
                     }
                     subPositionReloc += 1;
                 }
-                subtitleIndex = subPositionReloc
+                self.subtitleIndex = subPositionReloc
             }
-        
-           avPlayer.seek(to: cmTime)
+        avPlayer.seek(to: cmTime)
        }
-   }
+    }
     
    public func close() {
         if let avPlayer = avPlayer_, let videoOutput = videoOutput_{
