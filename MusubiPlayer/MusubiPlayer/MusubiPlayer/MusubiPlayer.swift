@@ -72,12 +72,15 @@ open class MusubiPlayer:NSObject, AVPlayerItemOutputPullDelegate {
     let subtitleWrapper: MusubiSubtitleWrapper? = MusubiSubtitleWrapper()
     var subtitleIndex: NSInteger = 0
     
+    var musubiDevice: MusubiDevice?
+    
     public init(_ videoPlayerView: UIView) {
         super.init()
         
         NSLog("MusubiPlayer Version: \(musubiPlayer_version)")
         
         device_ = MTLCreateSystemDefaultDevice()
+        musubiDevice = MusubiDeviceFactory.defaultDevice
         metalLayer_ = CAMetalLayer()
         
         if let metalDevice = device_, let metalLayer = metalLayer_ {
@@ -278,7 +281,11 @@ extension MusubiPlayer: MusubiPlayerAction {
             
             switch mediaType {
             case .local:
-                mediaURL_ = NSURL.fileURL(withPath: mediaPath) as NSURL
+                let fileManager: FileManager? = self.musubiDevice?.filemgr
+                if let fileMgr = fileManager {
+                    mediaURL_ = NSURL.fileURL(withPath: fileMgr.urls(for: .documentDirectory, in: .userDomainMask)[0].path + "/" + mediaPath) as NSURL
+                }
+            
                 break
             case .hls:
                 mediaURL_ = NSURL(string: mediaPath)
@@ -295,6 +302,7 @@ extension MusubiPlayer: MusubiPlayerAction {
             player.currentItem?.remove(videoOutput)
             
             if let mediaURL = mediaURL_ {
+                NSLog("Media URI: \(mediaURL)")
                 let item = AVPlayerItem.init(url: mediaURL as URL)
                 let asset = item.asset
                 
