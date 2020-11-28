@@ -383,6 +383,19 @@ extension MusubiPlayer: MusubiPlayerAction {
         avPlayer_ = nil
     }
     
+    public func setVolume(_ volume: Float) {
+        var audioVolume: Float = 1.0
+        if let avPlayer = avPlayer_ {
+            if volume >= 1.0 {
+                audioVolume = 1.0
+            }
+            if volume <= 0.0 {
+                audioVolume = 0.0
+            }
+            avPlayer.volume = audioVolume
+        }
+    }
+    
     public func setExternalSubtitle(_ subtitlePath: String, _ subtitleType: SubtitleType) {
         subtitleWrapper?.initMusubiSubtitle(subtitlePath, type: SubtitleType(rawValue: subtitleType.rawValue))
         
