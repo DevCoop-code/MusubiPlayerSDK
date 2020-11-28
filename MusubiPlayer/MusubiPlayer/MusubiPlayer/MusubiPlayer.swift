@@ -285,6 +285,7 @@ extension MusubiPlayer: MusubiPlayerAction {
                 break
             case .dash:
                 // TODO: playing dash content
+                NSLog("[ERROR] Dash is not supported now")
                 break
             default:
                 
