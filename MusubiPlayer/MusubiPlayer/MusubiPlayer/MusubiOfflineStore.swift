@@ -16,9 +16,9 @@ open class MusubiOfflineStore: NSObject {
     var offlineDB: FMDatabase?
     var musubiNetwork: MusubiNetwork?
     
-    public init(device: MusubiDevice?) {
+    override public init() {
         super.init()
-        self.device = device
+        self.device = MusubiDeviceFactory.defaultDevice
         musubiOfflineDispatchQueue = DispatchQueue(label: "offlineStoreQueue")
         musubiNetwork = MusubiNetwork()
         musubiNetwork?.networkCallback = self
