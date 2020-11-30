@@ -6,8 +6,11 @@ It uses AVFoundation for playing audio and video both locally and over the Inter
 MusubiPlayer is available through use Cocoapods
 To install it, simply add the following line to your Podfile
 ```
+use_frameworks!
+
 pod 'MusubiPlayer', '~> 0.1'
 ```
+You must Add **'use_frameworks!'** in your Podfile
 
 # Demo
 <img src="https://raw.githubusercontent.com/hankyojeong/MusubiPlayerSDK/master/images/demo1.png" width="50%" height="50%">
