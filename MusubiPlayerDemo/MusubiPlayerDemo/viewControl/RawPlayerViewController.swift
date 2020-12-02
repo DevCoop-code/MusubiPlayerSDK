@@ -63,6 +63,7 @@ class RawPlayerViewController: UIViewController {
         if let mediaURL = videoURL {
             player?.musubiDelegate = self
             player?.open(mediaURL, mediaType: .hls)
+            player?.setThumbnailSeekbar(seekBar)
             player?.setExternalSubtitle("/Function_b.smi", SubtitleType(2))
             player?.start()
             

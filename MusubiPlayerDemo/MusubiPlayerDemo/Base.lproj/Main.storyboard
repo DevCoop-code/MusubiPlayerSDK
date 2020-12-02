@@ -242,7 +242,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <slider opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="100" verticalCompressionResistancePriority="100" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="g5h-0X-j7k">
+                                            <slider opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="100" verticalCompressionResistancePriority="100" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="g5h-0X-j7k">
                                                 <rect key="frame" x="59" y="0.0" width="236" height="21.5"/>
                                                 <connections>
                                                     <action selector="seekBarTouchDown:" destination="g6G-HZ-uDt" eventType="touchDown" id="5SJ-5D-uWp"/>

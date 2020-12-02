@@ -44,6 +44,7 @@ enum hlsPlayListType {
 private var playerItemContext = 0
 
 open class MusubiPlayer:NSObject, AVPlayerItemOutputPullDelegate {
+    var musubiPlayerView: UIView?
     var device_: MTLDevice?
     var metalLayer_: CAMetalLayer?
     var pipelineState_: MTLRenderPipelineState?
@@ -74,8 +75,13 @@ open class MusubiPlayer:NSObject, AVPlayerItemOutputPullDelegate {
     
     var musubiDevice: MusubiDevice?
     
+    var seekbar: UISlider?
+    var thumbView: UIView?
+    
     public init(_ videoPlayerView: UIView) {
         super.init()
+        
+        musubiPlayerView = videoPlayerView
         
         NSLog("MusubiPlayer Version: \(musubiPlayer_version)")
         
@@ -393,6 +399,43 @@ extension MusubiPlayer: MusubiPlayerAction {
                 audioVolume = 0.0
             }
             avPlayer.volume = audioVolume
+        }
+    }
+    
+    public func setThumbnailSeekbar(_ seekbar: UISlider) {
+        var minSize: CGFloat = 0.0
+        if let videoView = musubiPlayerView {
+            let viewHeight = videoView.bounds.height
+            let viewWidth = videoView.bounds.width
+            
+            if viewHeight > viewWidth {
+                minSize = viewWidth
+            } else {
+                minSize = viewHeight
+            }
+            
+            thumbView = UIView()
+            thumbView?.backgroundColor = .blue
+            
+            thumbView?.frame.size.width = minSize * 0.25
+            thumbView?.frame.size.height = minSize * 0.25
+            
+            if let thumbNailView = thumbView {
+                videoView.addSubview(thumbNailView)
+                videoView.translatesAutoresizingMaskIntoConstraints = false
+                
+                seekbar.addTarget(self, action: #selector(sliderDidChangeValue(_:)), for: .valueChanged)
+            }
+        }
+        
+//        NSLog("\(videoPlayerView.bounds.width), \(thumbView.bounds.width), \(seekbar.bounds.width), \(thumbView.bounds.width) \((videoPlayerView.bounds.width - thumbView.bounds.width) / (seekbar.bounds.width)), \(thumbRect.origin.x) \(thumbView.frame.origin.x)")
+    }
+    
+    @objc func sliderDidChangeValue(_ seekbar: UISlider) {
+        let trackRect = seekbar.trackRect(forBounds: seekbar.bounds)
+        let thumbRect = seekbar.thumbRect(forBounds: seekbar.bounds, trackRect: trackRect, value: seekbar.value)
+        if let thumbNailView = thumbView, let musubiVideoView = musubiPlayerView {
+            thumbNailView.frame.origin.x = (((musubiVideoView.bounds.width) - (thumbNailView.bounds.width)) / seekbar.bounds.width) * thumbRect.origin.x
         }
     }
     
