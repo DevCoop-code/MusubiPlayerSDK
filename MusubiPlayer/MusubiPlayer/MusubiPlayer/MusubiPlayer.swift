@@ -79,6 +79,7 @@ open class MusubiPlayer:NSObject, AVPlayerItemOutputPullDelegate {
     var thumbView: UIImageView?
     
     var imageGenerator: AVAssetImageGenerator?
+    var lastSeekbarTime: Float = 0.0
     
     public init(_ videoPlayerView: UIView) {
         super.init()
@@ -149,7 +150,7 @@ open class MusubiPlayer:NSObject, AVPlayerItemOutputPullDelegate {
         // Calculate the nextVSync time which is when the screen will be refreshed next
         let nextVSync: CFTimeInterval = (displayLink.timestamp + displayLink.duration)
         
-        if let videoOutput = videoOutput_ {
+        if let videoOutput = self.videoOutput_ {
             outputItemTime = videoOutput.itemTime(forHostTime: nextVSync)
             
             var pixelBuffer: CVPixelBuffer?
@@ -157,19 +158,19 @@ open class MusubiPlayer:NSObject, AVPlayerItemOutputPullDelegate {
                 pixelBuffer = videoOutput.copyPixelBuffer(forItemTime: outputItemTime, itemTimeForDisplay: nil)
             }
 
-            if 0.0 == lastFrameTimestamp_ {
-                lastFrameTimestamp_ = displayLink.timestamp
+            if 0.0 == self.lastFrameTimestamp_ {
+                self.lastFrameTimestamp_ = displayLink.timestamp
             }
 
 //            var elapsed: TimeInterval = displayLink.timestamp - lastFrameTimestamp
-            lastFrameTimestamp_ = displayLink.timestamp
+            self.lastFrameTimestamp_ = displayLink.timestamp
 
             // AutoRelease
-            let drawable: CAMetalDrawable? = metalLayer_?.nextDrawable()
+            let drawable: CAMetalDrawable? = self.metalLayer_?.nextDrawable()
             if let pixelBufferData = pixelBuffer, let drawableData = drawable {
-                musubiDelegate?.renderObject(drawable: drawableData, pixelBuffer: pixelBufferData)
+                self.musubiDelegate?.renderObject(drawable: drawableData, pixelBuffer: pixelBufferData)
 
-                renderObject(drawable: drawableData, pixelBuffer: pixelBufferData)
+                self.renderObject(drawable: drawableData, pixelBuffer: pixelBufferData)
             }
         }
     }
@@ -439,21 +440,25 @@ extension MusubiPlayer: MusubiPlayerAction {
     }
     
     @objc func sliderDidChangeValue(_ seekbar: UISlider) {
-        let trackRect = seekbar.trackRect(forBounds: seekbar.bounds)
-        let thumbRect = seekbar.thumbRect(forBounds: seekbar.bounds, trackRect: trackRect, value: seekbar.value)
-        if let thumbNailView = self.thumbView, let musubiVideoView = self.musubiPlayerView {
-            thumbNailView.frame.origin.x = (((musubiVideoView.bounds.width) - (thumbNailView.bounds.width)) / seekbar.bounds.width) * thumbRect.origin.x
+        if (lastSeekbarTime - seekbar.value > 2.0) || (lastSeekbarTime - seekbar.value < -2.0) {
+            lastSeekbarTime = seekbar.value
             
-            let time = CMTimeMake(value: Int64(seekbar.value), timescale: 1)
-            do {
-                let imageRef = try self.imageGenerator?.copyCGImage(at: time, actualTime: nil)
-                if let videoThumbnailRef = imageRef {
-                    let thumbnail = UIImage(cgImage: videoThumbnailRef)
-                    
-                    thumbNailView.image = thumbnail
+            let trackRect = seekbar.trackRect(forBounds: seekbar.bounds)
+            let thumbRect = seekbar.thumbRect(forBounds: seekbar.bounds, trackRect: trackRect, value: seekbar.value)
+            if let thumbNailView = self.thumbView, let musubiVideoView = self.musubiPlayerView {
+                thumbNailView.frame.origin.x = (((musubiVideoView.bounds.width) - (thumbNailView.bounds.width)) / seekbar.bounds.width) * thumbRect.origin.x
+                
+                let time = CMTimeMake(value: Int64(seekbar.value), timescale: 1)
+                do {
+                    let imageRef = try self.imageGenerator?.copyCGImage(at: time, actualTime: nil)
+                    if let videoThumbnailRef = imageRef {
+                        let thumbnail = UIImage(cgImage: videoThumbnailRef)
+                        
+                        thumbNailView.image = thumbnail
+                    }
+                } catch {
+                    NSLog("Error Detect: \(error)")
                 }
-            } catch {
-                NSLog("Error Detect: \(error)")
             }
         }
     }
