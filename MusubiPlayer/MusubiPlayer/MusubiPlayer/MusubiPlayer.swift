@@ -423,7 +423,7 @@ extension MusubiPlayer: MusubiPlayerAction {
             }
             
             thumbView = UIImageView()
-            thumbView?.backgroundColor = .blue
+            thumbView?.backgroundColor = .black
             
             thumbView?.frame.size.width = minSize * 0.25
             thumbView?.frame.size.height = minSize * 0.25
@@ -433,11 +433,28 @@ extension MusubiPlayer: MusubiPlayerAction {
                 videoView.addSubview(thumbNailView)
                 videoView.translatesAutoresizingMaskIntoConstraints = false
                 
+                seekbar.addTarget(self, action: #selector(sliderDidTouchDown(_:)), for: .touchDown)
+                seekbar.addTarget(self, action: #selector(sliderDidTouchCancel(_:)), for: .touchUpInside)
+                seekbar.addTarget(self, action: #selector(sliderDidTouchCancel(_:)), for: .touchUpOutside)
                 seekbar.addTarget(self, action: #selector(sliderDidChangeValue(_:)), for: .valueChanged)
             }
+            
+            thumbView?.isHidden = true
         }
         
 //        NSLog("\(videoPlayerView.bounds.width), \(thumbView.bounds.width), \(seekbar.bounds.width), \(thumbView.bounds.width) \((videoPlayerView.bounds.width - thumbView.bounds.width) / (seekbar.bounds.width)), \(thumbRect.origin.x) \(thumbView.frame.origin.x)")
+    }
+    
+    @objc func sliderDidTouchDown(_ seekbar: UISlider) {
+        NSLog("did touch down")
+        
+        thumbView?.isHidden = false
+    }
+    
+    @objc func sliderDidTouchCancel(_ seekbar: UISlider) {
+        NSLog("did touch cancel")
+        
+        thumbView?.isHidden = true
     }
     
     @objc func sliderDidChangeValue(_ seekbar: UISlider) {
