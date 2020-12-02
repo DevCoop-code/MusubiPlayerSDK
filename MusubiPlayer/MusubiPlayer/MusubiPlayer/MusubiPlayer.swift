@@ -125,7 +125,7 @@ open class MusubiPlayer:NSObject, AVPlayerItemOutputPullDelegate {
         timer_?.add(to: .main, forMode: .default)
 
         // Setup AVPlayerItemVideoOutput with the required pixelbuffer attributes
-        var pixelBufferAttributes: NSDictionary = [kCVPixelBufferMetalCompatibilityKey:true, kCVPixelBufferPixelFormatTypeKey:kCVPixelFormatType_420YpCbCr8BiPlanarFullRange]
+        let pixelBufferAttributes: NSDictionary = [kCVPixelBufferMetalCompatibilityKey:true, kCVPixelBufferPixelFormatTypeKey:kCVPixelFormatType_420YpCbCr8BiPlanarFullRange]
         videoOutput_ = AVPlayerItemVideoOutput.init(pixelBufferAttributes: pixelBufferAttributes as! [String: Any])
         videoOutputQueue_ = DispatchQueue(label: "VideoOutputQueue")
         videoOutput_?.setDelegate(self, queue: videoOutputQueue_)
@@ -317,7 +317,7 @@ extension MusubiPlayer: MusubiPlayerAction {
                 let item = AVPlayerItem.init(url: mediaURL as URL)
                 let asset = item.asset
                 
-                var thumbnailAsset = AVAsset.init(url: mediaURL as URL)
+                let thumbnailAsset = AVAsset.init(url: mediaURL as URL)
                 imageGenerator = AVAssetImageGenerator(asset: thumbnailAsset)
                 
                 asset.loadValuesAsynchronously(forKeys: ["tracks"]) {
