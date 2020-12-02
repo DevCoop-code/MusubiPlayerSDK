@@ -427,6 +427,7 @@ extension MusubiPlayer: MusubiPlayerAction {
             
             thumbView?.frame.size.width = minSize * 0.25
             thumbView?.frame.size.height = minSize * 0.25
+            thumbView?.frame.origin.y = (videoView.bounds.width / 2.0) - ((minSize * 0.25) / 2.0)
             
             if let thumbNailView = thumbView {
                 videoView.addSubview(thumbNailView)
@@ -440,7 +441,7 @@ extension MusubiPlayer: MusubiPlayerAction {
     }
     
     @objc func sliderDidChangeValue(_ seekbar: UISlider) {
-        if (lastSeekbarTime - seekbar.value > 2.0) || (lastSeekbarTime - seekbar.value < -2.0) {
+        if (lastSeekbarTime - seekbar.value > 5.0) || (lastSeekbarTime - seekbar.value < -5.0) {
             lastSeekbarTime = seekbar.value
             
             let trackRect = seekbar.trackRect(forBounds: seekbar.bounds)
