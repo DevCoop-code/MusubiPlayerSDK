@@ -78,6 +78,8 @@ open class MusubiPlayer:NSObject, AVPlayerItemOutputPullDelegate {
     var seekbar: UISlider?
     var thumbView: UIView?
     
+    var imageGenerator: AVAssetImageGenerator?
+    
     public init(_ videoPlayerView: UIView) {
         super.init()
         
@@ -312,6 +314,9 @@ extension MusubiPlayer: MusubiPlayerAction {
                 let item = AVPlayerItem.init(url: mediaURL as URL)
                 let asset = item.asset
                 
+                var thumbnailAsset = AVAsset.init(url: mediaURL as URL)
+                imageGenerator = AVAssetImageGenerator(asset: thumbnailAsset)
+                
                 asset.loadValuesAsynchronously(forKeys: ["tracks"]) {
                     var error: NSError? = nil
                     let status = asset.statusOfValue(forKey: "tracks", error: &error)
@@ -432,10 +437,29 @@ extension MusubiPlayer: MusubiPlayerAction {
     }
     
     @objc func sliderDidChangeValue(_ seekbar: UISlider) {
+        // New Thread
+        
         let trackRect = seekbar.trackRect(forBounds: seekbar.bounds)
         let thumbRect = seekbar.thumbRect(forBounds: seekbar.bounds, trackRect: trackRect, value: seekbar.value)
         if let thumbNailView = thumbView, let musubiVideoView = musubiPlayerView {
             thumbNailView.frame.origin.x = (((musubiVideoView.bounds.width) - (thumbNailView.bounds.width)) / seekbar.bounds.width) * thumbRect.origin.x
+            
+            let time = CMTimeMake(value: Int64(seekbar.value), timescale: 1)
+            do {
+                let imageRef = try imageGenerator?.copyCGImage(at: time, actualTime: nil)
+                if let videoThumbnailRef = imageRef {
+                    let thumbnail = UIImage(cgImage: videoThumbnailRef)
+                    
+                    let thumbnailImageView = UIImageView(image: thumbnail)
+                    thumbnailImageView.frame = thumbNailView.frame
+                    
+                    musubiVideoView.addSubview(thumbnailImageView)
+                    
+                    
+                }
+            } catch {
+                NSLog("Error Detect: \(error)")
+            }
         }
     }
     
