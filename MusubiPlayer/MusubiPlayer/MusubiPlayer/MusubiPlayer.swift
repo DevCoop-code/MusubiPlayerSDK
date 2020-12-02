@@ -76,12 +76,14 @@ open class MusubiPlayer:NSObject, AVPlayerItemOutputPullDelegate {
     var musubiDevice: MusubiDevice?
     
     var seekbar: UISlider?
-    var thumbView: UIView?
+    var thumbView: UIImageView?
     
     var imageGenerator: AVAssetImageGenerator?
     
     public init(_ videoPlayerView: UIView) {
         super.init()
+        
+        initProperties()
         
         musubiPlayerView = videoPlayerView
         
@@ -419,7 +421,7 @@ extension MusubiPlayer: MusubiPlayerAction {
                 minSize = viewHeight
             }
             
-            thumbView = UIView()
+            thumbView = UIImageView()
             thumbView?.backgroundColor = .blue
             
             thumbView?.frame.size.width = minSize * 0.25
@@ -437,25 +439,18 @@ extension MusubiPlayer: MusubiPlayerAction {
     }
     
     @objc func sliderDidChangeValue(_ seekbar: UISlider) {
-        // New Thread
-        
         let trackRect = seekbar.trackRect(forBounds: seekbar.bounds)
         let thumbRect = seekbar.thumbRect(forBounds: seekbar.bounds, trackRect: trackRect, value: seekbar.value)
-        if let thumbNailView = thumbView, let musubiVideoView = musubiPlayerView {
+        if let thumbNailView = self.thumbView, let musubiVideoView = self.musubiPlayerView {
             thumbNailView.frame.origin.x = (((musubiVideoView.bounds.width) - (thumbNailView.bounds.width)) / seekbar.bounds.width) * thumbRect.origin.x
             
             let time = CMTimeMake(value: Int64(seekbar.value), timescale: 1)
             do {
-                let imageRef = try imageGenerator?.copyCGImage(at: time, actualTime: nil)
+                let imageRef = try self.imageGenerator?.copyCGImage(at: time, actualTime: nil)
                 if let videoThumbnailRef = imageRef {
                     let thumbnail = UIImage(cgImage: videoThumbnailRef)
                     
-                    let thumbnailImageView = UIImageView(image: thumbnail)
-                    thumbnailImageView.frame = thumbNailView.frame
-                    
-                    musubiVideoView.addSubview(thumbnailImageView)
-                    
-                    
+                    thumbNailView.image = thumbnail
                 }
             } catch {
                 NSLog("Error Detect: \(error)")
