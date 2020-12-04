@@ -317,8 +317,10 @@ extension MusubiPlayer: MusubiPlayerAction {
                 let item = AVPlayerItem.init(url: mediaURL as URL)
                 let asset = item.asset
                 
-                let thumbnailAsset = AVAsset.init(url: mediaURL as URL)
-                imageGenerator = AVAssetImageGenerator(asset: thumbnailAsset)
+                if mediaType == .local {
+                    let thumbnailAsset = AVAsset.init(url: mediaURL as URL)
+                    imageGenerator = AVAssetImageGenerator(asset: thumbnailAsset)
+                }
                 
                 asset.loadValuesAsynchronously(forKeys: ["tracks"]) {
                     var error: NSError? = nil
@@ -445,7 +447,9 @@ extension MusubiPlayer: MusubiPlayerAction {
     }
     
     @objc func sliderDidTouchDown(_ seekbar: UISlider) {
-        thumbView?.isHidden = false
+        if imageGenerator != nil {
+            thumbView?.isHidden = false
+        }
     }
     
     @objc func sliderDidTouchCancel(_ seekbar: UISlider) {
