@@ -420,54 +420,51 @@ extension MusubiPlayer: MusubiPlayerAction {
     }
     
     public func setThumbnailSeekbar(_ seekbar: UISlider) {
-        var minSize: CGFloat = 0.0
-        if let videoView = musubiPlayerView {
-            let viewHeight = videoView.bounds.height
-            let viewWidth = videoView.bounds.width
-            
-            if viewHeight > viewWidth {
-                minSize = viewWidth
-            } else {
-                minSize = viewHeight
-            }
-            
-            thumbView = UIImageView()
-            thumbView?.backgroundColor = .black
-            
-            // Thumbnail aspect width:height = 2:1
-            thumbView?.frame.size.width = minSize * 0.5
-            thumbView?.frame.size.height = minSize * 0.25
-            thumbView?.frame.origin.y = (videoView.bounds.height / 2.0) - ((minSize * 0.25) / 2.0)
-            
-            if let thumbNailView = thumbView {
-                videoView.addSubview(thumbNailView)
-                videoView.translatesAutoresizingMaskIntoConstraints = false
+        if m_type_ == .hls || m_type_ == .pd {
+            NSLog("[ERROR] Not Support ThumbnailSeekbar in Remote content")
+        } else {
+            var minSize: CGFloat = 0.0
+            if let videoView = musubiPlayerView {
+                let viewHeight = videoView.bounds.height
+                let viewWidth = videoView.bounds.width
                 
-                seekbar.addTarget(self, action: #selector(sliderDidTouchDown(_:)), for: .touchDown)
-                seekbar.addTarget(self, action: #selector(sliderDidTouchCancel(_:)), for: .touchUpInside)
-                seekbar.addTarget(self, action: #selector(sliderDidTouchCancel(_:)), for: .touchUpOutside)
-                seekbar.addTarget(self, action: #selector(sliderDidChangeValue(_:)), for: .valueChanged)
+                if viewHeight > viewWidth {
+                    minSize = viewWidth
+                } else {
+                    minSize = viewHeight
+                }
+                
+                thumbView = UIImageView()
+                thumbView?.backgroundColor = .black
+                
+                // Thumbnail aspect width:height = 2:1
+                thumbView?.frame.size.width = minSize * 0.5
+                thumbView?.frame.size.height = minSize * 0.25
+                thumbView?.frame.origin.y = (videoView.bounds.height / 2.0) - ((minSize * 0.25) / 2.0)
+                
+                if let thumbNailView = thumbView {
+                    videoView.addSubview(thumbNailView)
+                    videoView.translatesAutoresizingMaskIntoConstraints = false
+                    
+                    seekbar.addTarget(self, action: #selector(sliderDidTouchDown(_:)), for: .touchDown)
+                    seekbar.addTarget(self, action: #selector(sliderDidTouchCancel(_:)), for: .touchUpInside)
+                    seekbar.addTarget(self, action: #selector(sliderDidTouchCancel(_:)), for: .touchUpOutside)
+                    seekbar.addTarget(self, action: #selector(sliderDidChangeValue(_:)), for: .valueChanged)
+                }
+                
+                thumbView?.isHidden = true
             }
-            
-            thumbView?.isHidden = true
         }
     }
     
     @objc func sliderDidTouchDown(_ seekbar: UISlider) {
-        if m_type_ == .hls {
-            if let avPlayer = avPlayer_ {
-                avPlayer.pause()
-            }
+        if m_type_ == .local {
+            thumbView?.isHidden = false
         }
-        thumbView?.isHidden = false
     }
     
     @objc func sliderDidTouchCancel(_ seekbar: UISlider) {
-        if m_type_ == .hls {
-            if let avPlayer = avPlayer_ {
-                avPlayer.play()
-            }
-        }
+        
         thumbView?.isHidden = true
     }
     
@@ -498,25 +495,6 @@ extension MusubiPlayer: MusubiPlayerAction {
                         }
                     } catch {
                         NSLog("[Error] Fail to Generate Thumbnail \(error)")
-                    }
-                }
-                
-                else if m_type_ == .hls {
-                    let time = CMTimeMake(value: Int64(seekbar.value) * 1000000000, timescale: 1)
-                    var pixelBuffer: CVPixelBuffer?
-                    if let videoOutput = self.videoOutput_ {
-                        if videoOutput.hasNewPixelBuffer(forItemTime: time){
-                            pixelBuffer = videoOutput.copyPixelBuffer(forItemTime: time, itemTimeForDisplay: nil)
-                            
-                            if let pixelBufferData = pixelBuffer {
-                                var cgImage: CGImage?
-                                VTCreateCGImageFromCVPixelBuffer(pixelBufferData, options: nil, imageOut: &cgImage)
-                                
-                                if let coregraphicImage = cgImage {
-                                    thumbNailView.image = UIImage(cgImage: coregraphicImage)
-                                }
-                            }
-                        }
                     }
                 }
             }
