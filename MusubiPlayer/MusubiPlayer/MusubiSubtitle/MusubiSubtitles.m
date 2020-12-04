@@ -35,7 +35,7 @@
         subtitleParser = [[MusubiSRTParser alloc] initWithExternalSubtitle: filePath];
     }
     else {
-        NSLog(@"NOT Support Subtitle extension Format: %@", subtitleExtension);
+        NSLog(@"[WARNING] NOT Support Subtitle extension Format: %@", subtitleExtension);
     }
 }
 
@@ -55,7 +55,7 @@
         subtitleParser = [[MusubiSRTParser alloc] initExternalSubtitleOverHTTP:subtitleURL];
     }
     else {
-        NSLog(@"NOT Support Subtitle extension Format: %@", subtitleExtension);
+        NSLog(@"[WARNING] NOT Support Subtitle extension Format: %@", subtitleExtension);
     }
 }
 

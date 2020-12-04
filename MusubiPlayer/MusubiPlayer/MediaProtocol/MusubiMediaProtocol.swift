@@ -56,7 +56,7 @@ class MusubiMediaProtocol: NSObject {
             }
         }
         else {
-            NSLog("File is not HLS PlayList")
+            NSLog("[ERROR] File is not HLS PlayList")
             return .none
         }
         return .none
@@ -68,7 +68,6 @@ class MusubiMediaProtocol: NSObject {
             
             var index: Int = 7
             while index < manifest.count - 1 {
-//                NSLog("\(manifestArr[index])")
                 
                 if manifestArr[index] == "#" && manifestArr[index + 1] == "E" && manifestArr[index + 2] == "X" && manifestArr[index + 3] == "T" && manifestArr[index + 4] == "-" && manifestArr[index + 5] == "X" {
                     index += 7      // Skip the '-'
@@ -94,7 +93,7 @@ class MusubiMediaProtocol: NSObject {
                             playListURL = playListURL + String(manifestArr[index])
                             index += 1
                         }
-                        NSLog("hankyo sub url: \(playListURL)")
+                        NSLog("Sub Media url: \(playListURL)")
                         index += 1
                     }
                 }
@@ -105,7 +104,7 @@ class MusubiMediaProtocol: NSObject {
             
         }
         else {
-            NSLog("File is not HLS PlayList")
+            NSLog("[ERROR] File is not HLS PlayList")
             return nil
         }
         return nil
@@ -132,7 +131,7 @@ class MusubiMediaProtocol: NSObject {
                         mediaURL = mediaURL + String(manifestArr[index])
                         index += 1
                     }
-                    NSLog("hankyo media url: \(mediaURL)")
+                    NSLog("Media url: \(mediaURL)")
                 }
                 else {
                     index += 1
@@ -140,7 +139,7 @@ class MusubiMediaProtocol: NSObject {
             }
         }
         else {
-            NSLog("File is not HLS PlayList")
+            NSLog("[ERROR] File is not HLS PlayList")
         }
         return nil
     }

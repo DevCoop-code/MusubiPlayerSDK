@@ -28,7 +28,7 @@
             [self.filemgr createDirectoryAtURL:newDir withIntermediateDirectories:true attributes:nil error:&error];
             
             if (error) {
-                NSLog(@"Error to set musubi Directory");
+                NSLog(@"[ERROR] Error to set musubi Directory");
             } else {
                 [self.filemgr changeCurrentDirectoryPath:newDir.path];
                 NSLog(@"Check the Current Directory %@", newDir.absoluteString);

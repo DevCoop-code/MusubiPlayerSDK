@@ -17,10 +17,4 @@ class MusubiDeviceFactory {
         }
         return device!
     }
-//    public static func getMusubiDevice() -> MusubiDevice {
-//        if device == nil {
-//            device = MusubiDeviceImpl()
-//        }
-//        return device!
-//    }
 }

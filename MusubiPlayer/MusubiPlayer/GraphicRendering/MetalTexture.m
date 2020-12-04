@@ -50,7 +50,7 @@ pixelBuffer:(CVPixelBufferRef)pixelBuffer
             textureCache = yTextureCache;
         }
         else {
-            NSLog(@"Unable to allocate luma texture cache");
+            NSLog(@"[ERROR] Unable to allocate luma texture cache");
         }
         
         CVReturn yresultAboutTexture = CVMetalTextureCacheCreateTextureFromImage(kCFAllocatorDefault,
@@ -63,7 +63,7 @@ pixelBuffer:(CVPixelBufferRef)pixelBuffer
                                                                                  0,
                                                                                  &yTextureOut);
         if (yresultAboutTexture != kCVReturnSuccess) {
-            NSLog(@"Fail to make texture %d", yresultAboutTexture);
+            NSLog(@"[ERROR] Fail to make texture %d", yresultAboutTexture);
         }
         _ytexture = CVMetalTextureGetTexture(yTextureOut);
         
@@ -79,7 +79,7 @@ pixelBuffer:(CVPixelBufferRef)pixelBuffer
             textureCache = cbcrTextureCache;
         }
         else {
-            NSLog(@"Unable to allocate chroma texture cache");
+            NSLog(@"[ERROR] Unable to allocate chroma texture cache");
         }
         CVReturn cbcrresultAboutTexture = CVMetalTextureCacheCreateTextureFromImage(kCFAllocatorDefault,
                                                                         textureCache,
@@ -91,7 +91,7 @@ pixelBuffer:(CVPixelBufferRef)pixelBuffer
                                                                         1,
                                                                         &cbcrTextureOut);
         if (cbcrresultAboutTexture != kCVReturnSuccess) {
-            NSLog(@"Fail to make texture %d", cbcrresultAboutTexture);
+            NSLog(@"[ERROR] Fail to make texture %d", cbcrresultAboutTexture);
         }
         _cbcrtexture = CVMetalTextureGetTexture(cbcrTextureOut);
         

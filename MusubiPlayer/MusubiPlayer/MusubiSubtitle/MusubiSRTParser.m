@@ -103,7 +103,7 @@
                 NSInteger s_minute = [startSrtMinuteStr intValue];
                 NSInteger s_second = [startSrtSecondStr intValue];
                 
-                NSLog(@"SRT Index: %ld, hour: %ld, minute: %ld, second: %ld", (long)subtitleIndex, (long)s_hour, (long)s_minute, (long)s_second);
+//                NSLog(@"SRT Index: %ld, hour: %ld, minute: %ld, second: %ld", (long)subtitleIndex, (long)s_hour, (long)s_minute, (long)s_second);
                 
                 NSInteger srtStartTime = (s_hour * 60 * 60) + (s_minute * 60) + s_second;
                 srtData.subtitleStartTime = srtStartTime * 1000;
@@ -153,7 +153,7 @@
                 NSInteger e_minute = [endSrtMinuteStr intValue];
                 NSInteger e_second = [endSrtSecondStr intValue];
 
-                NSLog(@"SRT Index: %ld, hour: %ld, minute: %ld, second: %ld", (long)subtitleIndex, (long)e_hour, (long)e_minute, (long)e_second);
+//                NSLog(@"SRT Index: %ld, hour: %ld, minute: %ld, second: %ld", (long)subtitleIndex, (long)e_hour, (long)e_minute, (long)e_second);
 
                 NSInteger srtEndTime = (e_hour * 60 * 60) + (e_minute * 60) + e_second;
                 srtData.subtitleEndTime = srtEndTime * 1000;
@@ -217,7 +217,7 @@
                 srtData.subtitleText = srtSubtitleData;
                 [srtSubtitleArray addObject:srtData];
                 
-                NSLog(@"SRT Subtitle: %@", srtSubtitleData);
+//                NSLog(@"SRT Subtitle: %@", srtSubtitleData);
                 
                 index += (subtitleDataLength + 1);
                 distinctLabel = 0;
