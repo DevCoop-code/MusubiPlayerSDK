@@ -22,6 +22,7 @@ var ONE_FRAME_DURATION: Double {
 
 public enum mediaType {
     case local
+    case pd             // Progressive Download(http:// ~~~ .mp4)
     case hls
     case dash
 }
@@ -156,6 +157,7 @@ open class MusubiPlayer:NSObject, AVPlayerItemOutputPullDelegate {
             
             var pixelBuffer: CVPixelBuffer?
             if videoOutput.hasNewPixelBuffer(forItemTime: outputItemTime) {
+//                NSLog("player time: \(outputItemTime.value) \(nextVSync)")
                 pixelBuffer = videoOutput.copyPixelBuffer(forItemTime: outputItemTime, itemTimeForDisplay: nil)
             }
 
@@ -286,6 +288,8 @@ open class MusubiPlayer:NSObject, AVPlayerItemOutputPullDelegate {
 // MARK: Musubi Player Action API
 extension MusubiPlayer: MusubiPlayerAction {
      public func open(_ mediaPath: String, mediaType: mediaType) {
+        m_type_ = mediaType
+        
         var mediaURL_: NSURL?
         if let player = avPlayer_, let videoOutput = videoOutput_ {
             self.musubiPlayerState = .open
@@ -297,6 +301,9 @@ extension MusubiPlayer: MusubiPlayerAction {
                     mediaURL_ = NSURL.fileURL(withPath: fileMgr.urls(for: .documentDirectory, in: .userDomainMask)[0].path + "/" + mediaPath) as NSURL
                 }
             
+                break
+            case .pd:
+                mediaURL_ = NSURL(string: mediaPath)
                 break
             case .hls:
                 mediaURL_ = NSURL(string: mediaPath)
@@ -447,12 +454,20 @@ extension MusubiPlayer: MusubiPlayerAction {
     }
     
     @objc func sliderDidTouchDown(_ seekbar: UISlider) {
-        if imageGenerator != nil {
-            thumbView?.isHidden = false
+        if m_type_ == .hls {
+            if let avPlayer = avPlayer_ {
+                avPlayer.pause()
+            }
         }
+        thumbView?.isHidden = false
     }
     
     @objc func sliderDidTouchCancel(_ seekbar: UISlider) {
+        if m_type_ == .hls {
+            if let avPlayer = avPlayer_ {
+                avPlayer.play()
+            }
+        }
         thumbView?.isHidden = true
     }
     
@@ -472,16 +487,37 @@ extension MusubiPlayer: MusubiPlayerAction {
                 thumbNailView.frame.origin.x = thumbLoc
                 
                 // Draw the image to thumbnailView
-                let time = CMTimeMake(value: Int64(seekbar.value), timescale: 1)
-                do {
-                    let imageRef = try self.imageGenerator?.copyCGImage(at: time, actualTime: nil)
-                    if let videoThumbnailRef = imageRef {
-                        let thumbnail = UIImage(cgImage: videoThumbnailRef)
-                        
-                        thumbNailView.image = thumbnail
+                if m_type_ == .local || m_type_ == .pd {
+                    let time = CMTimeMake(value: Int64(seekbar.value), timescale: 1)
+                    do {
+                        let imageRef = try self.imageGenerator?.copyCGImage(at: time, actualTime: nil)
+                        if let videoThumbnailRef = imageRef {
+                            let thumbnail = UIImage(cgImage: videoThumbnailRef)
+
+                            thumbNailView.image = thumbnail
+                        }
+                    } catch {
+                        NSLog("[Error] Fail to Generate Thumbnail \(error)")
                     }
-                } catch {
-                    NSLog("[Error] Fail to Generate Thumbnail \(error)")
+                }
+                
+                else if m_type_ == .hls {
+                    let time = CMTimeMake(value: Int64(seekbar.value) * 1000000000, timescale: 1)
+                    var pixelBuffer: CVPixelBuffer?
+                    if let videoOutput = self.videoOutput_ {
+                        if videoOutput.hasNewPixelBuffer(forItemTime: time){
+                            pixelBuffer = videoOutput.copyPixelBuffer(forItemTime: time, itemTimeForDisplay: nil)
+                            
+                            if let pixelBufferData = pixelBuffer {
+                                var cgImage: CGImage?
+                                VTCreateCGImageFromCVPixelBuffer(pixelBufferData, options: nil, imageOut: &cgImage)
+                                
+                                if let coregraphicImage = cgImage {
+                                    thumbNailView.image = UIImage(cgImage: coregraphicImage)
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
