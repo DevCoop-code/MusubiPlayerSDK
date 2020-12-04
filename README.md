@@ -13,7 +13,10 @@ pod 'MusubiPlayer', '~> 0.1'
 You must Add **'use_frameworks!'** in your Podfile
 
 # Demo
+
 <img src="https://raw.githubusercontent.com/hankyojeong/MusubiPlayerSDK/master/images/demo1.png" width="50%" height="50%">
+
+<img src="https://raw.githubusercontent.com/hankyojeong/MusubiPlayerSDK/master/images/thumbnail.gif" width="50%" height="50%">
 
 # Usage
 Easy to use MusubiPlayer
@@ -39,6 +42,12 @@ override func viewDidAppear(_ animated: Bool) {
 player?.open(mediaURL, mediaType: .hls)
 player?.setExternalSubtitle("/[subtitleName].smi", SubtitleType(2))
 player?.start()
+```
+
+- Thumbnail Seekbar
+```
+player?.open([Local Video File Name], mediaType: .local)
+player?.setThumbnailSeekbar(seekBar)
 ```
 
 # Documentation
