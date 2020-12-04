@@ -98,12 +98,8 @@ open class MusubiPlayer:NSObject, AVPlayerItemOutputPullDelegate {
             metalLayer.device = metalDevice
             metalLayer.pixelFormat = .bgra8Unorm
             metalLayer.framebufferOnly = true
-//            metalLayer.frame = videoPlayerView.layer.frame
             metalLayer.frame = videoPlayerView.bounds
-//            metalLayer.frame.size.width -= 40
-            NSLog("metalLayer Frame: \(metalLayer.frame)")
-//            metalLayer.bounds = videoPlayerView.layer.bounds
-            //            videoPlayerView.layer.addSublayer(metalLayer)
+            NSLog("metalLayer Frame Size: \(metalLayer.frame)")
             videoPlayerView.layer.insertSublayer(metalLayer, at: 0)
             
             let frameworkBundle = Bundle(for: MusubiPlayer.self)
@@ -116,9 +112,12 @@ open class MusubiPlayer:NSObject, AVPlayerItemOutputPullDelegate {
             pipelineStateDescriptor.fragmentFunction = fragmentProgram
             pipelineStateDescriptor.colorAttachments[0].pixelFormat = .bgra8Unorm
             
-            pipelineState_ = try! metalDevice.makeRenderPipelineState(descriptor: pipelineStateDescriptor)
-            commandQueue_ = metalDevice.makeCommandQueue()
-            
+            do {
+                pipelineState_ = try metalDevice.makeRenderPipelineState(descriptor: pipelineStateDescriptor)
+                commandQueue_ = metalDevice.makeCommandQueue()
+            }catch {
+                NSLog("[Error] \(error)")
+            }
         }
         
         timer_ = CADisplayLink.init(target: self, selector: #selector(newFrame))
@@ -132,6 +131,8 @@ open class MusubiPlayer:NSObject, AVPlayerItemOutputPullDelegate {
         
         if let device = device_, let commandQueue = commandQueue_ {
             objectToDraw_ = SquarePlain.init(device, commandQ: commandQueue)
+        } else {
+            NSLog("[ERROR] Cannot Found MetalDefaultSystem Device or Metal CommandQueue")
         }
         
         avPlayer_ = AVPlayer()
@@ -162,7 +163,6 @@ open class MusubiPlayer:NSObject, AVPlayerItemOutputPullDelegate {
                 self.lastFrameTimestamp_ = displayLink.timestamp
             }
 
-//            var elapsed: TimeInterval = displayLink.timestamp - lastFrameTimestamp
             self.lastFrameTimestamp_ = displayLink.timestamp
 
             // AutoRelease
@@ -182,7 +182,6 @@ open class MusubiPlayer:NSObject, AVPlayerItemOutputPullDelegate {
         if let avPlayer = avPlayer_ {
             avPlayer.addPeriodicTimeObserver(forInterval: interval, queue: .main) { time in
                 
-//                NSLog("Player Time: %f", CMTimeGetSeconds(time))
                 self.musubiDelegate?.currentTime(time: CMTimeGetSeconds(time))
                 
                 if let subtitleData = self.subtitleWrapper?.getSubtitleSet() {
@@ -194,7 +193,6 @@ open class MusubiPlayer:NSObject, AVPlayerItemOutputPullDelegate {
                         if ( ((Double(subTimeSec) - CMTimeGetSeconds(time) <= 1 && Double(subTimeSec) - CMTimeGetSeconds(time) >= 0)) ||
                             ((Double(subTimeSec) - CMTimeGetSeconds(time) <= 0 && Double(subTimeSec) - CMTimeGetSeconds(time) >= -1)) ) {
                             if let subDataText = subData.subtitleText {
-//                                NSLog("text renderer: \(Double(subTimeSec)) , \(CMTimeGetSeconds(time))")
                                 self.musubiDelegate?.onSubtitleData(startTime: subData.subtitleStartTime, endTime: subData.subtitleEndTime, text: subDataText)
                                 self.subtitleIndex = self.subtitleIndex + 1
                             }
@@ -256,6 +254,7 @@ open class MusubiPlayer:NSObject, AVPlayerItemOutputPullDelegate {
             if let statusNumber = change?[.newKey] as? NSNumber {
                 status_ = AVPlayerItem.Status(rawValue: statusNumber.intValue)
             } else {
+                NSLog("[ERROR] Player Status Unknown")
                 status_ = .unknown
             }
             
@@ -271,10 +270,12 @@ open class MusubiPlayer:NSObject, AVPlayerItemOutputPullDelegate {
                     }
                     break
                 case .failed:
-                    // Player ittem failed. See error.
+                    // Player item failed. See error.
+                    NSLog("[ERROR] Player fail to play")
                     break
                 case .unknown:
                     // Player item is not yet ready
+                    NSLog("[WARNING] Player is not ready to play")
                     break
                 }
             }
@@ -287,7 +288,6 @@ extension MusubiPlayer: MusubiPlayerAction {
      public func open(_ mediaPath: String, mediaType: mediaType) {
         var mediaURL_: NSURL?
         if let player = avPlayer_, let videoOutput = videoOutput_ {
-            NSLog("Media Content URI: %@", mediaPath)
             self.musubiPlayerState = .open
             
             switch mediaType {
@@ -306,7 +306,7 @@ extension MusubiPlayer: MusubiPlayerAction {
                 NSLog("[ERROR] Dash is not supported now")
                 break
             default:
-                
+                NSLog("[ERROR] Player don't know the video type")
                 break
             }
             
@@ -335,7 +335,7 @@ extension MusubiPlayer: MusubiPlayerAction {
                         }
                         break
                     default:
-                        NSLog("Player Status is not loaded")
+                        NSLog("[ERROR]Player cannot load the video")
                         break
                     }
                 }
@@ -442,19 +442,13 @@ extension MusubiPlayer: MusubiPlayerAction {
             
             thumbView?.isHidden = true
         }
-        
-//        NSLog("\(videoPlayerView.bounds.width), \(thumbView.bounds.width), \(seekbar.bounds.width), \(thumbView.bounds.width) \((videoPlayerView.bounds.width - thumbView.bounds.width) / (seekbar.bounds.width)), \(thumbRect.origin.x) \(thumbView.frame.origin.x)")
     }
     
     @objc func sliderDidTouchDown(_ seekbar: UISlider) {
-        NSLog("did touch down")
-        
         thumbView?.isHidden = false
     }
     
     @objc func sliderDidTouchCancel(_ seekbar: UISlider) {
-        NSLog("did touch cancel")
-        
         thumbView?.isHidden = true
     }
     
@@ -483,7 +477,7 @@ extension MusubiPlayer: MusubiPlayerAction {
                         thumbNailView.image = thumbnail
                     }
                 } catch {
-                    NSLog("Error Detect: \(error)")
+                    NSLog("[Error] Fail to Generate Thumbnail \(error)")
                 }
             }
         }
@@ -491,13 +485,5 @@ extension MusubiPlayer: MusubiPlayerAction {
     
     public func setExternalSubtitle(_ subtitlePath: String, _ subtitleType: SubtitleType) {
         subtitleWrapper?.initMusubiSubtitle(subtitlePath, type: SubtitleType(rawValue: subtitleType.rawValue))
-        
-        // Check the Subtitle Data
-//        if let subtitleSet = subtitleWrapper?.getSubtitleSet() {
-//            for subtitle in subtitleSet {
-//                let subData = subtitle as! ExternalSubtitle
-//                NSLog("Time: \(subData.subtitleTime), Text: \(subData.subtitleText)")
-//            }
-//        }
     }
 }
