@@ -464,8 +464,17 @@ extension MusubiPlayer: MusubiPlayerAction {
             let trackRect = seekbar.trackRect(forBounds: seekbar.bounds)
             let thumbRect = seekbar.thumbRect(forBounds: seekbar.bounds, trackRect: trackRect, value: seekbar.value)
             if let thumbNailView = self.thumbView, let musubiVideoView = self.musubiPlayerView {
-                thumbNailView.frame.origin.x = (((musubiVideoView.bounds.width) - (thumbNailView.bounds.width)) / seekbar.bounds.width) * thumbRect.origin.x
+                // Locate the thumbnailView
+                var thumbLoc = (((musubiVideoView.bounds.width)) / seekbar.bounds.width) * thumbRect.origin.x
                 
+                if thumbLoc > musubiVideoView.bounds.width - thumbNailView.bounds.width {
+                    thumbLoc = musubiVideoView.bounds.width - thumbNailView.frame.width
+                }
+                thumbNailView.frame.origin.x = thumbLoc
+                
+                
+                
+                // Draw the image to thumbnailView
                 let time = CMTimeMake(value: Int64(seekbar.value), timescale: 1)
                 do {
                     let imageRef = try self.imageGenerator?.copyCGImage(at: time, actualTime: nil)
