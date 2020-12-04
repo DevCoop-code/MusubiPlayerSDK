@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class MusubiDevice: NSObject {
+class MusubiDevice: NSObject {
     var filemgr: FileManager?
     var musubiProtocol: MusubiMediaProtocol?
     

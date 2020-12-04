@@ -44,6 +44,7 @@ enum hlsPlayListType {
 private var playerItemContext = 0
 
 open class MusubiPlayer:NSObject, AVPlayerItemOutputPullDelegate {
+    var musubiPlayerView: UIView?
     var device_: MTLDevice?
     var metalLayer_: CAMetalLayer?
     var pipelineState_: MTLRenderPipelineState?
@@ -72,24 +73,33 @@ open class MusubiPlayer:NSObject, AVPlayerItemOutputPullDelegate {
     let subtitleWrapper: MusubiSubtitleWrapper? = MusubiSubtitleWrapper()
     var subtitleIndex: NSInteger = 0
     
+    var musubiDevice: MusubiDevice?
+    
+    var seekbar: UISlider?
+    var thumbView: UIImageView?
+    
+    var imageGenerator: AVAssetImageGenerator?
+    var lastSeekbarTime: Float = 0.0
+    
     public init(_ videoPlayerView: UIView) {
         super.init()
+        
+        initProperties()
+        
+        musubiPlayerView = videoPlayerView
         
         NSLog("MusubiPlayer Version: \(musubiPlayer_version)")
         
         device_ = MTLCreateSystemDefaultDevice()
+        musubiDevice = MusubiDeviceFactory.defaultDevice
         metalLayer_ = CAMetalLayer()
         
         if let metalDevice = device_, let metalLayer = metalLayer_ {
             metalLayer.device = metalDevice
             metalLayer.pixelFormat = .bgra8Unorm
             metalLayer.framebufferOnly = true
-//            metalLayer.frame = videoPlayerView.layer.frame
             metalLayer.frame = videoPlayerView.bounds
-//            metalLayer.frame.size.width -= 40
-            NSLog("metalLayer Frame: \(metalLayer.frame)")
-//            metalLayer.bounds = videoPlayerView.layer.bounds
-            //            videoPlayerView.layer.addSublayer(metalLayer)
+            NSLog("metalLayer Frame Size: \(metalLayer.frame)")
             videoPlayerView.layer.insertSublayer(metalLayer, at: 0)
             
             let frameworkBundle = Bundle(for: MusubiPlayer.self)
@@ -102,22 +112,27 @@ open class MusubiPlayer:NSObject, AVPlayerItemOutputPullDelegate {
             pipelineStateDescriptor.fragmentFunction = fragmentProgram
             pipelineStateDescriptor.colorAttachments[0].pixelFormat = .bgra8Unorm
             
-            pipelineState_ = try! metalDevice.makeRenderPipelineState(descriptor: pipelineStateDescriptor)
-            commandQueue_ = metalDevice.makeCommandQueue()
-            
+            do {
+                pipelineState_ = try metalDevice.makeRenderPipelineState(descriptor: pipelineStateDescriptor)
+                commandQueue_ = metalDevice.makeCommandQueue()
+            }catch {
+                NSLog("[Error] \(error)")
+            }
         }
         
         timer_ = CADisplayLink.init(target: self, selector: #selector(newFrame))
         timer_?.add(to: .main, forMode: .default)
 
         // Setup AVPlayerItemVideoOutput with the required pixelbuffer attributes
-        var pixelBufferAttributes: NSDictionary = [kCVPixelBufferMetalCompatibilityKey:true, kCVPixelBufferPixelFormatTypeKey:kCVPixelFormatType_420YpCbCr8BiPlanarFullRange]
+        let pixelBufferAttributes: NSDictionary = [kCVPixelBufferMetalCompatibilityKey:true, kCVPixelBufferPixelFormatTypeKey:kCVPixelFormatType_420YpCbCr8BiPlanarFullRange]
         videoOutput_ = AVPlayerItemVideoOutput.init(pixelBufferAttributes: pixelBufferAttributes as! [String: Any])
         videoOutputQueue_ = DispatchQueue(label: "VideoOutputQueue")
         videoOutput_?.setDelegate(self, queue: videoOutputQueue_)
         
         if let device = device_, let commandQueue = commandQueue_ {
             objectToDraw_ = SquarePlain.init(device, commandQ: commandQueue)
+        } else {
+            NSLog("[ERROR] Cannot Found MetalDefaultSystem Device or Metal CommandQueue")
         }
         
         avPlayer_ = AVPlayer()
@@ -136,7 +151,7 @@ open class MusubiPlayer:NSObject, AVPlayerItemOutputPullDelegate {
         // Calculate the nextVSync time which is when the screen will be refreshed next
         let nextVSync: CFTimeInterval = (displayLink.timestamp + displayLink.duration)
         
-        if let videoOutput = videoOutput_ {
+        if let videoOutput = self.videoOutput_ {
             outputItemTime = videoOutput.itemTime(forHostTime: nextVSync)
             
             var pixelBuffer: CVPixelBuffer?
@@ -144,19 +159,18 @@ open class MusubiPlayer:NSObject, AVPlayerItemOutputPullDelegate {
                 pixelBuffer = videoOutput.copyPixelBuffer(forItemTime: outputItemTime, itemTimeForDisplay: nil)
             }
 
-            if 0.0 == lastFrameTimestamp_ {
-                lastFrameTimestamp_ = displayLink.timestamp
+            if 0.0 == self.lastFrameTimestamp_ {
+                self.lastFrameTimestamp_ = displayLink.timestamp
             }
 
-//            var elapsed: TimeInterval = displayLink.timestamp - lastFrameTimestamp
-            lastFrameTimestamp_ = displayLink.timestamp
+            self.lastFrameTimestamp_ = displayLink.timestamp
 
             // AutoRelease
-            let drawable: CAMetalDrawable? = metalLayer_?.nextDrawable()
+            let drawable: CAMetalDrawable? = self.metalLayer_?.nextDrawable()
             if let pixelBufferData = pixelBuffer, let drawableData = drawable {
-                musubiDelegate?.renderObject(drawable: drawableData, pixelBuffer: pixelBufferData)
+                self.musubiDelegate?.renderObject(drawable: drawableData, pixelBuffer: pixelBufferData)
 
-                renderObject(drawable: drawableData, pixelBuffer: pixelBufferData)
+                self.renderObject(drawable: drawableData, pixelBuffer: pixelBufferData)
             }
         }
     }
@@ -168,7 +182,6 @@ open class MusubiPlayer:NSObject, AVPlayerItemOutputPullDelegate {
         if let avPlayer = avPlayer_ {
             avPlayer.addPeriodicTimeObserver(forInterval: interval, queue: .main) { time in
                 
-//                NSLog("Player Time: %f", CMTimeGetSeconds(time))
                 self.musubiDelegate?.currentTime(time: CMTimeGetSeconds(time))
                 
                 if let subtitleData = self.subtitleWrapper?.getSubtitleSet() {
@@ -180,7 +193,6 @@ open class MusubiPlayer:NSObject, AVPlayerItemOutputPullDelegate {
                         if ( ((Double(subTimeSec) - CMTimeGetSeconds(time) <= 1 && Double(subTimeSec) - CMTimeGetSeconds(time) >= 0)) ||
                             ((Double(subTimeSec) - CMTimeGetSeconds(time) <= 0 && Double(subTimeSec) - CMTimeGetSeconds(time) >= -1)) ) {
                             if let subDataText = subData.subtitleText {
-//                                NSLog("text renderer: \(Double(subTimeSec)) , \(CMTimeGetSeconds(time))")
                                 self.musubiDelegate?.onSubtitleData(startTime: subData.subtitleStartTime, endTime: subData.subtitleEndTime, text: subDataText)
                                 self.subtitleIndex = self.subtitleIndex + 1
                             }
@@ -242,6 +254,7 @@ open class MusubiPlayer:NSObject, AVPlayerItemOutputPullDelegate {
             if let statusNumber = change?[.newKey] as? NSNumber {
                 status_ = AVPlayerItem.Status(rawValue: statusNumber.intValue)
             } else {
+                NSLog("[ERROR] Player Status Unknown")
                 status_ = .unknown
             }
             
@@ -257,10 +270,12 @@ open class MusubiPlayer:NSObject, AVPlayerItemOutputPullDelegate {
                     }
                     break
                 case .failed:
-                    // Player ittem failed. See error.
+                    // Player item failed. See error.
+                    NSLog("[ERROR] Player fail to play")
                     break
                 case .unknown:
                     // Player item is not yet ready
+                    NSLog("[WARNING] Player is not ready to play")
                     break
                 }
             }
@@ -273,29 +288,39 @@ extension MusubiPlayer: MusubiPlayerAction {
      public func open(_ mediaPath: String, mediaType: mediaType) {
         var mediaURL_: NSURL?
         if let player = avPlayer_, let videoOutput = videoOutput_ {
-            NSLog("Media Content URI: %@", mediaPath)
             self.musubiPlayerState = .open
             
             switch mediaType {
             case .local:
-                mediaURL_ = NSURL.fileURL(withPath: mediaPath) as NSURL
+                let fileManager: FileManager? = self.musubiDevice?.filemgr
+                if let fileMgr = fileManager {
+                    mediaURL_ = NSURL.fileURL(withPath: fileMgr.urls(for: .documentDirectory, in: .userDomainMask)[0].path + "/" + mediaPath) as NSURL
+                }
+            
                 break
             case .hls:
                 mediaURL_ = NSURL(string: mediaPath)
                 break
             case .dash:
                 // TODO: playing dash content
+                NSLog("[ERROR] Dash is not supported now")
                 break
             default:
-                
+                NSLog("[ERROR] Player don't know the video type")
                 break
             }
             
             player.currentItem?.remove(videoOutput)
             
             if let mediaURL = mediaURL_ {
+                NSLog("Media URI: \(mediaURL)")
                 let item = AVPlayerItem.init(url: mediaURL as URL)
                 let asset = item.asset
+                
+                if mediaType == .local {
+                    let thumbnailAsset = AVAsset.init(url: mediaURL as URL)
+                    imageGenerator = AVAssetImageGenerator(asset: thumbnailAsset)
+                }
                 
                 asset.loadValuesAsynchronously(forKeys: ["tracks"]) {
                     var error: NSError? = nil
@@ -312,7 +337,7 @@ extension MusubiPlayer: MusubiPlayerAction {
                         }
                         break
                     default:
-                        NSLog("Player Status is not loaded")
+                        NSLog("[ERROR]Player cannot load the video")
                         break
                     }
                 }
@@ -374,15 +399,95 @@ extension MusubiPlayer: MusubiPlayerAction {
         avPlayer_ = nil
     }
     
+    public func setVolume(_ volume: Float) {
+        var audioVolume: Float = 1.0
+        if let avPlayer = avPlayer_ {
+            if volume >= 1.0 {
+                audioVolume = 1.0
+            }
+            if volume <= 0.0 {
+                audioVolume = 0.0
+            }
+            avPlayer.volume = audioVolume
+        }
+    }
+    
+    public func setThumbnailSeekbar(_ seekbar: UISlider) {
+        var minSize: CGFloat = 0.0
+        if let videoView = musubiPlayerView {
+            let viewHeight = videoView.bounds.height
+            let viewWidth = videoView.bounds.width
+            
+            if viewHeight > viewWidth {
+                minSize = viewWidth
+            } else {
+                minSize = viewHeight
+            }
+            
+            thumbView = UIImageView()
+            thumbView?.backgroundColor = .black
+            
+            // Thumbnail aspect width:height = 2:1
+            thumbView?.frame.size.width = minSize * 0.5
+            thumbView?.frame.size.height = minSize * 0.25
+            thumbView?.frame.origin.y = (videoView.bounds.height / 2.0) - ((minSize * 0.25) / 2.0)
+            
+            if let thumbNailView = thumbView {
+                videoView.addSubview(thumbNailView)
+                videoView.translatesAutoresizingMaskIntoConstraints = false
+                
+                seekbar.addTarget(self, action: #selector(sliderDidTouchDown(_:)), for: .touchDown)
+                seekbar.addTarget(self, action: #selector(sliderDidTouchCancel(_:)), for: .touchUpInside)
+                seekbar.addTarget(self, action: #selector(sliderDidTouchCancel(_:)), for: .touchUpOutside)
+                seekbar.addTarget(self, action: #selector(sliderDidChangeValue(_:)), for: .valueChanged)
+            }
+            
+            thumbView?.isHidden = true
+        }
+    }
+    
+    @objc func sliderDidTouchDown(_ seekbar: UISlider) {
+        if imageGenerator != nil {
+            thumbView?.isHidden = false
+        }
+    }
+    
+    @objc func sliderDidTouchCancel(_ seekbar: UISlider) {
+        thumbView?.isHidden = true
+    }
+    
+    @objc func sliderDidChangeValue(_ seekbar: UISlider) {
+        if (lastSeekbarTime - seekbar.value > 5.0) || (lastSeekbarTime - seekbar.value < -5.0) {
+            lastSeekbarTime = seekbar.value
+            
+            let trackRect = seekbar.trackRect(forBounds: seekbar.bounds)
+            let thumbRect = seekbar.thumbRect(forBounds: seekbar.bounds, trackRect: trackRect, value: seekbar.value)
+            if let thumbNailView = self.thumbView, let musubiVideoView = self.musubiPlayerView {
+                // Locate the thumbnailView
+                var thumbLoc = (((musubiVideoView.bounds.width)) / seekbar.bounds.width) * thumbRect.origin.x
+                
+                if thumbLoc > musubiVideoView.bounds.width - thumbNailView.bounds.width {
+                    thumbLoc = musubiVideoView.bounds.width - thumbNailView.frame.width
+                }
+                thumbNailView.frame.origin.x = thumbLoc
+                
+                // Draw the image to thumbnailView
+                let time = CMTimeMake(value: Int64(seekbar.value), timescale: 1)
+                do {
+                    let imageRef = try self.imageGenerator?.copyCGImage(at: time, actualTime: nil)
+                    if let videoThumbnailRef = imageRef {
+                        let thumbnail = UIImage(cgImage: videoThumbnailRef)
+                        
+                        thumbNailView.image = thumbnail
+                    }
+                } catch {
+                    NSLog("[Error] Fail to Generate Thumbnail \(error)")
+                }
+            }
+        }
+    }
+    
     public func setExternalSubtitle(_ subtitlePath: String, _ subtitleType: SubtitleType) {
         subtitleWrapper?.initMusubiSubtitle(subtitlePath, type: SubtitleType(rawValue: subtitleType.rawValue))
-        
-        // Check the Subtitle Data
-//        if let subtitleSet = subtitleWrapper?.getSubtitleSet() {
-//            for subtitle in subtitleSet {
-//                let subData = subtitle as! ExternalSubtitle
-//                NSLog("Time: \(subData.subtitleTime), Text: \(subData.subtitleText)")
-//            }
-//        }
     }
 }

@@ -8,19 +8,13 @@
 
 import UIKit
 
-open class MusubiDeviceFactory {
+class MusubiDeviceFactory {
     static var device: MusubiDevice?
     
-    open class var defaultDevice: MusubiDevice {
+    class var defaultDevice: MusubiDevice {
         if device == nil {
             device = MusubiDeviceImpl()
         }
         return device!
     }
-//    public static func getMusubiDevice() -> MusubiDevice {
-//        if device == nil {
-//            device = MusubiDeviceImpl()
-//        }
-//        return device!
-//    }
 }

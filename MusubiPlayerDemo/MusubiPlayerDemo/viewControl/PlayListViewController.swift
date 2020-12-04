@@ -17,7 +17,6 @@ class PlayListViewController: UIViewController {
     var mediaURL: String?
     
     var musubiOfflineStore: MusubiOfflineStore?
-    var device: MusubiDevice?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,9 +41,7 @@ class PlayListViewController: UIViewController {
                 }
             }
         }
-        
-        device = MusubiDeviceFactory.defaultDevice
-        musubiOfflineStore = MusubiOfflineStore(device: device)
+        musubiOfflineStore = MusubiOfflineStore()
     }
 }
 
