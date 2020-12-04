@@ -425,9 +425,10 @@ extension MusubiPlayer: MusubiPlayerAction {
             thumbView = UIImageView()
             thumbView?.backgroundColor = .black
             
-            thumbView?.frame.size.width = minSize * 0.25
+            // Thumbnail aspect width:height = 2:1
+            thumbView?.frame.size.width = minSize * 0.5
             thumbView?.frame.size.height = minSize * 0.25
-            thumbView?.frame.origin.y = (videoView.bounds.width / 2.0) - ((minSize * 0.25) / 2.0)
+            thumbView?.frame.origin.y = (videoView.bounds.height / 2.0) - ((minSize * 0.25) / 2.0)
             
             if let thumbNailView = thumbView {
                 videoView.addSubview(thumbNailView)
@@ -471,8 +472,6 @@ extension MusubiPlayer: MusubiPlayerAction {
                     thumbLoc = musubiVideoView.bounds.width - thumbNailView.frame.width
                 }
                 thumbNailView.frame.origin.x = thumbLoc
-                
-                
                 
                 // Draw the image to thumbnailView
                 let time = CMTimeMake(value: Int64(seekbar.value), timescale: 1)
