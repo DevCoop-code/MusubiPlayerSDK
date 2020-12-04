@@ -1,4 +1,7 @@
 # Release notes
+### 0.2.9 (2020-12-04) ###
+* Add ThumbnailView when seek but it only can use .mp4 local video
+
 ### 0.1.6 (2020-11-27) ###
 * Support SMI, SRT Subtitle
 * Migrate MusubiSubtitle to MusubiPlayer
